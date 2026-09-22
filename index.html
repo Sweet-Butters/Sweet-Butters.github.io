@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sweet-Butters · Portfolio</title>
+<meta name="description" content="Sweet-Butters의 프로젝트 포트폴리오">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233b5bdb'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='sans-serif'>SB</text></svg>">
+<style>
+:root {
+  --bg: #f6f7f9; --panel: #fff; --text: #1c1f24; --muted: #5d6470; --line: #e2e5ea;
+  --accent: #3b5bdb; --accent-soft: #e8edff; --chip: #eef0f3; color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317; --panel: #1a1d23; --text: #e6e8ec; --muted: #9aa1ad; --line: #2c313a;
+    --accent: #8ea6ff; --accent-soft: #232b45; --chip: #252a32; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --panel: #1a1d23; --text: #e6e8ec; --muted: #9aa1ad; --line: #2c313a;
+  --accent: #8ea6ff; --accent-soft: #232b45; --chip: #252a32; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+header { padding: 64px 0 32px; }
+h1 { margin: 0; font-size: 36px; letter-spacing: -.02em; }
+.lead { margin: 10px 0 0; color: var(--muted); font-size: 17px; }
+.links { display: flex; gap: 16px; margin-top: 16px; font-size: 15px; }
+h2 { font-size: 20px; margin: 40px 0 14px; }
+.featured { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; color: inherit; }
+.featured:hover { text-decoration: none; border-color: var(--accent); }
+.featured h3 { margin: 0; font-size: 21px; }
+.featured p { margin: 8px 0 0; color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tag { background: var(--chip); color: var(--muted); border-radius: 6px; padding: 2px 9px; font-size: 13px; }
+.tag.accent { background: var(--accent-soft); color: var(--accent); }
+.actions { display: flex; gap: 14px; margin-top: 14px; font-size: 15px; }
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.repo { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.repo h3 { margin: 0; font-size: 16px; overflow-wrap: anywhere; }
+.repo p { margin: 0; color: var(--muted); font-size: 14px; flex: 1; }
+.repo .meta { color: var(--muted); font-size: 13px; display: flex; gap: 12px; flex-wrap: wrap; }
+.note { color: var(--muted); font-size: 14px; }
+footer { color: var(--muted); font-size: 13px; padding: 48px 0; }
+@media (max-width: 680px) {
+  header { padding-top: 40px; }
+  h1 { font-size: 28px; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Sweet-Butters</h1>
+    <p class="lead">직접 만들고 운영하는 프로젝트를 모아둔 포트폴리오입니다.</p>
+    <nav class="links">
+      <a href="https://github.com/Sweet-Butters">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>대표 프로젝트</h2>
+    <a class="featured" href="https://sweet-butters.github.io/korea-ai-contest-tracker/">
+      <h3>AI 공모전 레이더</h3>
+      <p>대한민국 AI 대회·공모전·해커톤·창업경진대회를 11개 사이트에서 매일 자동 수집해 보여주는 사이트.
+        키워드 규칙에 TypeSafe Jev의 판정을 더해 AI 대회 여부와 분야를 가려내고, 여러 사이트의 같은 대회를 합칩니다.</p>
+      <div class="tags">
+        <span class="tag accent">Next.js</span><span class="tag accent">TypeScript</span><span class="tag accent">Python</span>
+        <span class="tag">GitHub Actions</span><span class="tag">TypeSafe Jev</span><span class="tag">GitHub Pages</span>
+      </div>
+      <div class="actions"><span>사이트 보기 →</span></div>
+    </a>
+    <p class="actions"><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">소스 코드</a></p>
+
+    <h2>GitHub 저장소</h2>
+    <p class="note" id="repo-note">불러오는 중…</p>
+    <ol class="grid" id="repos"></ol>
+  </main>
+
+  <footer>© Sweet-Butters</footer>
+</div>
+
+<script>
+// Lists public repositories live from the GitHub API, so new projects appear without editing this page.
+(async () => {
+  const note = document.getElementById("repo-note");
+  const list = document.getElementById("repos");
+  const skip = new Set(["sweet-butters.github.io"]);
+  try {
+    const r = await fetch("https://api.github.com/users/Sweet-Butters/repos?per_page=100&sort=pushed");
+    if (!r.ok) throw new Error(r.status);
+    const repos = (await r.json()).filter((x) => !x.fork && !skip.has(x.name.toLowerCase()));
+    note.hidden = true;
+    for (const x of repos) {
+      const li = document.createElement("li");
+      li.className = "repo";
+      const h = document.createElement("h3");
+      const a = document.createElement("a");
+      a.href = x.homepage || x.html_url; a.textContent = x.name;
+      h.append(a);
+      const p = document.createElement("p");
+      p.textContent = x.description || "";
+      const meta = document.createElement("div");
+      meta.className = "meta";
+      for (const t of [x.language, x.stargazers_count ? `★ ${x.stargazers_count}` : "", `업데이트 ${new Date(x.pushed_at).toLocaleDateString("ko-KR")}`]) {
+        if (!t) continue;
+        const s = document.createElement("span"); s.textContent = t; meta.append(s);
+      }
+      li.append(h, p, meta);
+      list.append(li);
+    }
+    if (!repos.length) { note.hidden = false; note.textContent = "공개 저장소가 없습니다."; }
+  } catch (e) {
+    note.textContent = "저장소 목록을 불러오지 못했습니다. ";
+    const a = document.createElement("a"); a.href = "https://github.com/Sweet-Butters?tab=repositories"; a.textContent = "GitHub에서 보기";
+    note.append(a);
+  }
+})();
+</script>
+</body>
+</html>
