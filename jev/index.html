@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jev 실사용 기록 · Sweet-Butters</title>
+<meta name="description" content="TypeSafe Jev를 AI 공모전 수집 서비스의 판정기로 실제 운영에 붙여본 기록">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233b5bdb'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='sans-serif'>SB</text></svg>">
+<style>
+:root {
+  --bg: #f6f7f9; --panel: #fff; --text: #1c1f24; --muted: #5d6470; --line: #e2e5ea;
+  --accent: #3b5bdb; --accent-soft: #e8edff; --chip: #eef0f3; color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317; --panel: #1a1d23; --text: #e6e8ec; --muted: #9aa1ad; --line: #2c313a;
+    --accent: #8ea6ff; --accent-soft: #232b45; --chip: #252a32; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --panel: #1a1d23; --text: #e6e8ec; --muted: #9aa1ad; --line: #2c313a;
+  --accent: #8ea6ff; --accent-soft: #232b45; --chip: #252a32; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.7 "Pretendard", "Apple SD Gothic Neo", "Hiragino Sans", "Meiryo", "Malgun Gothic", system-ui, sans-serif; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-size: 14px; }
+.lang { display: inline-flex; background: var(--chip); border-radius: 8px; padding: 3px; }
+.lang button { font: inherit; font-size: 13px; border: 0; background: transparent; color: var(--muted); padding: 3px 12px; border-radius: 6px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--panel); color: var(--text); font-weight: 600; }
+header { padding: 24px 0 8px; }
+.eyebrow { color: var(--accent); font-size: 14px; font-weight: 600; margin: 0; }
+h1 { margin: 6px 0 0; font-size: 32px; line-height: 1.3; letter-spacing: -.02em; }
+.lead { margin: 12px 0 0; color: var(--muted); font-size: 17px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; font-size: 15px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 28px 0 8px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.stat b { display: block; font-size: 24px; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 13px; }
+h2 { font-size: 21px; margin: 44px 0 10px; }
+p { margin: 10px 0; }
+ul, ol { padding-left: 20px; margin: 10px 0; }
+li { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; font-size: 13.5px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .9em; background: var(--chip); padding: 1px 5px; border-radius: 4px; }
+.box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin: 12px 0; }
+.box h3 { margin: 0 0 4px; font-size: 16px; }
+.box p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+.note { color: var(--muted); font-size: 14px; }
+.timeline { list-style: none; padding: 0; }
+.timeline li { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
+.timeline li:first-child { border-top: 0; }
+.timeline time { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 14px; }
+footer { color: var(--muted); font-size: 13px; padding: 48px 0; }
+[lang="ja"] .ko, [lang="ko"] .ja { display: none; }
+@media (max-width: 680px) {
+  h1 { font-size: 26px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .timeline li { grid-template-columns: 1fr; gap: 0; }
+  th, td { padding: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a href="../">← Sweet-Butters</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="ko" aria-pressed="true">한국어</button>
+      <button type="button" data-lang="ja" aria-pressed="false">日本語</button>
+    </div>
+  </div>
+
+  <header>
+    <p class="eyebrow"><span class="ko">TypeSafe Jev · 실사용 기록</span><span class="ja">TypeSafe Jev · 実運用の記録</span></p>
+    <h1 class="ko">새로 나온 AI 모델 Jev를<br>실제 서비스의 판정기로 붙여보다</h1>
+    <h1 class="ja">新しい AI モデル Jev を<br>実サービスの判定器として組み込む</h1>
+    <p class="lead ko">대한민국 AI 공모전·해커톤을 매일 자동으로 모으는 서비스에서, 키워드 규칙이 헷갈려하는 공고를 Jev에게 한 번 더 물어보도록 만들었습니다. 텍스트 대신 <b>확률이 붙은 정해진 형식의 답</b>을 돌려주는 모델이 실제 운영에서 어떻게 쓰이는지 기록합니다.</p>
+    <p class="lead ja">韓国の AI コンテスト・ハッカソン情報を毎日自動で集めるサービスで、キーワードルールが判断に迷う掲載を Jev にもう一度問い合わせる仕組みを作りました。テキストではなく<b>確率付きの決まった形式の答え</b>を返すモデルが、実運用でどう使えるかを記録します。</p>
+    <nav class="links">
+      <a href="https://sweet-butters.github.io/korea-ai-contest-tracker/"><span class="ko">서비스 보기</span><span class="ja">サービスを見る</span></a>
+      <a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker"><span class="ko">GitHub 저장소</span><span class="ja">GitHub リポジトリ</span></a>
+      <a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker/blob/main/collector/jev.py"><span class="ko">Jev 연동 코드</span><span class="ja">Jev 連携コード</span> (jev.py)</a>
+      <a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker/blob/main/data/jev_runs.jsonl"><span class="ko">실행별 기록</span><span class="ja">実行ごとの記録</span> (jev_runs.jsonl)</a>
+    </nav>
+  </header>
+
+  <section class="stats" aria-label="summary">
+    <div class="stat"><b>3,728</b><span class="ko">Jev가 판정한 공고</span><span class="ja">Jev が判定した掲載</span></div>
+    <div class="stat"><b>95%</b><span class="ko">키워드 규칙과 같은 판단</span><span class="ja">キーワードルールと同じ判断</span></div>
+    <div class="stat"><b>170</b><span class="ko">분야를 바로잡은 공고</span><span class="ja">分野を修正した掲載</span></div>
+    <div class="stat"><b>≈ $0.11</b><span class="ko">전체 판정 비용</span><span class="ja">全件の判定費用</span></div>
+  </section>
+
+  <h2 class="ko">왜 Jev를 썼나</h2>
+  <h2 class="ja">なぜ Jev を使ったか</h2>
+  <div class="ko">
+    <p>국내 AI 대회 정보는 공모전 플랫폼, 정부·지자체 공고, 기업 보도자료에 흩어져 있습니다. 11개 사이트에서 하루 약 4,000건의 공고를 모아 "AI 대회가 맞는지, 어떤 분야인지"를 가려야 했습니다.</p>
+    <p>처음에는 LLM으로 검색했지만, 매일 돌리기에는 토큰 비용이 비효율적이었습니다. 그래서 수집과 판정을 <b>정해진 키워드 규칙</b>으로 바꿨습니다. 그런데 규칙에는 두 가지 한계가 있었습니다.</p>
+    <ul>
+      <li>제목에 <code>데이터</code>나 <code>SW</code>만 들어가도 AI 대회로 잡힙니다.</li>
+      <li>반대로 "AI"라는 단어 없이 AI를 다루는 대회는 놓칩니다.</li>
+    </ul>
+    <p>대화형 LLM에 물으면 답을 문장에서 다시 파싱하고 검증해야 합니다. Jev는 질문의 형식(예/아니오, 선택지)에 맞춰 <b>확률값을 바로</b> 돌려줍니다. 그래서 답을 그대로 <code>if</code> 문에 넣을 수 있었고, 이 점이 이 문제에 맞다고 판단했습니다.</p>
+  </div>
+  <div class="ja">
+    <p>韓国の AI 大会情報は、コンテスト掲載サイト、行政・自治体の公告、企業のプレスリリースに分散しています。11 のサイトから 1 日約 4,000 件の掲載を集め、「AI 大会かどうか、どの分野か」を判定する必要がありました。</p>
+    <p>当初は LLM で検索していましたが、毎日回すにはトークン費用が非効率でした。そこで収集と判定を<b>決まったキーワードルール</b>に切り替えました。しかしルールには二つの限界がありました。</p>
+    <ul>
+      <li>タイトルに <code>データ</code> や <code>SW</code> が入っているだけで AI 大会と判定されてしまう。</li>
+      <li>逆に「AI」という語がなくても AI を扱う大会を取りこぼす。</li>
+    </ul>
+    <p>対話型 LLM に聞くと、答えを文章から改めてパースし検証する必要があります。Jev は質問の形式（はい/いいえ、選択肢）に合わせて<b>確率値をそのまま</b>返します。そのため答えをそのまま <code>if</code> 文に使えることが、この問題に合っていると判断しました。</p>
+  </div>
+
+  <h2 class="ko">어떻게 붙였나</h2>
+  <h2 class="ja">どう組み込んだか</h2>
+  <p class="ko">공고 하나(제목·설명·출처 사이트)마다 세 가지 질문을 한 번에 보냅니다.</p>
+  <p class="ja">掲載 1 件（タイトル・説明・掲載サイト）ごとに、三つの質問をまとめて送ります。</p>
+  <table>
+    <thead><tr>
+      <th><span class="ko">질문</span><span class="ja">質問</span></th>
+      <th><span class="ko">답 형식</span><span class="ja">回答形式</span></th>
+      <th><span class="ko">쓰는 곳</span><span class="ja">使いどころ</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="ko">AI를 다루는 대회인가?</span><span class="ja">AI を扱う大会か？</span></td><td><code>noul</code> <span class="ko">확률</span><span class="ja">確率</span></td><td><span class="ko">약한 키워드만 걸린 공고 제거, 놓친 AI 대회 구제</span><span class="ja">弱いキーワードのみの掲載を除外、取りこぼした AI 大会を救済</span></td></tr>
+      <tr><td><span class="ko">지금 참가자를 모집하는 대회인가?</span><span class="ja">今参加者を募集している大会か？</span></td><td><code>noul</code> <span class="ko">확률</span><span class="ja">確率</span></td><td><span class="ko">강의·채용·결과 발표 글 제거</span><span class="ja">講座・求人・結果発表の除外</span></td></tr>
+      <tr><td><span class="ko">어떤 분야인가? (해커톤·데이터·개발·창작·창업 …)</span><span class="ja">どの分野か？（ハッカソン・データ・開発・創作・起業 …）</span></td><td><code>choice</code> + <span class="ko">확신도</span><span class="ja">確信度</span></td><td><span class="ko">확신할 때만 분야 교체</span><span class="ja">確信があるときのみ分野を置き換え</span></td></tr>
+    </tbody>
+  </table>
+
+  <p class="ko">Jev는 한국어보다 영어를 더 잘 읽습니다. 그래서 규칙을 기본으로 두고, <b>Jev가 확신할 때만</b> 규칙을 뒤집도록 임계값을 보수적으로 잡았습니다.</p>
+  <p class="ja">Jev は韓国語より英語の方が得意です。そのためルールを基本とし、<b>Jev が確信しているときだけ</b>ルールを覆すよう、しきい値を保守的に設定しました。</p>
+  <table>
+    <thead><tr><th><span class="ko">상황</span><span class="ja">状況</span></th><th><span class="ko">판단</span><span class="ja">判断</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko">모집 중인 대회일 확률 &lt; 0.10</span><span class="ja">募集中の大会である確率 &lt; 0.10</span></td><td><span class="ko">제외</span><span class="ja">除外</span></td></tr>
+      <tr><td><span class="ko">약한 단어로만 남은 공고, AI 확률 &lt; 0.15</span><span class="ja">弱い語だけで残った掲載、AI 確率 &lt; 0.15</span></td><td><span class="ko">제외</span><span class="ja">除外</span></td></tr>
+      <tr><td><span class="ko">AI 단어가 없어 빠진 대회, AI 확률 ≥ 0.85</span><span class="ja">AI の語がなく漏れた大会、AI 確率 ≥ 0.85</span></td><td><span class="ko">구제</span><span class="ja">救済</span></td></tr>
+      <tr><td><span class="ko">분야 확신도 ≥ 0.6</span><span class="ja">分野の確信度 ≥ 0.6</span></td><td><span class="ko">Jev의 분야로 교체</span><span class="ja">Jev の分野に置き換え</span></td></tr>
+    </tbody>
+  </table>
+  <p class="ko">한 번 물어본 공고는 제목과 설명의 해시로 캐시합니다. 그래서 매일 실행할 때는 <b>새로 올라온 공고만</b> Jev에게 보냅니다. 실행마다 판정 결과, 지연 시간, 토큰, 비용을 <code>jev_runs.jsonl</code>에 남기고 관리자 페이지에서 확인합니다.</p>
+  <p class="ja">一度問い合わせた掲載はタイトルと説明のハッシュでキャッシュします。そのため毎日の実行では<b>新しく掲載されたものだけ</b>を Jev に送ります。実行ごとに判定結果、レイテンシ、トークン、費用を <code>jev_runs.jsonl</code> に記録し、管理画面で確認できます。</p>
+
+  <h2 class="ko">결과 (첫 전체 실행, 2026-09-22, jev-1.13.0)</h2>
+  <h2 class="ja">結果（初回の全件実行、2026-09-22、jev-1.13.0）</h2>
+  <table>
+    <thead><tr><th><span class="ko">결과</span><span class="ja">結果</span></th><th class="num"><span class="ko">건수</span><span class="ja">件数</span></th><th class="num"><span class="ko">비율</span><span class="ja">割合</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko">규칙과 같이 제외</span><span class="ja">ルールと同じく除外</span></td><td class="num">3,035</td><td class="num">81.4%</td></tr>
+      <tr><td><span class="ko">규칙과 같이 유지</span><span class="ja">ルールと同じく維持</span></td><td class="num">501</td><td class="num">13.4%</td></tr>
+      <tr><td><span class="ko">유지하되 분야를 바로잡음</span><span class="ja">維持しつつ分野を修正</span></td><td class="num">170</td><td class="num">4.6%</td></tr>
+      <tr><td><span class="ko">약한 키워드로만 잡힌 공고 제거</span><span class="ja">弱いキーワードのみの掲載を除外</span></td><td class="num">16</td><td class="num">0.4%</td></tr>
+      <tr><td><span class="ko">모집 중인 대회가 아니라서 제거</span><span class="ja">募集中の大会ではないため除外</span></td><td class="num">3</td><td class="num">0.1%</td></tr>
+      <tr><td><span class="ko">AI 단어 없이 놓친 AI 대회 구제</span><span class="ja">AI の語がなく漏れた AI 大会を救済</span></td><td class="num">3</td><td class="num">0.1%</td></tr>
+    </tbody>
+  </table>
+  <ul class="ko">
+    <li>규칙이 남긴 690건 중 19건(2.8%)을 걸러내고, 170건(남긴 공고의 25%)의 분야를 바로잡았습니다.</li>
+    <li>공고 하나에 입력 토큰 약 730개가 듭니다. 입력 100만 토큰당 $0.042(출력 무료)이므로 3.7천 건 전체를 판정해도 <b>약 $0.11</b>입니다.</li>
+    <li>이후 GitHub Actions의 매일 실행에서는 새 공고 14건만 물어 <b>$0.0004</b>가 들었습니다. 나머지 2,958건은 캐시에서 처리했습니다.</li>
+    <li>요청 하나의 지연은 로컬에서 약 2초(p50 2,054ms)였습니다. 첫 실행만 4개 병렬로 돌리고, 이후에는 수집 시간이 대부분입니다.</li>
+  </ul>
+  <ul class="ja">
+    <li>ルールが残した 690 件のうち 19 件（2.8%）を除外し、170 件（残した掲載の 25%）の分野を修正しました。</li>
+    <li>掲載 1 件あたり入力トークンは約 730 個です。入力 100 万トークンあたり $0.042（出力は無料）なので、3,700 件すべてを判定しても<b>約 $0.11</b>です。</li>
+    <li>その後の GitHub Actions による毎日の実行では、新しい掲載 14 件だけを問い合わせ、費用は <b>$0.0004</b> でした。残りの 2,958 件はキャッシュで処理しました。</li>
+    <li>リクエスト 1 件のレイテンシはローカルで約 2 秒（p50 2,054ms）でした。初回のみ 4 並列で実行し、以降は収集時間がほとんどを占めます。</li>
+  </ul>
+
+  <h2 class="ko">써보며 알게 된 점</h2>
+  <h2 class="ja">使ってみて分かったこと</h2>
+  <div class="box ko"><h3>답을 파싱할 필요가 없다</h3><p>확률과 선택지로 답이 오기 때문에 JSON 파싱 실패나 형식 검증 코드가 필요 없었습니다. 판정 로직이 임계값 비교 몇 줄로 끝납니다.</p></div>
+  <div class="box ja"><h3>回答をパースする必要がない</h3><p>確率と選択肢で答えが返るため、JSON のパース失敗や形式検証のコードが不要でした。判定ロジックはしきい値の比較数行で済みます。</p></div>
+  <div class="box ko"><h3>규칙을 대체하기보다 보완할 때 강하다</h3><p>대부분(95%)은 규칙과 같은 판단이었고, 차이는 규칙이 약한 가장자리에서 났습니다. 그래서 "규칙 우선, Jev는 확신할 때만"이라는 구조가 비용과 안정성 모두에 맞았습니다.</p></div>
+  <div class="box ja"><h3>ルールを置き換えるより補完するときに強い</h3><p>大半（95%）はルールと同じ判断で、差はルールが弱い境界部分で出ました。そのため「ルール優先、Jev は確信があるときのみ」という構成が、費用と安定性の両面で合っていました。</p></div>
+  <div class="box ko"><h3>캐시와 함께 쓰면 운영비가 사실상 0에 가깝다</h3><p>출력 토큰이 무료이고 입력도 짧아, 캐시를 붙이면 매일 새 공고만 판정하는 비용이 1센트에도 못 미칩니다. 서버·DB 없이 GitHub Actions만으로 운영합니다.</p></div>
+  <div class="box ja"><h3>キャッシュと併用すると運用費はほぼゼロ</h3><p>出力トークンが無料で入力も短いため、キャッシュを付ければ毎日新しい掲載だけを判定する費用は 1 セントにも満ちません。サーバー・DB なしで GitHub Actions だけで運用しています。</p></div>
+  <div class="box ko"><h3>한국어 입력에는 보수적인 임계값이 필요하다</h3><p>영어에 비해 한국어 판단에는 확신이 덜할 수 있다고 보고, 규칙을 뒤집는 조건을 좁게 잡았습니다. 이 임계값이 적절한지는 아래 평가로 검증합니다.</p></div>
+  <div class="box ja"><h3>韓国語の入力には保守的なしきい値が必要</h3><p>英語に比べ韓国語の判断は確信度が下がり得ると考え、ルールを覆す条件を狭く設定しました。このしきい値が適切かは、下の評価で検証します。</p></div>
+
+  <h2 class="ko">검증: 정확도 평가 (진행 중)</h2>
+  <h2 class="ja">検証：精度評価（進行中）</h2>
+  <div class="ko">
+    <p>Jev의 판정을 객관적으로 확인하기 위해 평가 파이프라인을 따로 만들었습니다.</p>
+    <ul>
+      <li>규칙이 강하게 잡은 공고, 약하게 잡은 공고, 제외한 공고에서 층화 표본 278건을 뽑았습니다.</li>
+      <li>같은 공고를 3번씩 반복 호출해 답이 얼마나 일관된지 측정합니다.</li>
+      <li>AUROC, PR-AUC, Brier, 보정 오차(ECE), 신뢰도 구간 등으로 평가합니다.</li>
+    </ul>
+    <p class="note">정답 라벨의 사람 검수가 끝나는 대로 결과를 이 페이지에 공개합니다. 코드: <a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker/tree/main/eval">eval/</a></p>
+  </div>
+  <div class="ja">
+    <p>Jev の判定を客観的に確認するため、評価パイプラインを別途作りました。</p>
+    <ul>
+      <li>ルールが強く拾った掲載、弱く拾った掲載、除外した掲載から、層化サンプル 278 件を抽出しました。</li>
+      <li>同じ掲載を 3 回ずつ繰り返し呼び出し、回答の一貫性を測定します。</li>
+      <li>AUROC、PR-AUC、Brier、較正誤差（ECE）、信頼区間などで評価します。</li>
+    </ul>
+    <p class="note">正解ラベルの人手レビューが終わり次第、結果をこのページで公開します。コード：<a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker/tree/main/eval">eval/</a></p>
+  </div>
+
+  <h2 class="ko">진행 기록</h2>
+  <h2 class="ja">進行記録</h2>
+  <ol class="timeline">
+    <li><time>2026-09-21</time><span class="ko">국내 AI 공모전 조사 시작. LLM 검색의 토큰 비용 문제를 확인하고 규칙 기반 자동 수집으로 방향 전환</span><span class="ja">韓国の AI コンテスト調査を開始。LLM 検索のトークン費用の問題を確認し、ルールベースの自動収集へ方針転換</span></li>
+    <li><time>2026-09-22</time><span class="ko">11개 사이트 수집기, Next.js 웹·관리자 페이지 구축, Jev 연동 후 3,728건 첫 판정, GitHub Pages 공개</span><span class="ja">11 サイトの収集処理、Next.js の Web・管理画面を構築。Jev を連携して 3,728 件を初回判定し、GitHub Pages で公開</span></li>
+    <li><time>2026-09-22</time><span class="ko">GitHub Actions 매일 06:00 자동 수집·판정·배포 시작, 정확도 평가 파이프라인 구축</span><span class="ja">GitHub Actions による毎日 06:00 の自動収集・判定・デプロイを開始。精度評価パイプラインを構築</span></li>
+  </ol>
+  <p class="note ko">설계와 판단은 직접 하고, 구현은 AI 코딩 에이전트(Claude Code)와 함께 진행했습니다.</p>
+  <p class="note ja">設計と判断は自分で行い、実装は AI コーディングエージェント（Claude Code）と共に進めました。</p>
+
+  <footer>© Sweet-Butters · <a href="../">Portfolio</a></footer>
+</div>
+<script>
+(() => {
+  const set = (lang) => {
+    document.documentElement.lang = lang;
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+    document.title = lang === "ja" ? "Jev 実運用の記録 · Sweet-Butters" : "Jev 실사용 기록 · Sweet-Butters";
+    try { localStorage.setItem("jev-lang", lang); } catch { /* storage blocked */ }
+  };
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => set(b.dataset.lang)));
+  // ?lang=ja wins, then the saved choice, then the browser language.
+  const q = new URLSearchParams(location.search).get("lang");
+  let saved = null;
+  try { saved = localStorage.getItem("jev-lang"); } catch { /* storage blocked */ }
+  const pick = q || saved || (navigator.language.startsWith("ja") ? "ja" : "ko");
+  set(pick === "ja" ? "ja" : "ko");
+})();
+</script>
+</body>
+</html>
