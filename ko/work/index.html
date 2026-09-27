@@ -280,6 +280,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
   const N = { date: "2026-09-27", sites: 13, fetched: 4133, live: 551, judged: 3797, agreed: 3509, recat: 265, dropRule: 2888, dropWeak: 14, dropNot: 6 };
   const drops = () => N.dropRule + N.dropWeak + N.dropNot;
   const RADAR = "https://sweet-butters.github.io/korea-ai-contest-tracker/";
+  const CHEM = "https://sweet-butters.github.io/train/";
 
   const W = {
     thisStop: { en: "This stop", ko: "이번 역" }, next: { en: "Next", ko: "다음 역" }, end: { en: "End of the line", ko: "종착역" },
@@ -356,8 +357,25 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         "dev에서 100%였던 파서가 실제 평가셋에서는 커버리지 17%에 그친 걸 발견해 다시 설계함 (커버리지 100%)",
         "규칙을 더하면 오히려 손해가 되는 지점에서 규칙을 멈춤"] },
       nums: [["0.088 → 0.747", { en: "overall score", ko: "종합 점수" }], [{ en: "Finals", ko: "본선" }, { en: "finalist and presenter", ko: "진출·발표" }]] },
-    { s: "u", id: "cursor", tags: ["u"], short: { en: "Cursor Hackathon", ko: "Cursor 해커톤" }, title: { en: "Cursor Hackathon", ko: "Cursor 해커톤" }, when: { en: "contest", ko: "대회" },
-      text: { en: "Took part in a hackathon run by Cursor, the AI coding tool.", ko: "AI 코딩 도구 Cursor의 해커톤에 참가했어요." } },
+    { s: "u", id: "cursor", big: true, tags: ["u", "d"], short: { en: "Cursor Hackathon: chemcheck", ko: "Cursor 해커톤: chemcheck" },
+      title: { en: "chemcheck: is the molecule the AI drew really that molecule?", ko: "chemcheck: AI가 그린 분자, 정말 그 분자일까" },
+      when: { en: "2026-09 · Cursor Hackathon", ko: "2026-09 · Cursor 해커톤 참가" },
+      text: { en: "At a Cursor hackathon I built a tool that checks whether a chemical structure drawn by ChatGPT or Gemini is really the molecule it's named as, and shows where it differs. I started it on a KTX train with Cursor on my phone.",
+        ko: "Cursor 해커톤에서, ChatGPT나 Gemini가 그린 화학 구조가 정말 그 이름의 분자인지 검사하고 어디가 다른지 보여 주는 도구를 만들었어요. KTX 안에서 휴대폰의 Cursor로 시작했어요." },
+      photo: ["/work/img/chemcheck.jpg", { en: "The live site: Gemini's drawing of caffeine is flagged as a different molecule, with one carbon too many", ko: "실제 사이트: Gemini가 그린 카페인을 \"다름\"으로 판정 (탄소 하나 많음)" }],
+      mine: { en: [
+        "Kept LLMs out of the verdict: a model that can't read structures can't check them either. The name (via PubChem) and the drawing (via structure recognition) both become InChIKeys and are compared as plain strings",
+        "Put \"never call a right answer wrong\" first: when unsure, it says \"can't judge\" instead of guessing",
+        "Wrote the success bar down before looking at any numbers",
+        "Ran two structure recognizers that cover each other's gaps, in separate processes, because their libraries can't share one"],
+        ko: [
+        "판정에 LLM을 쓰지 않음: 구조를 못 읽는 모델은 검사도 못 한다. 이름(PubChem)과 그림(구조 인식)을 각각 InChIKey로 바꿔 문자열로 비교함",
+        "\"맞는 걸 틀렸다고 하지 않기\"를 최우선으로 둠: 확신이 없으면 추측하지 않고 \"판정 불가\"로 물러남",
+        "숫자를 보기 전에 성공 기준부터 적어 둠",
+        "서로의 약점을 메우는 구조 인식기 두 개를, 라이브러리가 충돌해 별도 프로세스로 나눠 돌림"] },
+      nums: [["6 / 10", { en: "AI drawings it could judge that were a different molecule (Gemini and GPT)", ko: "판정한 AI 그림 중 다른 분자였던 것 (Gemini·GPT)" }],
+        ["0 / 50", { en: "confidently wrong, on 50 test images", ko: "시험 이미지 50장 중 자신 있게 틀림" }], ["204", { en: "commits", ko: "커밋" }]],
+      link: [CHEM, { en: "Try it", ko: "직접 해 보기" }] },
     { s: "u", id: "lecturer", tags: ["u", "d"], short: { en: "AI instructor", ko: "AI 강사" }, title: { en: "AI instructor", ko: "AI 강사" }, when: "2026 –",
       text: { en: "I teach AI to university students, office workers and middle-aged learners, online and in person.", ko: "대학생, 직장인, 중장년층을 대상으로 온·오프라인 AI 강의를 하고 있어요." } },
     { s: "u", id: "school", soon: true, tags: ["u", "d"], short: { en: "AI classes in K-12", ko: "초중고 AI 강의" }, title: { en: "AI classes in K-12 schools", ko: "초·중·고 AI 강의" },
@@ -372,6 +390,10 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       after: { en: `Every morning ${fmt(N.sites)} sites are gathered automatically, with fakes and duplicates filtered out, in one place`, ko: `매일 아침 ${fmt(N.sites)}개 사이트를 자동으로 모아, 가짜와 중복을 걸러 한 곳에서 봄` },
       nums: [[`${fmt(N.fetched)} → ${fmt(N.live)}`, { en: "listings today", ko: "건 (오늘)" }], [fmt(drops()), { en: "filtered out", ko: "건 걸러냄" }]],
       link: [RADAR, { en: "See the service", ko: "서비스 보기" }] },
+    { s: "d", id: "d-chem", tags: ["u", "d"], short: { en: "Wrong AI-drawn molecules", ko: "AI가 틀리게 그린 분자" }, title: { en: "Molecules the AI drew wrong", ko: "AI가 틀리게 그린 분자" },
+      before: { en: "AI-drawn chemical structures look right but are often wrong, and slip into slides and papers unnoticed", ko: "AI가 그린 화학 구조는 그럴듯하지만 틀린 경우가 많고, 모른 채 강의자료나 논문에 들어감" },
+      after: { en: "Put in the drawing and its name, and chemcheck says whether it's the same molecule and where it differs", ko: "그림과 이름을 넣으면 같은 분자인지, 어디가 다른지 알려 줌" },
+      nums: [["6 / 10", { en: "judged AI drawings that were wrong", ko: "판정한 AI 그림 중 틀린 것" }]], link: [CHEM, { en: "Try it", ko: "직접 해 보기" }] },
     { s: "d", id: "d-date", tags: ["c", "d"], short: { en: "Mismatched deadlines", ko: "어긋난 마감일" }, title: { en: "Mismatched deadlines", ko: "어긋난 마감일" },
       before: { en: "Each site counted deadlines differently, so the same contest's dates disagreed between sources (108 mismatches)", ko: "사이트마다 마감일 세는 방식이 달라, 같은 대회의 날짜가 출처끼리 어긋남 (불일치 108건)" },
       after: { en: "Checked 96 listings, found the cause and fixed it (15 mismatches); 30 samples are re-checked automatically every week", ko: "96건을 대조해 원인을 찾아 고침 (불일치 15건), 매주 표본 30건을 자동으로 다시 대조" },
