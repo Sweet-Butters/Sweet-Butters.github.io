@@ -162,11 +162,20 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <h2 class="en">Who gets the personal information, and how much of it</h2>
   <div class="ko">
     <p class="oneline">한 줄로: <b>결정론적 규칙 엔진과 실험 설계</b> (Python, 외부 의존성 0) — 지시문 파싱, 게이트형 채점 최적화, 변형·무작위 입력 검증, 바이트 단위 재현</p>
-    <p><b>과제.</b> 개인비서 AI 에이전트가 요청을 받았을 때, 개인정보를 <b>누구에게, 어떤 행동으로(진행·질문·보류·수정), 어디까지</b> 넘길지 판단해 여섯 칸짜리 답을 내는 문제였습니다. 공개 리더보드로 상위 100명을 자른 뒤, 그 100명의 코드를 주최측이 처음 보는 비공개 과제에 직접 돌려 상위 40명을 뽑았습니다. 그래서 진짜 시험은 공개 점수가 아니라 <b>처음 보는 데이터에서도 무너지지 않는 코드</b>였습니다.</p>
+    <h3>주제: AI Agent Harness, "이 정보를 지금 누구에게, 어디까지 보낼까"</h3>
+    <p>2026년 7월 6–12일, 1,845명이 참가한 라운드입니다. 스마트폰 개인비서 에이전트가 "이 파일 팀에 공유해 줘" 같은 요청을 받았을 때, 개인정보를 어떻게 다룰지 판단하는 층(하네스)을 만드는 문제였습니다.</p>
+    <p><b>왜 어려운가.</b> "민감한 정보는 내보내지 않는다"로 만들면 아무것도 못 하는 비서가 되고, "시키는 대로 한다"로 만들면 사고가 납니다. 같은 진단서도 병원에 보내면 정상이고 단톡방에 보내면 유출입니다. 정보 자체가 아니라 <b>누구에게, 어떤 조건으로 흐르느냐</b>가 문제라는 관점을 맥락적 무결성(Contextual Integrity, Nissenbaum)이라고 합니다. 언어모델은 이 판단을 말로는 맞히면서 행동에서는 새는 경향이 있다는 연구(PrivacyLens, ConfAIde)도 있습니다. 대회도 설명이 아니라 <b>최종 행동을 구조화된 답으로</b> 채점했습니다.</p>
+    <ul>
+      <li><b>입력:</b> 사용자 요청 문장, 기기 상태(메시지·파일·일정 같은 객체와 권한·경계 같은 신호), 대화 이력, 세션을 넘어 남는 기억</li>
+      <li><b>출력 여섯 칸:</b> 무엇에 대한 판단인가, 누구·어디로 보내나, 어떻게 할까(진행·수정·보류·질문), 어디까지 보내나(전체·요약·가림), 걸리는 위험과 확인, 실행 계획</li>
+      <li><b>채점:</b> 칸들이 독립이 아니라 게이트로 묶여 있었습니다. 앞의 세 칸(대상·받는 쪽·행동)이 모두 맞아야 뒤의 세 칸이 점수에 들어갑니다.</li>
+      <li><b>모델:</b> 외부 모델과 API는 쓸 수 없었고, 판단은 전부 참가자가 만드는 층의 몫이었습니다.</li>
+      <li><b>선발:</b> 공개 리더보드(하루 3회 제출)로 상위 100명을 자른 뒤, 주최측이 그 100명의 코드를 처음 보는 비공개 과제에 직접 돌려 상위 40명을 뽑았습니다. 그래서 진짜 시험은 공개 점수가 아니라 <b>처음 보는 데이터에서도 무너지지 않는 코드</b>였습니다.</li>
+    </ul>
     <p><b>만든 것.</b> 언어모델을 한 번도 부르지 않는 결정론적 규칙 엔진입니다. 파이썬 표준 라이브러리만 쓰는 파일 하나(1,213줄)이고, 같은 입력이면 늘 같은 답을 냅니다.</p>
     <h3>내가 한 판단</h3>
     <ul>
-      <li><b>채점 구조부터 읽었습니다.</b> 항목들이 독립이 아니라 게이트로 묶여 있어서, 받는 사람이나 행동을 틀리면 그 아래 항목이 전부 0점이 됩니다. 그래서 부분 점수를 모으기보다 그 두 칸을 먼저 맞췄습니다 (dev 120문항에서 각 120/120).</li>
+      <li><b>채점 구조부터 읽었습니다.</b> 게이트 세 칸 중 하나라도 틀리면 뒤의 세 칸이 전부 0점이 됩니다. 그래서 부분 점수를 모으기보다 게이트부터 맞췄습니다 (받는 쪽과 행동 두 칸 모두 dev 120문항에서 120/120).</li>
       <li><b>가장 큰 개선은 요청 문장 안의 한 부분에서 나왔습니다.</b> 요청마다 최종 전달 지시를 담은 부분이 있다는 가설을 세우고, 정답이 있는 dev 데이터에서 53/53 일치하는 걸 확인한 뒤에만 썼습니다. 이 하나로 리더보드가 +0.1162 올랐습니다.</li>
       <li><b>dev에서 100%였던 파서가 실제 심사 과제 700개 중 17%만 읽는다는 걸 찾아</b>, 700개 전부 읽도록 다시 썼습니다.</li>
       <li><b>제출 1번에 가설 1개만 시험했습니다.</b> 제출 전에 "이 점수가 나오면 이렇게 한다"를 먼저 적어 두었고, 점수가 떨어진 6번은 모두 기록하고 다시 내지 않았습니다.</li>
@@ -177,11 +186,20 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   </div>
   <div class="en">
     <p class="oneline">In one line: <b>a deterministic rule engine and experiment design</b> (Python, no dependencies): instruction parsing, optimising for gated scoring, metamorphic and property-based testing, byte-for-byte reproducible output</p>
-    <p><b>The task.</b> When a personal-assistant AI agent gets a request, it has to decide <b>who</b> personal information goes to, <b>what to do</b> (go ahead, ask, hold or amend), and <b>how much</b> to pass on, as a six-field answer. A public leaderboard cut the field to the top 100. The organisers then ran those 100 people's code on hidden tasks nobody had seen and took the top 40. So the real test wasn't the public score but <b>code that doesn't fall over on data it has never seen</b>.</p>
+    <h3>Topic: AI Agent Harness, "who should this information go to right now, and how much of it?"</h3>
+    <p>This round ran 6–12 July 2026 with 1,845 entrants. The task: build the layer (the "harness") that decides how a phone's personal-assistant agent handles personal information when asked something like "share this file with the team".</p>
+    <p><b>Why it's hard.</b> "Never send sensitive data out" gives you an assistant that can't do anything; "do what the user says" gives you leaks. The same medical note is fine to send to a clinic and a leak in a group chat. The issue isn't the information itself but <b>who it flows to, and under what conditions</b>, an idea known as contextual integrity (Nissenbaum). Research such as PrivacyLens and ConfAIde found that language models tend to get this right when asked about it but leak when acting; the contest, likewise, scored <b>the final action as a structured answer</b>, not an explanation.</p>
+    <ul>
+      <li><b>Input:</b> the user's request, the device state (objects such as messages, files and events, plus signals such as permissions and boundaries), the conversation history, and memory that persists across sessions</li>
+      <li><b>Output, six fields:</b> what the decision is about; who or where it goes to; what to do (go ahead, amend, hold or ask); how much to send (all, summary or redacted); the risks and confirmations involved; and the execution plan</li>
+      <li><b>Scoring:</b> the fields were gated rather than independent. The last three only counted if the first three (subject, recipient and action) were all right.</li>
+      <li><b>Models:</b> external models and APIs weren't allowed; every call had to come from the layer the entrant built.</li>
+      <li><b>Selection:</b> a public leaderboard (3 submissions a day) cut the field to the top 100. The organisers then ran those 100 entrants' code on hidden tasks nobody had seen and took the top 40. So the real test wasn't the public score but <b>code that doesn't fall over on data it has never seen</b>.</li>
+    </ul>
     <p><b>What I built.</b> A deterministic rule engine that never calls a language model: one Python file (1,213 lines), standard library only, which always gives the same answer for the same input.</p>
     <h3>The calls I made</h3>
     <ul>
-      <li><b>I read the scoring first.</b> The fields weren't independent but gated: get the recipient or the action wrong and every field below it scores 0. So instead of collecting partial credit, I got those two right first (120/120 each on the 120 dev tasks).</li>
+      <li><b>I read the scoring first.</b> Getting any of the three gate fields wrong zeroes the three fields after them. So instead of collecting partial credit, I got the gates right first (recipient and action both 120/120 on the 120 dev tasks).</li>
       <li><b>The biggest gain came from one part of each request.</b> I guessed that part of every request carried the final instruction on where the information should go, and used it only after it matched every dev answer it applied to (53/53). That alone added +0.1162 on the leaderboard.</li>
       <li><b>I found that a parser at 100% on dev read only 17% of the 700 real screening tasks</b>, and rewrote it until it read all 700.</li>
       <li><b>One submission tested one hypothesis.</b> Before each submission I wrote down what I would do with each possible score. The 6 submissions that went down are all recorded, and none was resubmitted.</li>
@@ -207,13 +225,29 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <h2 class="en">A maintenance assistant that remembers across jobs</h2>
   <div class="ko">
     <p class="oneline">한 줄로: <b>온디바이스 상태 엔진</b> (Kotlin, Android, 외부 의존성 0) — 트랜잭션 경계, 같은 이벤트는 정확히 한 번, 강제 종료 후 복구, 결정론적 해시 체인, 근거 기반 무효화. 서버는 없습니다.</p>
-    <p><b>과제.</b> 여러 번에 걸쳐 반복되는 모바일 작업에서 과거 경험을 골라 기억하고, 다음번 사용자의 수고를 줄이고, 상황이나 권한이 바뀌면 멈추거나 다시 계획하는 안드로이드 앱(APK)을 만드는 공개 과제였습니다. 도메인은 참가자가 정합니다. 앱을 강제로 끄고 다시 켜도 이어져야 하고, 문제가 생기면 전체 초기화가 아니라 부분 복구를 해야 했습니다.</p>
+    <h3>주제: Long-Horizon Mobile Agent Open Mission, "과거의 어느 기억을 지금 쓸까"</h3>
+    <p>1차가 "지금 이 정보를 어디로 보낼까"였다면, 2차는 여기에 <b>시간</b>이 붙었습니다. 여러 번에 걸쳐 반복되는 모바일 생활 작업에서 과거 경험을 골라 기억하고, 다음번 사용자의 수고를 줄이고, 목표·상황·권한이 바뀌면 멈추거나 다시 계획하는 안드로이드 앱(APK)을 7일 안에 만드는 과제였습니다. 도메인과 화면은 정해져 있지 않았고, 한 번 답하고 끝나는 챗봇이나 정해진 화면만 재생하는 데모는 인정되지 않았습니다.</p>
+    <ul>
+      <li><b>미션 선언:</b> 시작 48시간 안에 대상 사용자, 핵심 문제, 장기 목표, 네 에피소드의 인과를 한 쪽으로 선언하면 그 뒤로는 바꿀 수 없습니다. 결과를 보고 목표를 끼워 맞추지 못하게 하는 장치입니다.</li>
+      <li><b>구조 요건:</b> 에피소드 4개 이상, 세션 경계 3번 이상, 앱 강제 종료 후 재실행, 앞의 선택이 뒤의 가능한 행동을 두 군데 이상에서 실제로 바꿀 것, 과거 방식과 현재 조건이 부딪치는 재판단, 전체 초기화가 아닌 부분 복구</li>
+      <li><b>평가 영역 여섯:</b> 필요한 과거만 고르기, 가장 최근의 정정·권한 따르기, 반복 부담 줄이기(단 안전 확인은 유지), 예외 때 묻기·기다리기·멈추기, 재시작 뒤에도 같은 상태, 늦게 온 결과 반영</li>
+      <li><b>평가 방식:</b> APK와 소스가 일치하는지, 권한과 안전 규칙을 지켰는지 먼저 검사하고, 공식 실행기가 연습 때와 다른 합성 입력으로 앱을 자동 실행해 80점을 매깁니다. 선정된 후보만 핵심 기법이 정말 효과의 원인인지와 참가자가 직접 만들었는지를 사람이 검증해 20점을 더합니다.</li>
+      <li><b>제약:</b> 실제 계정·결제·연락처를 쓰지 않고 합성 데이터만 쓰며, 앱이 스스로 점수나 합격 여부를 계산하면 안 됩니다. 제출물은 APK, 소스, 기술 노트, 설치 가이드, 빌드 정보, 실행 증거, 3분 이내 시연 영상의 7종입니다.</li>
+    </ul>
     <p><b>만든 것.</b> 승강기 점검·수리 기사를 위한 <b>현장 정비 비서</b>입니다. 이 직업을 고른 건 과제가 요구하는 성질이 전부 자연스럽게 생기는 일이라서입니다. 같은 준비가 반복되고, 야간 호출로 작업이 끊기고, 현장에서 진단이 뒤집히고, 자재 소식은 늦게 오고, 다른 현장의 물건은 이 현장에 섞이면 안 됩니다. 앱은 모델을 부르지 않는 결정론적 코어로 기기 안에서만 돌아가고, 외부 서버로 보내는 데이터가 없습니다.</p>
     <p><b>핵심 규칙.</b> 아직 유효한 과거 항목은 다시 묻지 않고 다음 작업으로 넘기고, 바뀐 것만 다시 계획합니다. <b>안전 확인만은 예외로 매번 묻습니다.</b> 다른 작업의 항목은 보이기만 하고 이번 판단에는 쓰지 않습니다.</p>
   </div>
   <div class="en">
     <p class="oneline">In one line: <b>an on-device state engine</b> (Kotlin, Android, no dependencies): transaction boundaries, exactly-once handling of repeated events, crash recovery, a deterministic hash chain, and evidence-based invalidation. There is no server.</p>
-    <p><b>The task.</b> A public brief: build an Android app (APK) for a mobile task that repeats over several sessions. It should remember the right parts of past experience, save the user effort next time, and stop or re-plan when the situation or authority changes. Entrants chose their own domain. The app had to carry on after being force-killed and restarted, and recover partially rather than wipe everything when something went wrong.</p>
+    <h3>Topic: Long-Horizon Mobile Agent Open Mission, "which past memory should be used now?"</h3>
+    <p>Round 1 asked where information should go right now; round 2 added <b>time</b>. In 7 days, build an Android app (APK) for an everyday mobile task that repeats over several sessions. It should remember the right parts of past experience, save the user effort next time, and stop or re-plan when goals, circumstances or authority change. No domain or screens were given, and a one-shot chatbot or a demo that replays fixed screens didn't count.</p>
+    <ul>
+      <li><b>Mission declaration:</b> within 48 hours of the start, a one-page declaration of the target user, core problem, long-term goal and how four episodes lead into each other, frozen from then on. It stops entrants from fitting their goal to the results afterwards.</li>
+      <li><b>Structural requirements:</b> at least 4 episodes and 3 session boundaries; a forced kill and restart; earlier choices must actually change what's possible later, at two or more points; a moment where the old way clashes with current conditions; partial recovery rather than a full reset</li>
+      <li><b>Six evaluation areas:</b> use only the past that's needed; follow the latest correction or authority; cut repeat effort (but keep safety checks); ask, wait or stop on exceptions; the same state after a restart; act on results that arrive late</li>
+      <li><b>How it was judged:</b> first an automatic check that the APK matches its source and follows permission and safety rules. Then an official runner drives the app with synthetic inputs different from the practice ones, for 80 points. For selected candidates only, people check that the core technique really causes the effect and that the entrant built it, for 20 more.</li>
+      <li><b>Constraints:</b> synthetic data only (no real accounts, payments or contacts), and the app must never compute its own score or pass mark. Seven deliverables: the APK, source, technical note, install guide, build information, run evidence, and a demo video of 3 minutes or less.</li>
+    </ul>
     <p><b>What I built.</b> A <b>field maintenance assistant</b> for lift (elevator) service technicians. I picked this job because every property the brief asked for happens there naturally: the same preparation repeats, night call-outs interrupt jobs, diagnoses flip on site, parts news arrives late, and one site's items must not leak into another. The app runs a deterministic core with no model calls, entirely on the phone, and sends no data to any server.</p>
     <p><b>The core rule.</b> Past items that are still valid carry into the next job without being asked again, and only what changed is re-planned. <b>Safety checks are the exception: they are asked every time.</b> Other jobs' items are shown but not used for this job's decisions.</p>
   </div>
@@ -289,21 +323,23 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
     <figcaption><span class="ko">본선 발표자료 표지: "유효한 과거만 이어받는 결정론적 상태 코어". 기능을 쌓은 게 아니라 문제를 하나씩 막았고, 그중 제 것은 하나라는 주장으로 시작했습니다</span><span class="en">Finals cover slide (in Korean): "A deterministic state core that inherits only the past that is still valid". It opens with the claim that I blocked problems one by one rather than piling up features, and that only one of the fixes is mine</span></figcaption>
   </figure>
   <div class="ko">
-    <p>본선은 2차에 낸 앱을 바꾸지 않은 채 현장에서 발표하고 질문에 답하는 자리였습니다. 21명의 진출자 중 한 명으로 발표했고, 수상은 하지 못했습니다.</p>
+    <h3>형식</h3>
+    <p>2차 예선 결과로 21명이 본선에 올랐습니다. 본선은 새로 만드는 자리가 아니라, <b>제출 후 동결한 2차 앱</b>을 현장에서 설명하는 자리였습니다. 10분 발표 기준의 발표자료를 미리 제출하고, 발표 뒤에 심사위원 질의응답을 받았습니다. 발표자료에는 개인 식별 정보를 넣을 수 없었고, 현장에는 휴대폰·노트북을 가져갈 수 없었습니다. 저는 21명 중 한 명으로 발표했고, 수상은 하지 못했습니다.</p>
     <ul>
       <li><b>발표자료를 손으로 고치지 않았습니다.</b> 스크립트로 생성하고 12개 자동 검사를 걸어, 사실 목록에 없는 숫자가 들어가거나 페이지가 넘치면 빌드가 실패하게 했습니다. 검사가 진짜로 잡는지도, 일부러 망가뜨려 12/12 모두 잡는 걸 확인했습니다.</li>
       <li><b>무엇이 제 것이고 무엇이 아닌지 먼저 말했습니다.</b> 근거를 추적해 낡은 것을 걷어내는 기반층은 오래된 기법(진리 유지 시스템 계열)이고 제 발명이 아닙니다. 제 것은 그 위의 "유효한 것은 다시 묻지 않는다, 안전 확인은 예외" 규칙 하나라고, 구석이 아닌 본문 한 장으로 밝혔습니다. 가장 날카로운 질문이 "결국 의존성 추적 아니냐"일 거라 봤기 때문입니다.</li>
       <li><b>발표 전날 대본과 제출한 발표자료가 한 쪽씩 어긋나 있는 걸 찾아</b> 다시 맞췄습니다. 검사 스크립트가 순서를 보지 않아 통과시킨 결함이었습니다.</li>
-      <li>현장에 휴대폰·노트북을 가져갈 수 없어서, 질의응답 대비 답변을 인쇄용 자료로 만들어 갔습니다.</li>
+      <li>현장에 전자기기를 가져갈 수 없어서, 질의응답 대비 답변을 인쇄용 자료로 만들어 갔습니다.</li>
     </ul>
   </div>
   <div class="en">
-    <p>The finals were an in-person presentation and Q&amp;A on the round-2 app, unchanged since submission. I presented as one of 21 finalists and didn't win an award.</p>
+    <h3>Format</h3>
+    <p>21 entrants reached the finals on their round-2 results. The finals weren't about building anything new: they were about explaining <b>the round-2 app, frozen since submission</b>, in person. Slides for a 10-minute talk were submitted in advance, followed by questions from the judges. The slides couldn't contain personal identifying information, and phones and laptops weren't allowed on site. I presented as one of the 21 and didn't win an award.</p>
     <ul>
       <li><b>I never edited the slides by hand.</b> They were generated by a script with 12 automated checks, so the build failed if a number not in the fact sheet appeared or a page overflowed. I also broke things on purpose to confirm the checks catch them: 12 of 12 did.</li>
       <li><b>I said up front what was mine and what wasn't.</b> The base layer, which tracks what each item depends on and clears out stale ones, is an old technique (truth-maintenance systems), not my invention. What's mine is the rule on top: "don't re-ask what's still valid; safety checks are the exception". I gave that a full slide instead of a footnote, because I expected the sharpest question to be "isn't this just dependency tracking?"</li>
       <li><b>The day before, I found the spoken script was one page out of step with the submitted slides</b>, and realigned it. The checking script hadn't looked at order, so it had passed.</li>
-      <li>Phones and laptops weren't allowed on site, so I took my prepared Q&amp;A answers as printed notes.</li>
+      <li>With no devices allowed on site, I took my prepared Q&amp;A answers as printed notes.</li>
     </ul>
   </div>
 
