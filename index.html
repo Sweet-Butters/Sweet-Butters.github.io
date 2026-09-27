@@ -105,6 +105,24 @@ footer { color: var(--muted); font-size: 13px; padding: 48px 0; }
       </p>
     </section>
 
+    <h2>같은 구조를 옮겨 보는 중</h2>
+    <section class="card">
+      <h3>Jev를 네 가지 제품에 써 봤습니다</h3>
+      <p>공모전 판정기에서 쓴 방식을 다른 문제에도 옮기고 있습니다. 네 곳에서 반복되는 규칙은 하나입니다 —
+        <b>판단은 Jev, 생성은 LLM, 마지막 행동은 사람.</b> 비용을 아끼는 구조이면서, 되돌릴 수 없는 행동을 모델에 맡기지 않는 구조입니다.</p>
+      <ul class="judgement">
+        <li><b>레이더</b> — 규칙이 먼저 거르고 애매한 공고만 Jev가 확률로 판단합니다. 매일 돌아가고, 정확도를 재서 적어 두었습니다.</li>
+        <li><b>replydesk</b> — 메일 스레드를 바로 LLM에 넘기지 않고, Jev에게 일곱 가지(답장 필요 여부, 상대의 요구, 긴급도, 불만도, 지금 답할 수 있는지, 사람이 써야 하는지, 약속한 것)를 먼저 묻고 그에 맞춰 초안 3개를 만듭니다.</li>
+        <li><b>reply-copilot</b> — 같은 흐름을 Gmail·유튜브·인스타 댓글에. 스팸·악플·답장 불필요로 판정되면 초안 모델을 아예 호출하지 않습니다.</li>
+        <li><b>jev-chat-windows</b> — 중국에서 만들어진 안드로이드 프로젝트의 <b>포크</b>입니다. 판단 커널은 상류의 것이고, 제가 바꾼 것은 수집부(윈도우 창 캡처 + 오프라인 OCR)입니다.</li>
+      </ul>
+      <p class="sub">뒤의 셋은 2026년 9월에 시작해 사용자도 운영 지표도 아직 없습니다.</p>
+      <p class="actions">
+        <a href="jev/">Jev 실사용 기록 →</a>
+        <a href="https://github.com/Sweet-Butters?tab=repositories">저장소 목록</a>
+      </p>
+    </section>
+
     <h2>경진대회</h2>
     <div class="card">
       <div class="row">
