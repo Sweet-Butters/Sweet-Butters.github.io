@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en" data-default-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- head:start (tools/make_ko.py swaps this block for the Korean page at /ko/scpc/) -->
+<title>SCPC AI Challenge · Hoekwang Chung</title>
+<meta name="description" content="What I built in the three rounds of the 2026 SCPC AI Challenge, and the calls I made, in my own words.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCPC AI Challenge 2026: two qualifying rounds, then the finals">
+<meta property="og:description" content="A rule engine with no model calls (35th of 127 on the hidden set), an Android assistant that remembers across jobs, and a finals presentation.">
+<meta property="og:url" content="https://sweet-butters.github.io/scpc/">
+<meta property="og:image" content="https://sweet-butters.github.io/work/img/scpc.jpg">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://sweet-butters.github.io/scpc/">
+<link rel="alternate" hreflang="en" href="https://sweet-butters.github.io/scpc/">
+<link rel="alternate" hreflang="ko" href="https://sweet-butters.github.io/ko/scpc/">
+<!-- head:end -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231b1f2a'/><circle cx='16' cy='16' r='9' fill='white' stroke='%239a700a' stroke-width='4'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Same route-map look as the work page: this page is stop U01 on the Update line. */
+:root {
+  --ink: #1b1f2a; --ink-2: #4a5061; --paper: #f2efe8; --board: #fbfaf6; --rule: #d9d4c8; --mark: #f3e3a8; --led: #ffc94a;
+  --teach: #1f8a4c; --make: #2456c9; --gather: #c8356e; --c: #9a700a;
+  --display: "Black Han Sans", "IBM Plex Sans KR", sans-serif;
+  --ui: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16.5px/1.75 var(--ui); word-break: keep-all; overflow-wrap: anywhere; }
+a { color: inherit; text-underline-offset: 3px; }
+a:hover { color: var(--make); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 16px; }
+.stripe { display: flex; height: 6px; }
+.stripe span { flex: 1; }
+.stripe span:nth-child(1) { background: var(--teach); } .stripe span:nth-child(2) { background: var(--make); } .stripe span:nth-child(3) { background: var(--gather); }
+
+.topbar { background: var(--ink); color: #fff; }
+.topbar .wrap { max-width: 1180px; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; }
+.topbar .name { font: 400 20px/1 "Black Han Sans", "IBM Plex Sans KR", sans-serif; text-decoration: none; color: #fff; }
+.lang { display: inline-flex; }
+.lang a { min-height: 34px; display: inline-flex; align-items: center; padding: 0 12px; border: 1.5px solid rgba(255,255,255,.7); color: #fff; font-size: 13.5px; font-weight: 600; text-decoration: none; }
+.lang a + a { border-left: 0; }
+.lang a[aria-current="true"] { background: #fff; color: var(--ink); }
+
+/* the station sign at the top of the page */
+.sign { margin-top: 40px; background: #fff; border: 2px solid var(--ink); }
+.sign-board { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 8px solid var(--c); }
+.sb { padding: 6px 12px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.sb.cur { grid-column: 1 / -1; background: var(--c); color: #fff; text-align: center; padding: 12px; }
+.sb.cur small { font: 600 13px var(--ui); opacity: .9; }
+.sb.cur b { font: 400 30px/1.2 var(--display); }
+.sb.next { text-align: right; align-items: flex-end; }
+.sb .dir { font-size: 12.5px; color: var(--ink-2); }
+.sb a, .sb .none { min-height: 40px; display: inline-flex; align-items: center; font-weight: 600; font-size: 15px; }
+.sb .none { color: var(--ink-2); font-weight: 400; }
+
+header { padding: 36px 0 0; }
+.eyebrow { margin: 0; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+h1 { margin: 8px 0 0; font: 400 clamp(32px, 5.4vw, 52px)/1.2 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.lead { margin: 18px 0 0; font-size: 18px; max-width: 38em; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 16px; font-size: 15px; font-weight: 600; }
+.links a::after { content: " ↗"; }
+
+.stats { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.stats li { background: #fff; border: 2px solid var(--ink); border-bottom: 6px solid var(--c); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--ink-2); line-height: 1.4; }
+.stats b { font: 400 30px/1.1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* the article */
+h2 { margin: 64px 0 14px; font: 400 clamp(24px, 3.4vw, 32px)/1.25 var(--display); display: flex; align-items: center; gap: 12px; }
+h2::before { content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 4px solid var(--c); }
+h3 { font-size: 17px; font-weight: 700; margin: 0; }
+p { margin: 12px 0; }
+ul, ol { padding-left: 22px; margin: 12px 0; }
+li { margin: 4px 0; }
+code { font-family: var(--mono); font-size: .86em; background: var(--mark); padding: 0 4px; }
+.table { overflow-x: auto; margin: 18px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; background: #fff; border: 2px solid var(--ink); }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { background: var(--ink); color: #fff; font-weight: 600; font-size: 13.5px; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.box { background: #fff; border: 2px solid var(--ink); border-bottom: 6px solid var(--c); padding: 14px 18px; margin: 14px 0; }
+.box p { margin: 4px 0 0; color: var(--ink-2); }
+.note { color: var(--ink-2); font-size: 14.5px; }
+
+/* progress log drawn as a short route */
+.timeline { list-style: none; padding: 0; margin: 18px 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 9px; top: 12px; bottom: 12px; width: 6px; border-radius: 3px; background: var(--c); }
+.timeline li { position: relative; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 8px 0 8px 40px; margin: 0; }
+.timeline li::before { content: ""; position: absolute; left: 3px; top: 13px; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3.5px solid var(--c); }
+.timeline time { color: var(--ink-2); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+footer { margin-top: 72px; border-top: 2px solid var(--ink); padding: 20px 0 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 14px; color: var(--ink-2); }
+footer a { font-weight: 700; color: var(--ink); }
+
+.lang a, .topbar .name { white-space: nowrap; }
+@media (max-width: 640px) {
+  .topbar .name { font-size: 17px; }
+  .lang a { padding: 0 9px; font-size: 13px; }
+  .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .sb.cur b { font-size: 24px; }
+}
+[lang="en"] body { word-break: normal; }
+[lang="en"] .ko, [lang="ko"] .en { display: none; }
+figure { margin: 18px 0; }
+figure img { display: block; width: 100%; height: auto; border: 2px solid var(--ink); background: #fff; }
+figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
+.round { font: 600 13px/1 var(--ui); letter-spacing: .04em; color: var(--c); margin: 72px 0 0; }
+.round + h2, .round + h2 + h2 { margin-top: 8px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="name" href="/"><span class="en">Hoekwang Chung</span><span class="ko">정회광</span></a>
+    <span class="lang"><a href="/scpc/" data-lang="en">EN</a><a href="/ko/scpc/" data-lang="ko">한국어</a></span>
+  </div>
+  <div class="stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+</header>
+
+<main class="wrap">
+  <nav class="sign" aria-label="Station">
+    <div class="sign-board">
+      <div class="sb cur"><small><span class="ko">참여선 · U01</span><span class="en">Update line · U01</span></small><b><span class="ko">SCPC AI 챌린지</span><span class="en">SCPC AI Challenge</span></b></div>
+      <div class="sb prev"><span class="dir"><span class="ko">노선도</span><span class="en">Route map</span></span><a href="/work/#stop-scpc" data-ko-href="/ko/work/#stop-scpc"><span class="ko">CRUD 노선</span><span class="en">CRUD route</span></a></div>
+      <div class="sb next"><span class="dir"><span class="ko">다음 역</span><span class="en">Next</span></span><a href="/work/#stop-cursor" data-ko-href="/ko/work/#stop-cursor"><span class="ko">Cursor 해커톤: chemcheck</span><span class="en">Cursor Hackathon: chemcheck</span></a></div>
+    </div>
+  </nav>
+
+  <header>
+    <p class="eyebrow"><span class="ko">2026 SCPC AI 챌린지 · 개인전 · 2026년 7–8월</span><span class="en">2026 SCPC AI Challenge · individual · July–August 2026</span></p>
+    <h1 class="ko">SCPC AI 챌린지:<br>예선 두 번을 넘어 본선 발표까지</h1>
+    <h1 class="en">SCPC AI Challenge: two qualifying rounds, then the finals</h1>
+    <p class="lead ko">삼성전자가 여는 대학생 대회 SCPC(Samsung Collegiate Programming Challenge)의 AI 챌린지에 혼자 참가했습니다. 1차 예선, 2차 예선을 통과해 본선에서 발표했고, 수상은 하지 못했습니다. 이 페이지는 라운드마다 <b>무엇을 만들었고 어떤 판단을 했는지</b>를 적은 기록입니다.</p>
+    <p class="lead en">I entered the AI Challenge of SCPC (Samsung Collegiate Programming Challenge), Samsung's contest for university students, on my own. I got through both qualifying rounds and presented at the finals; I didn't win an award. This page records, round by round, <b>what I built and the calls I made</b>.</p>
+  </header>
+
+  <div class="box">
+    <h3><span class="ko">여기 없는 것</span><span class="en">What isn't here</span></h3>
+    <p class="ko">대회 규정상 대회 데이터는 참가자 외에게 복제·배포할 수 없고, 소스 코드는 데이콘 플랫폼을 통해서만 공개할 수 있습니다. 그래서 문제 원문, 데이터 예시, 코드, 앱 파일은 싣지 않았습니다. 과제는 제 말로 풀어 쓰고, 숫자는 제 작업 기록과 주최측이 참가자에게 알린 결과에서만 가져왔습니다.</p>
+    <p class="en">The rules don't allow competition data to be copied or passed on to non-participants, and source code may only be published through the Dacon platform. So there is no problem text, sample data, code or app file here. The tasks are described in my own words, and the numbers come only from my own records and the results the organisers sent to participants.</p>
+  </div>
+
+  <ul class="stats" aria-label="summary">
+    <li><b>35 / 127</b><span><span class="ko">1차 비공개 채점 순위 (상위 40 진출)</span><span class="en">round 1, hidden-set rank (top 40 advanced)</span></span></li>
+    <li><b>0</b><span><span class="ko">1차에서 부른 언어모델 (규칙 엔진만)</span><span class="en">language-model calls in round 1 (rules only)</span></span></li>
+    <li><b>22,402</b><span><span class="ko">2차 앱으로 돌린 단계, 계약 위반 0</span><span class="en">round 2 steps run, 0 contract violations</span></span></li>
+    <li><b>1 / 21</b><span><span class="ko">본선 진출</span><span class="en">finalists</span></span></li>
+  </ul>
+
+  <p class="round"><span class="ko">1차 예선 · 2026년 7월</span><span class="en">ROUND 1 · JULY 2026</span></p>
+  <h2 class="ko">개인정보를 누구에게, 어디까지 넘길까</h2>
+  <h2 class="en">Who gets the personal information, and how much of it</h2>
+  <div class="ko">
+    <p><b>과제.</b> 개인비서 AI 에이전트가 요청을 받았을 때, 개인정보를 <b>누구에게, 어떤 행동으로(진행·질문·보류·수정), 어디까지</b> 넘길지 판단해 여섯 칸짜리 답을 내는 문제였습니다. 공개 리더보드로 상위 100명을 자른 뒤, 그 100명의 코드를 주최측이 처음 보는 비공개 과제에 직접 돌려 상위 40명을 뽑았습니다. 그래서 진짜 시험은 공개 점수가 아니라 <b>처음 보는 데이터에서도 무너지지 않는 코드</b>였습니다.</p>
+    <p><b>만든 것.</b> 언어모델을 한 번도 부르지 않는 결정론적 규칙 엔진입니다. 파이썬 표준 라이브러리만 쓰는 파일 하나(1,213줄)이고, 같은 입력이면 늘 같은 답을 냅니다.</p>
+    <h3>내가 한 판단</h3>
+    <ul>
+      <li><b>채점 구조부터 읽었습니다.</b> 항목들이 독립이 아니라 게이트로 묶여 있어서, 받는 사람이나 행동을 틀리면 그 아래 항목이 전부 0점이 됩니다. 그래서 부분 점수를 모으기보다 그 두 칸을 먼저 맞췄습니다 (dev 120문항에서 각 120/120).</li>
+      <li><b>가장 큰 개선은 요청 문장 안의 한 부분에서 나왔습니다.</b> 요청마다 최종 전달 지시를 담은 부분이 있다는 가설을 세우고, 정답이 있는 dev 데이터에서 53/53 일치하는 걸 확인한 뒤에만 썼습니다. 이 하나로 리더보드가 +0.1162 올랐습니다.</li>
+      <li><b>dev에서 100%였던 파서가 실제 심사 과제 700개 중 17%만 읽는다는 걸 찾아</b>, 700개 전부 읽도록 다시 썼습니다.</li>
+      <li><b>제출 1번에 가설 1개만 시험했습니다.</b> 제출 전에 "이 점수가 나오면 이렇게 한다"를 먼저 적어 두었고, 점수가 떨어진 6번은 모두 기록하고 다시 내지 않았습니다.</li>
+      <li><b>규칙을 쓰기 전에 "이 칸은 입력만으로 정해지는가"부터 확인했습니다.</b> 같은 입력인데 정답이 다른 경우가 0건이면, 못 맞히는 건 정보 부족이 아니라 제 규칙의 잘못입니다. 이 검사가 "정보의 벽"이라고 생각했던 걸 세 번 이상 뒤집었습니다.</li>
+      <li><b>처음 보는 데이터에 대비했습니다.</b> 값을 뜻이 같게 바꿔도 답이 흔들리는 규칙은 0/120, 700개 과제를 변형한 2,456개 입력에서도 멈추거나 형식이 깨진 답은 없었습니다.</li>
+      <li><b>남은 오답이 잡음 맞추기뿐인 지점에서 규칙을 멈췄습니다.</b> 거기서 규칙을 더하면 공개 점수는 오를 수 있어도 비공개 과제에서는 손해라고 판단했습니다.</li>
+    </ul>
+  </div>
+  <div class="en">
+    <p><b>The task.</b> When a personal-assistant AI agent gets a request, it has to decide <b>who</b> personal information goes to, <b>what to do</b> (go ahead, ask, hold or amend), and <b>how much</b> to pass on, as a six-field answer. A public leaderboard cut the field to the top 100. The organisers then ran those 100 people's code on hidden tasks nobody had seen and took the top 40. So the real test wasn't the public score but <b>code that doesn't fall over on data it has never seen</b>.</p>
+    <p><b>What I built.</b> A deterministic rule engine that never calls a language model: one Python file (1,213 lines), standard library only, which always gives the same answer for the same input.</p>
+    <h3>The calls I made</h3>
+    <ul>
+      <li><b>I read the scoring first.</b> The fields weren't independent but gated: get the recipient or the action wrong and every field below it scores 0. So instead of collecting partial credit, I got those two right first (120/120 each on the 120 dev tasks).</li>
+      <li><b>The biggest gain came from one part of each request.</b> I guessed that part of every request carried the final instruction on where the information should go, and used it only after it matched every dev answer it applied to (53/53). That alone added +0.1162 on the leaderboard.</li>
+      <li><b>I found that a parser at 100% on dev read only 17% of the 700 real screening tasks</b>, and rewrote it until it read all 700.</li>
+      <li><b>One submission tested one hypothesis.</b> Before each submission I wrote down what I would do with each possible score. The 6 submissions that went down are all recorded, and none was resubmitted.</li>
+      <li><b>Before writing a rule, I checked whether the field could be decided from the input at all.</b> If no two tasks share an input but differ in their answer, a miss is my rule's fault, not missing information. This check overturned my "we've hit a wall" call more than three times.</li>
+      <li><b>I prepared for unseen data.</b> Rules that broke when values were swapped for equivalents: 0 of 120. Across 2,456 altered versions of the 700 tasks, nothing crashed and every answer kept its format.</li>
+      <li><b>I stopped adding rules once the remaining misses were only noise to fit.</b> More rules there might lift the public score but would cost me on the hidden tasks.</li>
+    </ul>
+  </div>
+  <div class="table">
+  <table>
+    <thead><tr><th><span class="ko">결과</span><span class="en">Result</span></th><th class="num"><span class="ko">값</span><span class="en">Value</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko">공개 리더보드 점수 (첫 규칙 엔진 → 최종)</span><span class="en">Public leaderboard (first rule engine → final)</span></td><td class="num">0.6791 → 0.8852</td></tr>
+      <tr><td><span class="ko">공개 리더보드 순위</span><span class="en">Public leaderboard rank</span></td><td class="num"><span class="ko">70위</span><span class="en">70th</span></td></tr>
+      <tr><td><span class="ko">비공개 채점 (주최측 결과)</span><span class="en">Hidden set (organisers' result)</span></td><td class="num"><span class="ko">35위 / 127 · 0.5423</span><span class="en">35th / 127 · 0.5423</span></td></tr>
+      <tr><td><span class="ko">결과</span><span class="en">Outcome</span></td><td class="num"><span class="ko">상위 40 → 2차 진출</span><span class="en">Top 40 → round 2</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="round"><span class="ko">2차 예선 · 2026년 7월 29일 – 8월 5일</span><span class="en">ROUND 2 · 29 JULY – 5 AUGUST 2026</span></p>
+  <h2 class="ko">작업이 바뀌어도 기억을 이어 가는 정비 비서</h2>
+  <h2 class="en">A maintenance assistant that remembers across jobs</h2>
+  <div class="ko">
+    <p><b>과제.</b> 여러 번에 걸쳐 반복되는 모바일 작업에서 과거 경험을 골라 기억하고, 다음번 사용자의 수고를 줄이고, 상황이나 권한이 바뀌면 멈추거나 다시 계획하는 안드로이드 앱(APK)을 만드는 공개 과제였습니다. 도메인은 참가자가 정합니다. 앱을 강제로 끄고 다시 켜도 이어져야 하고, 문제가 생기면 전체 초기화가 아니라 부분 복구를 해야 했습니다.</p>
+    <p><b>만든 것.</b> 승강기 점검·수리 기사를 위한 <b>현장 정비 비서</b>입니다. 이 직업을 고른 건 과제가 요구하는 성질이 전부 자연스럽게 생기는 일이라서입니다. 같은 준비가 반복되고, 야간 호출로 작업이 끊기고, 현장에서 진단이 뒤집히고, 자재 소식은 늦게 오고, 다른 현장의 물건은 이 현장에 섞이면 안 됩니다. 앱은 모델을 부르지 않는 결정론적 코어로 기기 안에서만 돌아가고, 외부 서버로 보내는 데이터가 없습니다.</p>
+    <p><b>핵심 규칙.</b> 아직 유효한 과거 항목은 다시 묻지 않고 다음 작업으로 넘기고, 바뀐 것만 다시 계획합니다. <b>안전 확인만은 예외로 매번 묻습니다.</b> 다른 작업의 항목은 보이기만 하고 이번 판단에는 쓰지 않습니다.</p>
+  </div>
+  <div class="en">
+    <p><b>The task.</b> A public brief: build an Android app (APK) for a mobile task that repeats over several sessions. It should remember the right parts of past experience, save the user effort next time, and stop or re-plan when the situation or authority changes. Entrants chose their own domain. The app had to carry on after being force-killed and restarted, and recover partially rather than wipe everything when something went wrong.</p>
+    <p><b>What I built.</b> A <b>field maintenance assistant</b> for lift (elevator) service technicians. I picked this job because every property the brief asked for happens there naturally: the same preparation repeats, night call-outs interrupt jobs, diagnoses flip on site, parts news arrives late, and one site's items must not leak into another. The app runs a deterministic core with no model calls, entirely on the phone, and sends no data to any server.</p>
+    <p><b>The core rule.</b> Past items that are still valid carry into the next job without being asked again, and only what changed is re-planned. <b>Safety checks are the exception: they are asked every time.</b> Other jobs' items are shown but not used for this job's decisions.</p>
+  </div>
+  <figure>
+    <img src="/work/img/scpc.jpg" alt="" width="1280" height="800" loading="lazy">
+    <figcaption><span class="ko">실제 앱 화면: 이번 작업 항목, 이전 작업에서 이월된 표준 항목(근거가 바뀌어 다시 계산 대기), 판단에 쓰지 않는 다른 작업의 항목(회색)</span><span class="en">The real app (in Korean): this job's items, a standard item carried over from an earlier job (waiting to be recalculated because its basis changed), and other jobs' items, greyed out and not used</span></figcaption>
+  </figure>
+
+  <h3 class="ko">설계 결정: 기능을 더한 게 아니라, 사고가 날 자리를 없앴습니다</h3>
+  <h3 class="en">Design calls: each one removes a way things could go wrong, rather than adding a feature</h3>
+  <div class="table">
+  <table>
+    <thead><tr><th><span class="ko">결정</span><span class="en">Decision</span></th><th><span class="ko">안 그랬으면 생겼을 문제</span><span class="en">What it prevents</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko">재시작하면 기록을 다시 재생하지 않고, 저장해 둔 상태를 그대로 읽는다</span><span class="en">On restart, load the saved state instead of replaying the event log</span></td><td><span class="ko">재생하는 순간 지운 값이 되살아남</span><span class="en">Replaying brings deleted values back</span></td></tr>
+      <tr><td><span class="ko">삭제하면 가리는 게 아니라 원문을 실제로 파기한다</span><span class="en">Deleting destroys the original text rather than hiding it</span></td><td><span class="ko">가리기를 한 군데만 빠뜨려도 유출. 내보낸 파일 전체에서 지운 값 0건 확인</span><span class="en">Missing one spot when hiding means a leak. Checked: 0 deleted values in the full export</span></td></tr>
+      <tr><td><span class="ko">"아직 유효한가"를 저장하지 않고 매번 근거에서부터 다시 계산한다</span><span class="en">"Still valid?" is recomputed from its sources every time, never stored</span></td><td><span class="ko">저장된 값이 실제와 어긋나거나, 근거를 다 잃은 항목들이 서로를 붙잡고 살아남음</span><span class="en">A stored flag drifts from reality, or items that lost all their basis keep each other alive</span></td></tr>
+      <tr><td><span class="ko">"값이 틀렸다(정정)"는 딸린 항목까지 자동으로 고치고, "하지 마라(철회)"는 고치지 않는다</span><span class="en">A correction ("the value was wrong") repairs dependent items automatically; a withdrawal ("don't do this") does not</span></td><td><span class="ko">사라진 값이 계획에 되살아나거나, 사용자의 뜻을 앱이 뒤집음</span><span class="en">A removed value reappears in the plan, or the app overrides what the user meant</span></td></tr>
+      <tr><td><span class="ko">권한 표시의 이름을 보고 서열을 짐작하지 않는다 (먼저 나온 순서로만 판단)</span><span class="en">Never guess a ranking from the names of authority labels (only the order they appeared)</span></td><td><span class="ko">처음 보는 이름이 오면 틀린 서열을 지어냄</span><span class="en">Unfamiliar names lead it to invent a wrong ranking</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 class="ko">효과를 어떻게 쟀나</h3>
+  <h3 class="en">How I measured it</h3>
+  <p class="ko">같은 APK 안에 <b>핵심 규칙 하나만 끈 사본</b>을 저장소만 분리해 함께 돌렸습니다. 같은 입력을 넣고 두 쪽을 비교하면, 차이가 그 규칙 때문인지 알 수 있습니다.</p>
+  <p class="en">The same APK runs <b>a second copy with only the core rule switched off</b>, with separate storage. Feeding both the same input shows whether a difference comes from that rule.</p>
+  <ul class="ko">
+    <li>395단계 중 74단계에서 판단에 쓰인 근거가 두 쪽이 달랐습니다.</li>
+    <li>같은 계획에 도달하기까지 사용자가 입력한 횟수: 규칙을 켠 쪽 3번, 끈 쪽 5번.</li>
+    <li>그러면서도 두 쪽의 판단과 최종 상태는 같았습니다. 수고만 줄고 결과는 바뀌지 않았다는 뜻입니다.</li>
+    <li>안전 확인 요청은 두 쪽 모두 5번으로 같았습니다. 줄이지 말아야 할 것은 줄지 않았습니다.</li>
+    <li>모두 22,402단계를 돌려 계약 위반, 상태 기록 단절, 예외는 0이었습니다. 테스트는 JVM 258개와 기기 36개가 통과했습니다.</li>
+  </ul>
+  <ul class="en">
+    <li>In 74 of 395 steps, the two copies based their decision on different evidence.</li>
+    <li>Inputs the user typed to reach the same plan: 3 with the rule on, 5 with it off.</li>
+    <li>Yet both copies reached the same decisions and the same final state: less effort, same outcome.</li>
+    <li>Safety-check prompts were the same, 5 each: what shouldn't be reduced wasn't.</li>
+    <li>Across 22,402 steps in total: 0 contract violations, 0 breaks in the state record, 0 exceptions. 258 JVM tests and 36 on-device tests pass.</li>
+  </ul>
+  <p class="ko">검사도 믿지 않았습니다. 테스트가 통과하는 것만으로는 아무것도 증명되지 않아서, <b>고친 부분을 되돌리면 그 테스트가 실제로 실패하는지</b>까지 확인했습니다. 시나리오 일부는 제가 쓰지 않은 평범한 서술로 만들고, 돌리기 전에 기대 결과를 먼저 적어 두었습니다.</p>
+  <p class="en">I didn't trust the checks either. A passing test proves little, so I also checked that <b>undoing a fix makes its test actually fail</b>. Some scenarios came from plain descriptions I didn't write, and I wrote down the expected results before running them.</p>
+
+  <h3 class="ko">틀렸던 것</h3>
+  <h3 class="en">What I got wrong</h3>
+  <ul class="ko">
+    <li><b>권한에 서열이 있다고 가정했습니다</b> ("본사가 현장보다 위"). 미리 적어 둔 기대가 블라인드 시나리오에서 깨졌고, 두 권한의 이름을 맞바꿔 돌려도 결과가 같음을 확인한 뒤 "서열을 짐작하지 않는다"를 설계로 정했습니다.</li>
+    <li><b>지운 원문이 기록 파일에 남는 걸 "과거 기록"이라며 정당화했습니다.</b> 규칙을 다시 읽으니 적극적으로 없애야 하는 것이었고, 실제로 내보낸 파일 5개에서 나왔습니다. 고치고, 파일을 직접 검색하는 테스트로 막았습니다.</li>
+    <li><b>수고를 잰다던 숫자 하나가 정의상 늘 0이 나오는 값이었습니다.</b> 앱이 고장 나도 0이 나오는 숫자라 증거로 쓰지 않고, 그 사실을 문서에 한계로 적었습니다.</li>
+  </ul>
+  <ul class="en">
+    <li><b>I assumed authority had a ranking</b> ("head office outranks the site"). The expectation I'd written down beforehand broke on a blind scenario. After swapping the two labels' names and getting identical results, "never guess a ranking" became a design rule.</li>
+    <li><b>I justified deleted text staying in the evidence files as "historical record".</b> Rereading the rules, it had to be actively removed, and it turned up in 5 exported files. I fixed it and added a test that searches the actual files.</li>
+    <li><b>One "effort" number was 0 by definition.</b> It would read 0 even if the app were broken, so I didn't use it as evidence and wrote that down as a limit.</li>
+  </ul>
+  <p class="note ko">한계: 2차 공식 점수는 공개되지 않아 모릅니다. 규모는 과제 상한(80단계)까지만 시험했고, 기기 안에서만 돌아서 기기를 바꾸면 기억이 이어지지 않습니다. 혼자 7일 안에 만들었기 때문에, 범위를 줄이는 결정이 곧 설계였습니다.</p>
+  <p class="note en">Limits: round 2 scores weren't published, so I don't know mine. Scale was tested only up to the brief's cap (80 steps), and since it runs only on the phone, memory doesn't follow you to a new device. I built it alone in 7 days, so deciding what to leave out was itself the design.</p>
+
+  <p class="round"><span class="ko">본선 · 2026년 8월 21일</span><span class="en">FINALS · 21 AUGUST 2026</span></p>
+  <h2 class="ko">동결한 앱을 설명하는 발표</h2>
+  <h2 class="en">Presenting the frozen app</h2>
+  <div class="ko">
+    <p>본선은 2차에 낸 앱을 바꾸지 않은 채 현장에서 발표하고 질문에 답하는 자리였습니다. 21명의 진출자 중 한 명으로 발표했고, 수상은 하지 못했습니다.</p>
+    <ul>
+      <li><b>발표자료를 손으로 고치지 않았습니다.</b> 스크립트로 생성하고 12개 자동 검사를 걸어, 사실 목록에 없는 숫자가 들어가거나 페이지가 넘치면 빌드가 실패하게 했습니다. 검사가 진짜로 잡는지도, 일부러 망가뜨려 12/12 모두 잡는 걸 확인했습니다.</li>
+      <li><b>무엇이 제 것이고 무엇이 아닌지 먼저 말했습니다.</b> 근거를 추적해 낡은 것을 걷어내는 기반층은 오래된 기법(진리 유지 시스템 계열)이고 제 발명이 아닙니다. 제 것은 그 위의 "유효한 것은 다시 묻지 않는다, 안전 확인은 예외" 규칙 하나라고, 구석이 아닌 본문 한 장으로 밝혔습니다. 가장 날카로운 질문이 "결국 의존성 추적 아니냐"일 거라 봤기 때문입니다.</li>
+      <li><b>발표 전날 대본과 제출한 발표자료가 한 쪽씩 어긋나 있는 걸 찾아</b> 다시 맞췄습니다. 검사 스크립트가 순서를 보지 않아 통과시킨 결함이었습니다.</li>
+      <li>현장에 휴대폰·노트북을 가져갈 수 없어서, 질의응답 대비 답변을 인쇄용 자료로 만들어 갔습니다.</li>
+    </ul>
+  </div>
+  <div class="en">
+    <p>The finals were an in-person presentation and Q&amp;A on the round-2 app, unchanged since submission. I presented as one of 21 finalists and didn't win an award.</p>
+    <ul>
+      <li><b>I never edited the slides by hand.</b> They were generated by a script with 12 automated checks, so the build failed if a number not in the fact sheet appeared or a page overflowed. I also broke things on purpose to confirm the checks catch them: 12 of 12 did.</li>
+      <li><b>I said up front what was mine and what wasn't.</b> The base layer, which tracks what each item depends on and clears out stale ones, is an old technique (truth-maintenance systems), not my invention. What's mine is the rule on top: "don't re-ask what's still valid; safety checks are the exception". I gave that a full slide instead of a footnote, because I expected the sharpest question to be "isn't this just dependency tracking?"</li>
+      <li><b>The day before, I found the spoken script was one page out of step with the submitted slides</b>, and realigned it. The checking script hadn't looked at order, so it had passed.</li>
+      <li>Phones and laptops weren't allowed on site, so I took my prepared Q&amp;A answers as printed notes.</li>
+    </ul>
+  </div>
+
+  <h2 class="ko">진행 기록</h2>
+  <h2 class="en">Log</h2>
+  <ol class="timeline">
+    <li><time>2026-07</time><span class="ko">1차 예선: 규칙 엔진으로 제출, 공개 0.8852 · 70위</span><span class="en">Round 1: submitted the rule engine, public 0.8852 · 70th</span></li>
+    <li><time>2026-07-28</time><span class="ko">비공개 채점 35위 / 127, 상위 40으로 2차 진출</span><span class="en">Hidden set 35th / 127, into round 2 in the top 40</span></li>
+    <li><time>2026-07-31</time><span class="ko">2차 미션 선언: 승강기 정비 기사용 현장 정비 비서</span><span class="en">Round 2 mission declared: a field assistant for lift technicians</span></li>
+    <li><time>2026-08-05</time><span class="ko">APK와 제출물 7종 제출, 이후 동결</span><span class="en">Submitted the APK and the other six required files; frozen from then on</span></li>
+    <li><time>2026-08-14</time><span class="ko">본선 진출 (21명)</span><span class="en">Named a finalist (21 in total)</span></li>
+    <li><time>2026-08-21</time><span class="ko">오프라인 본선 발표·질의응답</span><span class="en">Presented and took questions at the in-person finals</span></li>
+    <li><time>2026-08-28</time><span class="ko">시상식. 수상은 하지 못함</span><span class="en">Awards ceremony; no award for me</span></li>
+  </ol>
+  <p class="note ko">문제 해석, 설계, 판단은 직접 하고, 구현은 AI 코딩 에이전트(Claude Code)와 함께 했습니다. 2차에서는 사용한 AI 도구를 제출물에 신고했습니다.</p>
+  <p class="note en">I read the problems, designed the solutions and made the calls; the building was done together with an AI coding agent (Claude Code). In round 2, the AI tools used were declared in the submission, as required.</p>
+
+  <footer>
+    <a href="/work/#stop-scpc" data-ko-href="/ko/work/#stop-scpc"><span class="ko">← 노선도로 돌아가기</span><span class="en">← Back to the route map</span></a>
+    <span>© 2026 Hoekwang Chung</span>
+  </footer>
+</main>
+<script>
+(() => {
+  const set = (lang) => {
+    document.documentElement.lang = lang;
+    document.querySelectorAll(".lang a").forEach((a) => a.setAttribute("aria-current", a.dataset.lang === lang));
+    document.title = { en: "SCPC AI Challenge · Hoekwang Chung", ko: "SCPC AI 챌린지 · 정회광" }[lang];
+  };
+  // /scpc/ is English, /ko/scpc/ is Korean (the file says which).
+  const q = new URLSearchParams(location.search).get("lang");
+  const pick = q || document.documentElement.dataset.defaultLang || "en";
+  const lang = ["en", "ko"].includes(pick) ? pick : "en";
+  set(lang);
+  if (lang === "ko") document.querySelectorAll("a[data-ko-href]").forEach((a) => { a.href = a.dataset.koHref; });
+})();
+</script>
+</body>
+</html>

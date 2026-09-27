@@ -4,7 +4,7 @@ Each English page holds both languages; the Korean copy only differs in
 <html lang>, and in the <head> block between the head:start / head:end
 markers (title, description and link-preview tags in Korean).
 
-Run after editing work/index.html or jev/index.html:
+Run after editing work/index.html, jev/index.html or scpc/index.html:
     python tools/make_ko.py
 """
 import pathlib
@@ -31,6 +31,15 @@ PAGES = {
         "og_title": "새로 나온 AI 모델 Jev를 실제 서비스의 판정기로 붙여 보다",
         "og_description": "공고 3,728건 판정, 규칙과 95% 같은 판단, 전체 비용 약 $0.11. 된 것과 안 된 것을 기록했어요.",
         "og_image": f"{SITE}/work/img/jev-results.jpg",
+    },
+    "scpc/index.html": {
+        "out": "ko/scpc/index.html",
+        "path": "/scpc/",
+        "title": "SCPC AI 챌린지 · 정회광",
+        "description": "2026 SCPC AI 챌린지 세 라운드에서 무엇을 만들었고 어떤 판단을 했는지, 제 말로 정리한 기록.",
+        "og_title": "SCPC AI 챌린지: 예선 두 번을 넘어 본선 발표까지",
+        "og_description": "언어모델 없는 규칙 엔진(비공개 채점 35위 / 127), 작업이 바뀌어도 기억을 이어 가는 안드로이드 비서, 그리고 본선 발표.",
+        "og_image": f"{SITE}/work/img/scpc.jpg",
     },
 }
 
