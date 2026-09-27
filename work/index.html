@@ -54,6 +54,10 @@ code { font-family: var(--mono); font-size: .88em; background: var(--mark); padd
 
 /* ---------- intro ---------- */
 .intro { padding-block: 52px 44px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 48px; align-items: end; }
+/* the motto opens the page */
+.motto { margin: 0 0 22px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.motto .kw { font: 400 clamp(26px, 3.4vw, 34px)/1.1 var(--display); background: linear-gradient(transparent 62%, var(--led) 62%); padding: 0 2px; }
+.motto .why { font-size: 17px; color: var(--ink); }
 .eyebrow { margin: 0; font-size: 14px; font-weight: 600; color: var(--ink-2); }
 h1 { margin: 8px 0 0; font: 400 clamp(38px, 6vw, 72px)/1.08 var(--display); letter-spacing: -.01em; }
 .lead { margin: 18px 0 0; font-size: 18.5px; max-width: 34em; }
@@ -205,6 +209,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
 <main>
   <section class="wrap intro">
     <div>
+      <p class="motto"><span class="kw">Proactive.</span><span class="why"><span class="en">In the age of AI, I believe execution matters most.</span><span class="ko">AI 시대에는 실행력이 가장 중요하다고 생각해요.</span></span></p>
       <p class="eyebrow"><span class="en">Hoekwang Chung · Work</span><span class="ko">정회광 · 작업 기록</span></p>
       <h1><span class="en">I build with AI,<br>and keep it running</span><span class="ko">AI로 만들고,<br>매일 돌아가게 합니다</span></h1>
       <p class="lead"><span class="en">Not demos: services built with AI that run for real, every day. I've sorted my work into the four things you do with data, <b>CRUD</b>. Scroll down and the train rides the line.</span><span class="ko">데모로 끝나지 않고 매일 실제로 돌아가는 서비스를 AI와 함께 만듭니다. 제가 해 온 일을 데이터의 네 가지 동작, <b>CRUD</b>로 정리했어요. 아래로 내리면 열차가 노선을 따라 달려요.</span></p>

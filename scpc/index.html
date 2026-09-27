@@ -67,6 +67,17 @@ h1 { margin: 8px 0 0; font: 400 clamp(32px, 5.4vw, 52px)/1.2 var(--display); let
 .links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 16px; font-size: 15px; font-weight: 600; }
 .links a::after { content: " ↗"; }
 
+/* at a glance: the three rounds in three lines, each jumping to its section */
+.glance { margin: 18px 0 0; background: #fff; border: 2px solid var(--ink); }
+.glance-h { margin: 0; padding: 10px 16px; font-weight: 700; font-size: 14px; border-bottom: 2px solid var(--ink); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.glance-h small { font-weight: 400; color: var(--ink-2); }
+.glance ol { list-style: none; margin: 0; padding: 0; }
+.glance li { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--rule); }
+.glance li:last-child { border-bottom: 0; }
+.glance .when { font-weight: 700; font-size: 14px; }
+.glance .what { font-size: 15.5px; line-height: 1.55; }
+.glance .what b { font-variant-numeric: tabular-nums; }
+.glance a { font-weight: 700; font-size: 14px; white-space: nowrap; }
 .stats { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .stats li { background: #fff; border: 2px solid var(--ink); border-bottom: 6px solid var(--c); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--ink-2); line-height: 1.4; }
 .stats b { font: 400 30px/1.1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
@@ -104,6 +115,7 @@ footer a { font-weight: 700; color: var(--ink); }
   .topbar .name { font-size: 17px; }
   .lang a { padding: 0 9px; font-size: 13px; }
   .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .glance li { grid-template-columns: minmax(0, 1fr); }
   .timeline li { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .sb.cur b { font-size: 24px; }
 }
@@ -156,7 +168,22 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
     <li><b>1 / 21</b><span><span class="ko">본선 진출</span><span class="en">finalists</span></span></li>
   </ul>
 
-  <p class="round"><span class="ko">1차 예선 · 2026년 7월</span><span class="en">ROUND 1 · JULY 2026</span></p>
+  <nav class="glance" aria-label="At a glance">
+    <p class="glance-h"><span><span class="ko">한눈에 보기</span><span class="en">At a glance</span></span><small><span class="ko">라운드별 자세한 내용은 아래에 있어요</span><span class="en">Each round in detail below</span></small></p>
+    <ol>
+      <li><span class="when"><span class="ko">1차 예선 · 7월</span><span class="en">Round 1 · July</span></span>
+        <span class="what"><span class="ko">개인정보를 누구에게, 어디까지 넘길지 판단하는 에이전트를 <b>언어모델 없이 규칙 엔진만으로</b> 만듦. 비공개 채점 <b>35위 / 127</b>, 상위 40으로 2차 진출</span><span class="en">An agent that decides who gets personal information and how much, built as a <b>rule engine with no language model</b>. Hidden-set rank <b>35th / 127</b>, into round 2 in the top 40</span></span>
+        <a href="#round-1"><span class="ko">자세히 ↓</span><span class="en">Details ↓</span></a></li>
+      <li><span class="when"><span class="ko">2차 예선 · 7–8월</span><span class="en">Round 2 · Jul–Aug</span></span>
+        <span class="what"><span class="ko">작업이 바뀌어도 기억을 이어 가는 승강기 정비 기사용 안드로이드 비서. <b>22,402단계</b>를 돌려 계약 위반 <b>0건</b></span><span class="en">An Android assistant for lift technicians that remembers across jobs. <b>22,402 steps</b> run with <b>0</b> contract violations</span></span>
+        <a href="#round-2"><span class="ko">자세히 ↓</span><span class="en">Details ↓</span></a></li>
+      <li><span class="when"><span class="ko">본선 · 8월 21일</span><span class="en">Finals · 21 Aug</span></span>
+        <span class="what"><span class="ko">동결한 2차 앱을 현장에서 발표. <b>본선 진출 1 / 21</b></span><span class="en">Presented the frozen round-2 app in person. <b>Finalist, 1 / 21</b></span></span>
+        <a href="#finals"><span class="ko">자세히 ↓</span><span class="en">Details ↓</span></a></li>
+    </ol>
+  </nav>
+
+  <p class="round" id="round-1"><span class="ko">1차 예선 · 2026년 7월</span><span class="en">ROUND 1 · JULY 2026</span></p>
   <h2 class="ko">개인정보를 누구에게, 어디까지 넘길까</h2>
   <h2 class="en">Who gets the personal information, and how much of it</h2>
   <div class="ko">
@@ -219,7 +246,7 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   </table>
   </div>
 
-  <p class="round"><span class="ko">2차 예선 · 2026년 7월 29일 – 8월 5일</span><span class="en">ROUND 2 · 29 JULY – 5 AUGUST 2026</span></p>
+  <p class="round" id="round-2"><span class="ko">2차 예선 · 2026년 7월 29일 – 8월 5일</span><span class="en">ROUND 2 · 29 JULY – 5 AUGUST 2026</span></p>
   <h2 class="ko">작업이 바뀌어도 기억을 이어 가는 정비 비서</h2>
   <h2 class="en">A maintenance assistant that remembers across jobs</h2>
   <div class="ko">
@@ -314,7 +341,7 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <p class="note ko">한계: 2차 공식 점수는 공개되지 않아 모릅니다. 규모는 과제 상한(80단계)까지만 시험했고, 기기 안에서만 돌아서 기기를 바꾸면 기억이 이어지지 않습니다. 혼자 7일 안에 만들었기 때문에, 범위를 줄이는 결정이 곧 설계였습니다.</p>
   <p class="note en">Limits: round 2 scores weren't published, so I don't know mine. Scale was tested only up to the brief's cap (80 steps), and since it runs only on the phone, memory doesn't follow you to a new device. I built it alone in 7 days, so deciding what to leave out was itself the design.</p>
 
-  <p class="round"><span class="ko">본선 · 2026년 8월 21일</span><span class="en">FINALS · 21 AUGUST 2026</span></p>
+  <p class="round" id="finals"><span class="ko">본선 · 2026년 8월 21일</span><span class="en">FINALS · 21 AUGUST 2026</span></p>
   <h2 class="ko">동결한 앱을 설명하는 발표</h2>
   <h2 class="en">Presenting the frozen app</h2>
   <figure>

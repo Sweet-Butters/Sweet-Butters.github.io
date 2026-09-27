@@ -28,6 +28,10 @@ a:hover { text-decoration: underline; }
 .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
 header { padding: 64px 0 8px; }
 h1 { margin: 0; font-size: 34px; letter-spacing: -.02em; }
+.motto { margin: 14px 0 0; font-size: 17px; }
+.motto b { font-size: 22px; background: linear-gradient(transparent 60%, #ffe28a 60%); padding: 0 2px; margin-right: 8px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .motto b { background: linear-gradient(transparent 60%, #6b5a1f 60%); } }
+:root[data-theme="dark"] .motto b { background: linear-gradient(transparent 60%, #6b5a1f 60%); }
 .lead { margin: 14px 0 0; font-size: 18px; max-width: 60ch; }
 .sub { margin: 10px 0 0; color: var(--muted); max-width: 62ch; }
 .links { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 18px; font-size: 15px; }
@@ -68,6 +72,7 @@ footer { color: var(--muted); font-size: 13px; padding: 48px 0; }
 <div class="wrap">
   <header>
     <h1>Sweet-Butters</h1>
+    <p class="motto"><b>Proactive.</b>AI 시대에는 실행력이 가장 중요하다고 생각합니다.</p>
     <p class="lead">AI를 가르치고, AI로 직접 만들어 운영합니다.</p>
     <p class="sub">연세대학교 화학과 4학년. 대학생·직장인·중장년층을 대상으로 AI 강의를 하고 있고,
       연세대 '연세프리미엄인강'에서 AI 바이브코딩 인터넷 강의를 촬영·편집하고 있습니다.
