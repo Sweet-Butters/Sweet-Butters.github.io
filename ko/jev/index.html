@@ -277,6 +277,43 @@ footer a { font-weight: 700; color: var(--ink); }
   <div class="box en"><h3>Korean input needs conservative thresholds</h3><p>I assumed Jev might be less sure about Korean than English, so I kept the conditions for overturning the rules narrow. The evaluation below checks whether those thresholds are right.</p></div>
   <div class="box zh"><h3>韩文输入需要保守的阈值</h3><p>我估计 Jev 对韩文的判断可能没有英文那么有把握，所以把推翻规则的条件设得很窄。这些阈值是否合适，由下面的评估来验证。</p></div>
 
+  <h2 class="ko">네 가지 제품에 같은 구조를 썼습니다</h2>
+  <h2 class="en">The same shape, in four products</h2>
+  <h2 class="zh">同一个结构，用在四个产品里</h2>
+  <div class="ko">
+    <p>공모전 판정기를 만든 뒤, 같은 구조를 다른 문제에도 옮겨 보고 있습니다. 네 곳에서 반복되는 규칙은 하나입니다.
+      <b>판단은 Jev, 생성은 LLM, 마지막 행동은 사람.</b> 비용을 아끼는 구조이면서, 되돌릴 수 없는 행동을 모델에 맡기지 않는 구조이기도 합니다.</p>
+    <ul>
+      <li><b><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">AI 공모전 레이더</a></b> — 규칙이 먼저 거르고, 애매한 공고만 Jev가 확률로 판단합니다. 매일 돌아가며 550여 건을 싣습니다. 판정 정확도는 위에 적었습니다.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — 메일함의 답장 도구. LLM에 스레드를 던지는 대신, Jev에게 <b>일곱 가지를 먼저 묻습니다</b>: 답장이 필요한가, 무엇을 원하나, 얼마나 급한가, 얼마나 화가 났나, 지금 가진 정보로 답할 수 있나, 사람이 써야 하나, 우리가 약속한 것이 있나. 그 답에 맞춰 초안 3개를 만들고, 고르고 보내는 건 사람입니다.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/reply-copilot">reply-copilot</a></b> — 같은 흐름을 Gmail과 유튜브·인스타그램 댓글에 적용했습니다. <b>스팸·악플·답장 불필요로 판정되면 초안 모델을 아예 호출하지 않습니다.</b> 메일은 임시보관함에, 댓글은 로컬 승인 대기열에 쌓입니다.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — 중국에서 만들어진 안드로이드용 <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a>의 <b>포크</b>입니다. 판단 커널과 문제 정의는 상류의 것이고, 제가 한 일은 수집부를 윈도우 창 캡처 + 오프라인 OCR로 바꾼 것입니다. 전송은 여기서도 사람이 누릅니다.</li>
+    </ul>
+    <p class="note">뒤의 셋은 2026년 9월에 시작해 아직 사용자도 운영 지표도 없습니다. 레이더처럼 "매일 돌아간다"고 말할 수 있는 단계가 아닙니다.</p>
+  </div>
+  <div class="en">
+    <p>After the contest classifier I started moving the same shape onto other problems. One rule repeats in all four:
+      <b>Jev judges, an LLM writes, a person acts.</b> It keeps cost down, and it keeps irreversible actions away from the model.</p>
+    <ul>
+      <li><b><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">AI Contest Radar</a></b> — rules filter first, Jev judges only the borderline listings. Runs daily, carries ~550 contests. Accuracy is measured above.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — a reply copilot for an inbox. Instead of handing a thread to a language model, it asks Jev <b>seven typed questions first</b>: is a reply expected, what do they want, how urgent, how annoyed, can it be answered from what we have, should a human write this, did we promise anything. Only then are three drafts written; a person picks one and sends it.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/reply-copilot">reply-copilot</a></b> — the same flow on Gmail and YouTube/Instagram comments. <b>If the judgement says spam, abuse, or no reply needed, the drafting model is never called.</b> Mail lands in Drafts, comments in a local approval queue.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — a <b>fork</b> of <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a>, an Android tool built in China. The judgement core and the question set are upstream's; my part is the capture layer — Windows window screenshots plus offline OCR. Sending stays manual here too.</li>
+    </ul>
+    <p class="note">The last three started in September 2026 and have no users and no operating numbers yet. They are not at the stage where I can say "it runs every day", as the radar does.</p>
+  </div>
+  <div class="zh">
+    <p>做完比赛判定器之后，我把同一个结构搬到了别的问题上。四个项目里重复着同一条规则：
+      <b>判断交给 Jev，生成交给 LLM，最后的动作留给人。</b>既省成本，也把不可逆的动作挡在模型之外。</p>
+    <ul>
+      <li><b><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">AI 竞赛雷达</a></b> — 规则先过滤，只有模棱两可的公告才交给 Jev 用概率判断。每天运行，收录约 550 条。准确率见上文。</li>
+      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — 收件箱的回复助手。不是把整段对话丢给语言模型，而是<b>先问 Jev 七个问题</b>：是否需要回复、对方想要什么、有多急、有多不满、现有信息能否回答、是否该由人来写、我们是否承诺过什么。据此写出三条草稿，挑选和发送由人完成。</li>
+      <li><b><a href="https://github.com/Sweet-Butters/reply-copilot">reply-copilot</a></b> — 同样的流程用在 Gmail 与 YouTube／Instagram 评论上。<b>一旦判定为垃圾、恶意或无需回复，就根本不调用写草稿的模型。</b>邮件进草稿箱，评论进本地待审队列。</li>
+      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — 中国开发者的安卓项目 <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a> 的<b>分支</b>。判断内核与题目口径来自上游，我做的是把采集换成 Windows 窗口截图 + 离线 OCR。发送同样由人手动完成。</li>
+    </ul>
+    <p class="note">后三个始于 2026 年 9 月，目前还没有用户，也没有运行指标，还谈不上像雷达那样“每天都在跑”。</p>
+  </div>
+
   <h2 class="ko">검증: 정확도 평가</h2>
   <h2 class="en">Checking it: accuracy evaluation</h2>
   <h2 class="zh">验证：准确率评估</h2>
