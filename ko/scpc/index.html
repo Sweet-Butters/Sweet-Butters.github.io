@@ -115,6 +115,7 @@ figure img { display: block; width: 100%; height: auto; border: 2px solid var(--
 figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
 .round { font: 600 13px/1 var(--ui); letter-spacing: .04em; color: var(--c); margin: 72px 0 0; }
 .round + h2, .round + h2 + h2 { margin-top: 8px; }
+.oneline { background: var(--mark); padding: 8px 12px; font-size: 15px; }
 </style>
 </head>
 <body>
@@ -160,6 +161,7 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <h2 class="ko">개인정보를 누구에게, 어디까지 넘길까</h2>
   <h2 class="en">Who gets the personal information, and how much of it</h2>
   <div class="ko">
+    <p class="oneline">한 줄로: <b>결정론적 규칙 엔진과 실험 설계</b> (Python, 외부 의존성 0) — 지시문 파싱, 게이트형 채점 최적화, 변형·무작위 입력 검증, 바이트 단위 재현</p>
     <p><b>과제.</b> 개인비서 AI 에이전트가 요청을 받았을 때, 개인정보를 <b>누구에게, 어떤 행동으로(진행·질문·보류·수정), 어디까지</b> 넘길지 판단해 여섯 칸짜리 답을 내는 문제였습니다. 공개 리더보드로 상위 100명을 자른 뒤, 그 100명의 코드를 주최측이 처음 보는 비공개 과제에 직접 돌려 상위 40명을 뽑았습니다. 그래서 진짜 시험은 공개 점수가 아니라 <b>처음 보는 데이터에서도 무너지지 않는 코드</b>였습니다.</p>
     <p><b>만든 것.</b> 언어모델을 한 번도 부르지 않는 결정론적 규칙 엔진입니다. 파이썬 표준 라이브러리만 쓰는 파일 하나(1,213줄)이고, 같은 입력이면 늘 같은 답을 냅니다.</p>
     <h3>내가 한 판단</h3>
@@ -174,6 +176,7 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
     </ul>
   </div>
   <div class="en">
+    <p class="oneline">In one line: <b>a deterministic rule engine and experiment design</b> (Python, no dependencies): instruction parsing, optimising for gated scoring, metamorphic and property-based testing, byte-for-byte reproducible output</p>
     <p><b>The task.</b> When a personal-assistant AI agent gets a request, it has to decide <b>who</b> personal information goes to, <b>what to do</b> (go ahead, ask, hold or amend), and <b>how much</b> to pass on, as a six-field answer. A public leaderboard cut the field to the top 100. The organisers then ran those 100 people's code on hidden tasks nobody had seen and took the top 40. So the real test wasn't the public score but <b>code that doesn't fall over on data it has never seen</b>.</p>
     <p><b>What I built.</b> A deterministic rule engine that never calls a language model: one Python file (1,213 lines), standard library only, which always gives the same answer for the same input.</p>
     <h3>The calls I made</h3>
@@ -203,11 +206,13 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <h2 class="ko">작업이 바뀌어도 기억을 이어 가는 정비 비서</h2>
   <h2 class="en">A maintenance assistant that remembers across jobs</h2>
   <div class="ko">
+    <p class="oneline">한 줄로: <b>온디바이스 상태 엔진</b> (Kotlin, Android, 외부 의존성 0) — 트랜잭션 경계, 같은 이벤트는 정확히 한 번, 강제 종료 후 복구, 결정론적 해시 체인, 근거 기반 무효화. 서버는 없습니다.</p>
     <p><b>과제.</b> 여러 번에 걸쳐 반복되는 모바일 작업에서 과거 경험을 골라 기억하고, 다음번 사용자의 수고를 줄이고, 상황이나 권한이 바뀌면 멈추거나 다시 계획하는 안드로이드 앱(APK)을 만드는 공개 과제였습니다. 도메인은 참가자가 정합니다. 앱을 강제로 끄고 다시 켜도 이어져야 하고, 문제가 생기면 전체 초기화가 아니라 부분 복구를 해야 했습니다.</p>
     <p><b>만든 것.</b> 승강기 점검·수리 기사를 위한 <b>현장 정비 비서</b>입니다. 이 직업을 고른 건 과제가 요구하는 성질이 전부 자연스럽게 생기는 일이라서입니다. 같은 준비가 반복되고, 야간 호출로 작업이 끊기고, 현장에서 진단이 뒤집히고, 자재 소식은 늦게 오고, 다른 현장의 물건은 이 현장에 섞이면 안 됩니다. 앱은 모델을 부르지 않는 결정론적 코어로 기기 안에서만 돌아가고, 외부 서버로 보내는 데이터가 없습니다.</p>
     <p><b>핵심 규칙.</b> 아직 유효한 과거 항목은 다시 묻지 않고 다음 작업으로 넘기고, 바뀐 것만 다시 계획합니다. <b>안전 확인만은 예외로 매번 묻습니다.</b> 다른 작업의 항목은 보이기만 하고 이번 판단에는 쓰지 않습니다.</p>
   </div>
   <div class="en">
+    <p class="oneline">In one line: <b>an on-device state engine</b> (Kotlin, Android, no dependencies): transaction boundaries, exactly-once handling of repeated events, crash recovery, a deterministic hash chain, and evidence-based invalidation. There is no server.</p>
     <p><b>The task.</b> A public brief: build an Android app (APK) for a mobile task that repeats over several sessions. It should remember the right parts of past experience, save the user effort next time, and stop or re-plan when the situation or authority changes. Entrants chose their own domain. The app had to carry on after being force-killed and restarted, and recover partially rather than wipe everything when something went wrong.</p>
     <p><b>What I built.</b> A <b>field maintenance assistant</b> for lift (elevator) service technicians. I picked this job because every property the brief asked for happens there naturally: the same preparation repeats, night call-outs interrupt jobs, diagnoses flip on site, parts news arrives late, and one site's items must not leak into another. The app runs a deterministic core with no model calls, entirely on the phone, and sends no data to any server.</p>
     <p><b>The core rule.</b> Past items that are still valid carry into the next job without being asked again, and only what changed is re-planned. <b>Safety checks are the exception: they are asked every time.</b> Other jobs' items are shown but not used for this job's decisions.</p>
@@ -250,6 +255,14 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
     <li>Safety-check prompts were the same, 5 each: what shouldn't be reduced wasn't.</li>
     <li>Across 22,402 steps in total: 0 contract violations, 0 breaks in the state record, 0 exceptions. 258 JVM tests and 36 on-device tests pass.</li>
   </ul>
+  <figure>
+    <a href="/work/img/scpc-burden.jpg"><img src="/work/img/scpc-burden.jpg" alt="" width="1280" height="720" loading="lazy"></a>
+    <figcaption><span class="ko">본선 발표자료 3쪽: 같은 계획에 도달하기까지 사용자 조작은 5회 → 3회로 줄고, 안전 확인은 5 = 5로 그대로</span><span class="en">Finals slide 3 (in Korean): user actions to reach the same plan drop from 5 to 3, while safety checks stay at 5 = 5</span></figcaption>
+  </figure>
+  <figure>
+    <a href="/work/img/scpc-result.jpg"><img src="/work/img/scpc-result.jpg" alt="" width="1280" height="720" loading="lazy"></a>
+    <figcaption><span class="ko">본선 발표자료 13쪽: 작업이 길어질수록 차이가 벌어짐 (80단계에서 규칙을 끈 쪽의 재입력 요구 270건, 켠 쪽 0건). 판단 상태는 끝까지 같음</span><span class="en">Finals slide 13 (in Korean): the gap grows with longer runs (at 80 steps, 270 re-entry requests with the rule off, 0 with it on), while the decisions stay identical</span></figcaption>
+  </figure>
   <p class="ko">검사도 믿지 않았습니다. 테스트가 통과하는 것만으로는 아무것도 증명되지 않아서, <b>고친 부분을 되돌리면 그 테스트가 실제로 실패하는지</b>까지 확인했습니다. 시나리오 일부는 제가 쓰지 않은 평범한 서술로 만들고, 돌리기 전에 기대 결과를 먼저 적어 두었습니다.</p>
   <p class="en">I didn't trust the checks either. A passing test proves little, so I also checked that <b>undoing a fix makes its test actually fail</b>. Some scenarios came from plain descriptions I didn't write, and I wrote down the expected results before running them.</p>
 
@@ -271,6 +284,10 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <p class="round"><span class="ko">본선 · 2026년 8월 21일</span><span class="en">FINALS · 21 AUGUST 2026</span></p>
   <h2 class="ko">동결한 앱을 설명하는 발표</h2>
   <h2 class="en">Presenting the frozen app</h2>
+  <figure>
+    <a href="/work/img/scpc-cover.jpg"><img src="/work/img/scpc-cover.jpg" alt="" width="1280" height="720" loading="lazy"></a>
+    <figcaption><span class="ko">본선 발표자료 표지: "유효한 과거만 이어받는 결정론적 상태 코어". 기능을 쌓은 게 아니라 문제를 하나씩 막았고, 그중 제 것은 하나라는 주장으로 시작했습니다</span><span class="en">Finals cover slide (in Korean): "A deterministic state core that inherits only the past that is still valid". It opens with the claim that I blocked problems one by one rather than piling up features, and that only one of the fixes is mine</span></figcaption>
+  </figure>
   <div class="ko">
     <p>본선은 2차에 낸 앱을 바꾸지 않은 채 현장에서 발표하고 질문에 답하는 자리였습니다. 21명의 진출자 중 한 명으로 발표했고, 수상은 하지 못했습니다.</p>
     <ul>
