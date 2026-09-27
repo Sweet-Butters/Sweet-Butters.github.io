@@ -387,13 +387,13 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         ko: "삼성 SCPC(Samsung Collegiate Programming Challenge) AI 챌린지에 Claude와 함께 참가했어요. 1차 예선은 개인정보가 어디로 가도 되는지 에이전트가 판단하는 문제(6개 항목 채점), 2차 예선은 작업이 바뀌어도 기억을 이어 가는 승강기 정비 기사용 안드로이드 비서, 본선은 동결한 2차 앱을 현장에서 발표했어요." },
       photo: ["/work/img/scpc.jpg", { en: "Round 2 app (in Korean): items for this job, standard items carried over from earlier jobs, and other jobs' items, greyed out and not used", ko: "2차 예선 앱: 이번 작업 항목, 이전 작업에서 이월된 표준 항목, 판단에 쓰지 않는 다른 작업의 항목(회색)" }],
       mine: { en: [
-        "Round 1: worked out first that scoring was gated: if the recipient or action is wrong, the fields below it all score 0. So I got those two right first (120/120 each on dev)",
+        "Round 1: worked out first that scoring was gated: if any of the first three fields (subject, recipient, action) is wrong, the other three score 0. So I got the gates right first (recipient and action 120/120 each on dev)",
         "Round 1: found a parser that was 100% on dev read only 17% of the 700 real screening tasks, and rewrote it until it read all 700. Stopped adding rules once the ones left only fit noise",
         "Round 2: items still valid carry into the next job without asking again; safety checks are asked every time. The same APK runs a second copy with only that feature off, so the difference can be measured",
         "Round 2: after a forced kill, it restores from a saved snapshot rather than replaying the log, so deleted data can't come back; deleting destroys the original text",
         "Finals: the slide deck was generated from a script and checked by 12 automated gates, so no number could appear that wasn't in the fact sheet"],
         ko: [
-        "1차: 채점이 게이팅 구조라 수신자나 행동이 틀리면 아래 항목이 모두 0점이 된다는 걸 먼저 분석해, 그 두 축부터 맞춤 (dev 각 120/120)",
+        "1차: 채점이 게이트 구조라 앞의 세 칸(대상·받는 쪽·행동) 중 하나라도 틀리면 나머지가 모두 0점이 된다는 걸 먼저 분석해, 게이트부터 맞춤 (받는 쪽·행동 dev 각 120/120)",
         "1차: dev에서 100%였던 파서가 실제 심사 과제 700개 중 17%만 읽는 걸 발견해 700개 전부 읽도록 다시 씀. 남은 오답이 잡음 맞추기뿐인 지점에서 규칙 추가를 멈춤",
         "2차: 아직 유효한 항목은 다음 작업으로 다시 묻지 않고 넘기되, 안전 확인은 매번 묻게 함. 같은 APK 안에 이 기능만 끈 사본을 함께 돌려 차이를 잴 수 있게 함",
         "2차: 강제 종료 후에는 로그 재실행이 아니라 저장된 스냅샷으로 복구해 지운 정보가 되살아나지 않게 하고, 삭제는 원문까지 파기",
