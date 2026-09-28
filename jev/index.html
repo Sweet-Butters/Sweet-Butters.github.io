@@ -284,33 +284,64 @@ footer a { font-weight: 700; color: var(--ink); }
       <b>판단은 Jev, 생성은 LLM, 마지막 행동은 사람.</b> 비용을 아끼는 구조이면서, 되돌릴 수 없는 행동을 모델에 맡기지 않는 구조이기도 합니다.</p>
     <ul>
       <li><b><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">AI 공모전 레이더</a></b> — 규칙이 먼저 거르고, 애매한 공고만 Jev가 확률로 판단합니다. 매일 돌아가며 550여 건을 싣습니다. 판정 정확도는 위에 적었습니다.</li>
-      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — 메일함의 답장 도구. LLM에 스레드를 던지는 대신, Jev에게 <b>일곱 가지를 먼저 묻습니다</b>: 답장이 필요한가, 무엇을 원하나, 얼마나 급한가, 얼마나 화가 났나, 지금 가진 정보로 답할 수 있나, 사람이 써야 하나, 우리가 약속한 것이 있나. 그 답에 맞춰 초안 3개를 만들고, 고르고 보내는 건 사람입니다.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — 메일함의 답장 도구. LLM에 스레드를 던지는 대신, Jev에게 <b>여덟 가지를 먼저 묻습니다</b>: 답장이 필요한가, <b>답장 말고 폼·링크에서 처리하는 건인가</b>, 무엇을 원하나, 얼마나 급한가, 얼마나 화가 났나, 지금 가진 정보로 답할 수 있나, 사람이 써야 하나, 우리가 약속한 것이 있나. 그 답에 맞춰 초안 3개를 만든 뒤 <b>쓴 초안도 다시 Jev에게 보여, 대화에 없는 사실을 단정한 후보는 버립니다.</b> 고르고 보내는 건 사람입니다. 실제 메일함 두 개에서 34건을 분류했고, 판단은 건당 0.4~0.7초·약 0.0001달러입니다.</li>
       <li><b><a href="https://github.com/Sweet-Butters/reply-copilot">reply-copilot</a></b> — 같은 흐름을 Gmail과 유튜브·인스타그램 댓글에 적용했습니다. <b>스팸·악플·답장 불필요로 판정되면 초안 모델을 아예 호출하지 않습니다.</b> 메일은 임시보관함에, 댓글은 로컬 승인 대기열에 쌓입니다.</li>
-      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — 중국에서 만들어진 안드로이드용 <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a>의 <b>포크</b>입니다. 판단 커널과 문제 정의는 상류의 것이고, 제가 한 일은 수집부를 윈도우 창 캡처 + 오프라인 OCR로 바꾼 것입니다. 전송은 여기서도 사람이 누릅니다.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — 중국에서 만들어진 안드로이드용 <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a>의 <b>포크</b>입니다. 판단 커널과 문제 정의는 상류의 것입니다. 제가 한 일은 <b>한국어에서 동작하게 만든 것</b>이고, PR 두 건으로 보냈습니다. 내장 OCR이 중국어·영어 전용이라 한국어 말풍선 9개 중 0개만 인식했고, "초록 배경이면 내 말풍선"이라는 위챗 전용 규칙 때문에 9개 전부 상대방 것으로 분류됐습니다. 윈도우 내장 OCR 백엔드와 앱별 프로필 구조로 바꿔 <b>9/9 인식, 프레임당 2.0초 → 0.20초</b>가 됐고, 단체방 공지 배너가 메시지로 섞여 들어오던 것도 걸러냈습니다. 화면 문구 112곳을 다국어 구조로 감싸 한국어 150개를 번역하되 원문을 키로 써서, 기존 중국어 사용자에게는 아무 변화가 없습니다. 전송은 여기서도 사람이 누릅니다.</li>
     </ul>
-    <p class="note">뒤의 셋은 2026년 9월에 시작해 아직 사용자도 운영 지표도 없습니다. 레이더처럼 "매일 돌아간다"고 말할 수 있는 단계가 아닙니다.</p>
+    <p class="note">뒤의 셋은 2026년 9월에 시작했습니다. 저 말고 쓰는 사람은 아직 없고, jev-chat-windows의 PR 두 건은 <b>열린 상태</b>입니다. replydesk는 제 메일함 두 개에서 실제로 돌려 위 수치를 쟀지만, 레이더처럼 "매일 돌아간다"고 말할 단계는 아닙니다.</p>
   </div>
   <div class="en">
     <p>After the contest classifier I started moving the same shape onto other problems. One rule repeats in all four:
       <b>Jev judges, an LLM writes, a person acts.</b> It keeps cost down, and it keeps irreversible actions away from the model.</p>
     <ul>
       <li><b><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">AI Contest Radar</a></b> — rules filter first, Jev judges only the borderline listings. Runs daily, carries ~550 contests. Accuracy is measured above.</li>
-      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — a reply copilot for an inbox. Instead of handing a thread to a language model, it asks Jev <b>seven typed questions first</b>: is a reply expected, what do they want, how urgent, how annoyed, can it be answered from what we have, should a human write this, did we promise anything. Only then are three drafts written; a person picks one and sends it.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — a reply copilot for an inbox. Instead of handing a thread to a language model, it asks Jev <b>eight typed questions first</b>: is a reply expected, <b>is the action taken somewhere else — a form, a link</b>, what do they want, how urgent, how annoyed, can it be answered from what we have, should a human write this, did we promise anything. Three drafts are written, and then <b>the drafts are judged too: any candidate that asserts something the thread does not support is dropped</b> before a person sees it. Picking and sending stay human. Measured on two real mailboxes: 34 threads triaged, 0.4–0.7s and about $0.0001 per judgement.</li>
       <li><b><a href="https://github.com/Sweet-Butters/reply-copilot">reply-copilot</a></b> — the same flow on Gmail and YouTube/Instagram comments. <b>If the judgement says spam, abuse, or no reply needed, the drafting model is never called.</b> Mail lands in Drafts, comments in a local approval queue.</li>
-      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — a <b>fork</b> of <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a>, an Android tool built in China. The judgement core and the question set are upstream's; my part is the capture layer — Windows window screenshots plus offline OCR. Sending stays manual here too.</li>
+      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — a <b>fork</b> of <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a>, an Android tool built in China. The judgement core and the question set are upstream's. My part was <b>making it work in Korean</b>, sent as two pull requests. The bundled OCR ships Chinese and English models only, so it read 0 of 9 Korean bubbles, and "green background means mine" — a WeChat-only rule — put all nine on the other person. A Windows OCR backend and a per-app profile structure took it to <b>9 of 9, and 2.0s → 0.20s per frame</b>; a pinned group notice that had been read as a message is now filtered out. 112 UI call sites were wrapped for translation and 150 Korean strings added, keyed on the original Chinese so nothing changes for existing users. Sending stays manual here too.</li>
     </ul>
-    <p class="note">The last three started in September 2026 and have no users and no operating numbers yet. They are not at the stage where I can say "it runs every day", as the radar does.</p>
+    <p class="note">The last three started in September 2026. Nobody but me uses them yet, and the two jev-chat-windows pull requests are <b>still open</b>. replydesk has real numbers because I ran it on my own two mailboxes, but it is not at the stage where I can say "it runs every day", as the radar does.</p>
   </div>
   <div class="zh">
     <p>做完比赛判定器之后，我把同一个结构搬到了别的问题上。四个项目里重复着同一条规则：
       <b>判断交给 Jev，生成交给 LLM，最后的动作留给人。</b>既省成本，也把不可逆的动作挡在模型之外。</p>
     <ul>
       <li><b><a href="https://github.com/Sweet-Butters/korea-ai-contest-tracker">AI 竞赛雷达</a></b> — 规则先过滤，只有模棱两可的公告才交给 Jev 用概率判断。每天运行，收录约 550 条。准确率见上文。</li>
-      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — 收件箱的回复助手。不是把整段对话丢给语言模型，而是<b>先问 Jev 七个问题</b>：是否需要回复、对方想要什么、有多急、有多不满、现有信息能否回答、是否该由人来写、我们是否承诺过什么。据此写出三条草稿，挑选和发送由人完成。</li>
+      <li><b><a href="https://github.com/Sweet-Butters/replydesk">replydesk</a></b> — 收件箱的回复助手。不是把整段对话丢给语言模型，而是<b>先问 Jev 八个问题</b>：是否需要回复、<b>要做的事是否在别处（表单、链接）完成</b>、对方想要什么、有多急、有多不满、现有信息能否回答、是否该由人来写、我们是否承诺过什么。据此写出三条草稿，然后<b>再让 Jev 判一遍草稿：凡是断言了对话里没有的事实的候选，在给人看之前就丢掉。</b>挑选和发送仍由人完成。在两个真实收件箱上实测：分类 34 封，每次判断 0.4~0.7 秒、约 0.0001 美元。</li>
       <li><b><a href="https://github.com/Sweet-Butters/reply-copilot">reply-copilot</a></b> — 同样的流程用在 Gmail 与 YouTube／Instagram 评论上。<b>一旦判定为垃圾、恶意或无需回复，就根本不调用写草稿的模型。</b>邮件进草稿箱，评论进本地待审队列。</li>
-      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — 中国开发者的安卓项目 <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a> 的<b>分支</b>。判断内核与题目口径来自上游，我做的是把采集换成 Windows 窗口截图 + 离线 OCR。发送同样由人手动完成。</li>
+      <li><b><a href="https://github.com/Sweet-Butters/jev-chat-windows">jev-chat-windows</a></b> — 中国开发者的安卓项目 <a href="https://github.com/jev-chat/jev-chat-jarvis">jev-chat-jarvis</a> 的<b>分支</b>。判断内核与题目口径来自上游。我做的是<b>让它在韩文下能用</b>，并提交了两个 PR。自带 OCR 只有中英文模型，9 条韩文气泡一条都没认对；"绿底＝自己"是微信专用规则，于是 9 条全被判成对方发的。换成 Windows 自带 OCR 后端并按软件分档后，<b>9/9 认对，一帧 2.0 秒 → 0.20 秒</b>，群聊置顶公告被当成消息的问题也一并解决。界面文案 112 处包了翻译层、补了 150 条韩文，并以中文原文为键，老用户一个字都不会变。发送同样由人手动完成。</li>
     </ul>
-    <p class="note">后三个始于 2026 年 9 月，目前还没有用户，也没有运行指标，还谈不上像雷达那样“每天都在跑”。</p>
+    <p class="note">后三个始于 2026 年 9 月。除我之外还没有用户，jev-chat-windows 的两个 PR <b>仍未合并</b>。replydesk 的数字来自我自己的两个邮箱的真实运行，但还谈不上像雷达那样“每天都在跑”。</p>
+  </div>
+
+  <h2 class="ko">실제 메일에 붙여보고 알게 된 세 가지</h2>
+  <h2 class="en">Three things a real mailbox taught me</h2>
+  <h2 class="zh">接到真实邮箱之后学到的三件事</h2>
+  <div class="ko">
+    <p>replydesk를 제 메일함에 붙이고 실제로 받은 메일에 초안을 만들어 봤습니다. 되는 것보다 안 되는 것에서 더 배웠습니다.</p>
+    <ul>
+      <li><b>환각은 프롬프트로 막히지 않았습니다.</b> "대화에 없는 사실을 쓰지 말라"는 규칙을 넣고 더 강하게 고쳐도, 참가자 모집 메일에 "저는 참가 신청을 <b>마쳤습니다</b>"라고 쓴 후보가 3개 중 2개였습니다. 하지 않은 일을 단정한 것입니다. 해결은 프롬프트가 아니라 구조였습니다 — 후보마다 Jev에게 "이 초안이 대화에 없는 사실을 단정하는가"를 묻고, 넘으면 사람이 보기 전에 버립니다. 남은 후보는 사실만 담았습니다.</li>
+      <li><b>진짜 원인은 잘린 입력이었습니다.</b> 그 메일에는 "참가신청(구글폼) https://forms.gle/…"가 있었는데, 본문을 1,500자에서 자르는 바람에 판단에 들어가지 않았습니다. 모델은 제목만 보고 답장을 지어낸 것입니다. 트림 한도를 늘리고, 잘린 뒤쪽의 링크는 따로 살려 붙이도록 고쳤습니다. 프롬프트를 아무리 잘 써도 고쳐지지 않았을 문제입니다.</li>
+      <li><b>질문 세트에 구멍이 있었습니다.</b> "답장이 필요한가"는 물었지만 "<b>답장이 답인가</b>"는 묻지 않았습니다. 모집 안내는 답장이 필요해 보이지만 실제 신청은 구글폼에서 일어납니다. "답장 말고 다른 곳에서 처리하는가"를 추가하니 0.98로 잡혔고, 초안을 아예 만들지 않습니다. 부수 효과로 그런 메일은 2.6초에서 0.6초가 됐습니다 — 생성·검증·순위를 통째로 건너뛰기 때문입니다.</li>
+    </ul>
+    <p class="note">고치는 과정에서 제 실수도 하나 있었습니다. 테스트를 파이프로 넘겨 실행하는 바람에 실패가 종료 코드에 반영되지 않았고, 적용되지도 않은 변경을 커밋 메시지에 적었습니다. 다음 커밋에서 바로잡았습니다.</p>
+  </div>
+  <div class="en">
+    <p>I pointed replydesk at my own mailbox and drafted a reply to a mail I had actually received. The failures taught me more than the successes.</p>
+    <ul>
+      <li><b>The prompt did not stop the hallucination.</b> The rule "never state a fact that is not in the thread" was already there, and strengthening it changed nothing: two of three candidates told a recruitment mail that I <b>had already applied</b>. The fix was structural, not verbal — each draft is shown back to Jev with one question, "does this assert something the thread does not support", and anything over the line is dropped before a person sees it.</li>
+      <li><b>The real cause was a truncated input.</b> The mail said "apply here: https://forms.gle/…", but the body was cut at 1,500 characters and the link never reached the judge. The model was answering a subject line. Raising the limit and carrying links past the cut fixed it — no amount of prompt writing would have.</li>
+      <li><b>The question set had a hole.</b> It asked whether a reply was expected, never whether <b>a reply is how this gets answered</b>. A recruitment notice wants something, but the something happens in a Google Form. A new question scored 0.98 on that mail and no draft is written at all. It also dropped the cost: 2.6s → 0.6s, because drafting, checking and ranking are all skipped.</li>
+    </ul>
+    <p class="note">I made a mistake of my own along the way: I ran the tests through a pipe, so a failure never reached the exit code, and I described a change in a commit message that had not actually applied. The next commit said so and fixed it.</p>
+  </div>
+  <div class="zh">
+    <p>我把 replydesk 接到自己的邮箱，给一封真实收到的邮件写了草稿。失败的地方比成功的地方教给我更多。</p>
+    <ul>
+      <li><b>提示词挡不住幻觉。</b>"不要写对话里没有的事实"这条规则本来就在，写得更严也没用：三条候选里有两条对一封招募邮件说"我<b>已经报名完成</b>"。解决办法不是改措辞，而是改结构——把每条草稿再交给 Jev 问一句"它是否断言了对话里没有的事实"，越线的在给人看之前就丢掉。</li>
+      <li><b>真正的原因是输入被截断了。</b>那封邮件里写着"报名（谷歌表单）https://forms.gle/…"，但正文在 1,500 字处被截，链接根本没进到判断里。模型是在回答一个标题。把上限提高、并把截断之后的链接单独保留，问题才真正解决——这不是提示词能修的。</li>
+      <li><b>题目集漏了一个问题。</b>只问了"是否需要回复"，没问"<b>回复是不是解决办法</b>"。招募通知确实有所求，但求的事发生在谷歌表单里。新增的问题在这封邮件上给出 0.98，于是根本不写草稿。顺带把成本也降了：2.6 秒 → 0.6 秒，因为生成、校验、排序全都跳过。</li>
+    </ul>
+    <p class="note">过程中我自己也犯了个错：测试经过管道执行，失败没有反映到退出码上，我还把一处并未生效的修改写进了提交说明。下一个提交里更正了。</p>
   </div>
 
   <h2 class="ko">검증: 정확도 평가</h2>
