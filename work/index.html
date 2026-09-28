@@ -72,6 +72,21 @@ h1 { margin: 8px 0 0; font: 400 clamp(38px, 6vw, 72px)/1.08 var(--display); lett
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(95,210,143,.6); } 70% { box-shadow: 0 0 0 7px rgba(95,210,143,0); } 100% { box-shadow: 0 0 0 0 rgba(95,210,143,0); } }
 
 /* ---------- the ride: pinned vertical map on the left, stops scroll past on the right ---------- */
+/* four stories: each starts from a problem, ends at a stop on the map */
+.why { padding-block: 8px 44px; }
+.why-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.story-card { background: #fff; border: 2px solid var(--ink); border-top: 8px solid var(--s); padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.story-card .no { font: 600 12.5px var(--mono); color: var(--s); letter-spacing: .04em; }
+.story-card h3 { margin: 0; font: 400 22px/1.3 var(--display); }
+.story-card dl { margin: 0; display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 6px 12px; font-size: 15px; line-height: 1.6; }
+.story-card dt { font-weight: 700; color: var(--ink-2); font-size: 13.5px; padding-top: 1px; }
+.story-card dd { margin: 0; }
+.story-card dd a { font-weight: 600; }
+.story-card dd.felt { font-family: var(--ui); background: var(--mark); padding: 2px 6px; }
+.story-card .go { align-self: flex-start; font-weight: 700; margin-top: 2px; }
+@media (max-width: 900px) { .why-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .story-card dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } .story-card dt { margin-top: 6px; } }
+
 .ride { background: var(--board); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
 .ride-grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 56px; align-items: start; padding-block: 40px 20px; }
 .pin { position: sticky; top: 12px; }
@@ -227,6 +242,59 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     </div>
   </section>
 
+  <!-- Four stories, each from a problem I actually had or saw, to a result on the map below. -->
+  <section class="wrap why" id="stories-why">
+    <div class="sec-head">
+      <h2><span class="ko">작은 불편에서 시작했습니다</span><span class="en">It started with small annoyances</span></h2>
+      <p><span class="ko">제가 평소에 불편함을 느꼈던 작은 문제부터 AI로 해결해 보고자 했습니다. 넷 다 아래 노선도의 역으로 이어져요.</span><span class="en">I set out to solve small problems I ran into myself, with AI. Each one continues as a stop on the map below.</span></p>
+    </div>
+    <div class="why-grid">
+      <article class="story-card" style="--s:var(--c)">
+        <span class="no">01 · 2026-05</span>
+        <h3><span class="ko">언제 올지 모르는 메일</span><span class="en">Email that could arrive any time</span></h3>
+        <dl>
+          <dt><span class="ko">문제</span><span class="en">Problem</span></dt><dd><span class="ko">각종 공모전 메일, 교수님·교무처의 메일처럼 언제 올지 모르는 메일을 불안해하며 주기적으로 확인하는 데 지쳐, 이를 문제라고 생각했습니다.</span><span class="en">Contest notices, professors, the university office: I was worn out checking my inbox again and again for mail that could arrive at any time, and decided that was a problem to solve.</span></dd>
+          <dt><span class="ko">방법</span><span class="en">How</span></dt><dd><span class="ko">Gemini 무료 티어와 Claude Code로 mail-notifier를 만들었습니다. 받은 메일을 Gemini가 제가 원하는 내용인지 분류하고, 이에 부합하는 메일만 텔레그램으로 보냅니다.</span><span class="en">With Gemini's free tier and Claude Code I built mail-notifier. Gemini classifies each incoming email as something I want or not, and only the ones that match are sent to Telegram.</span></dd>
+          <dt><span class="ko">결과</span><span class="en">Result</span></dt><dd><span class="ko">2026년 5월부터 운영 중, 월 0원 · <a href="https://github.com/Sweet-Butters/mail-notifier" target="_blank" rel="noopener">github.com/Sweet-Butters/mail-notifier</a></span><span class="en">Running since May 2026, at $0 a month · <a href="https://github.com/Sweet-Butters/mail-notifier" target="_blank" rel="noopener">github.com/Sweet-Butters/mail-notifier</a></span></dd>
+          <dt><span class="ko">느낀 점</span><span class="en">Takeaway</span></dt><dd class="felt"><span class="ko">알림을 많이 보내는 것보다, 제가 확인해야 할 메일을 가려내는 판단이 중요하다고 느꼈습니다.</span><span class="en">What matters is not sending more alerts but the judgement that picks out the mail I actually need to read.</span></dd>
+        </dl>
+        <a class="go" href="#stop-mail"><span class="ko">노선도에서 보기 ↓</span><span class="en">On the map ↓</span></a>
+      </article>
+      <article class="story-card" style="--s:var(--r)">
+        <span class="no">02 · 2026-09</span>
+        <h3><span class="ko">알림을 넘어, 답장까지</span><span class="en">Beyond alerts, to replies</span></h3>
+        <dl>
+          <dt><span class="ko">문제</span><span class="en">Problem</span></dt><dd><span class="ko">개인 차원에서는 알림만으로도 잘 쓰고 있지만, 기업 차원에서는 사람이 메일·카카오톡·SNS에 온 말에 일일이 답하는 일이 비효율적으로 보였습니다. 새로 나온 AI인 Jev가 이 문제에 유용하겠다고 생각했습니다.</span><span class="en">Alerts are enough for me personally, but for a company, people answering every email, KakaoTalk message and social post by hand looked inefficient. I thought Jev, a newly released AI, would fit this problem.</span></dd>
+          <dt><span class="ko">방법</span><span class="en">How</span></dt><dd><span class="ko">코딩은 Claude Code와 Codex, 판단은 Jev, 초안은 Gemini 무료 티어, 고르고 보내는 마지막 행동은 사람이 맡습니다. Jev는 답장이 필요한가, 답장이 아니라 폼이나 링크에서 처리할 일인가, 얼마나 급한가, 사람이 직접 써야 하는가를 묻고 확률값으로 답합니다. 그래서 답장을 쓸지 말지, 누가 쓸지를 코드가 if문으로 결정할 수 있습니다. Gemini가 실제로 보낼 답장 문안 3개를 쓰면, 저는 그중 하나를 골라 고쳐 보냅니다.</span><span class="en">Coding is done with Claude Code and Codex, judging by Jev, drafting by Gemini's free tier, and the last step, choosing and sending, by a person. Jev is asked whether the email needs a reply, whether it is really handled by a form or link instead, how urgent it is, and whether a person should write it, and it answers with probabilities. So whether to reply, and who writes it, is decided by an if statement in code. Gemini writes three candidate replies, and I pick one, edit it and send it.</span></dd>
+          <dt><span class="ko">결과</span><span class="en">Result</span></dt><dd><span class="ko">replydesk: 실제 메일함 2개에서 34건 판단, 받은 메일 20건 중 19건 "답장 불필요" · <a href="https://github.com/Sweet-Butters/replydesk" target="_blank" rel="noopener">github.com/Sweet-Butters/replydesk</a></span><span class="en">replydesk: 34 threads judged across two real inboxes; 19 of 20 received emails needed no reply · <a href="https://github.com/Sweet-Butters/replydesk" target="_blank" rel="noopener">github.com/Sweet-Butters/replydesk</a></span></dd>
+        </dl>
+        <a class="go" href="#stop-replydesk"><span class="ko">노선도에서 보기 ↓</span><span class="en">On the map ↓</span></a>
+      </article>
+      <article class="story-card" style="--s:var(--u)">
+        <span class="no">03 · 2026-09</span>
+        <h3><span class="ko">강의 슬라이드 속 틀린 분자</span><span class="en">Wrong molecules on lecture slides</span></h3>
+        <dl>
+          <dt><span class="ko">문제</span><span class="en">Problem</span></dt><dd><span class="ko">교수님이 AI로 만든 PPT로 강의하시다가 화학 분자 구조 상당수가 틀린 것을 발견하고, 검수하지 않았다고 조교님들을 꾸짖으신 적이 있습니다. AI로 생성한 분자 구조는 틀리는 빈도가 높아 검증이 필요하다고 봤습니다.</span><span class="en">A professor once lectured from AI-made slides, found that many of the chemical structures were wrong, and scolded the teaching assistants for not checking them. AI-drawn structures are wrong often, so I saw a real need to verify them.</span></dd>
+          <dt><span class="ko">방법</span><span class="en">How</span></dt><dd><span class="ko">Cursor AI 창업 캠프 999에 참여해, KTX로 이동하면서 모바일 환경에서 Cursor와 Claude Code로 chemcheck를 만들었습니다. 검증에는 LLM을 쓰지 않았습니다. 구조 인식기 두 종(MolScribe·DECIMER)으로 그림을 읽어 각각 InChIKey로 바꾼 뒤 문자열로 비교합니다.</span><span class="en">At Cursor's AI startup camp 999 I built chemcheck on my phone with Cursor and Claude Code while travelling by KTX. The check uses no LLM: two structure recognizers (MolScribe and DECIMER) read the drawing, each result becomes an InChIKey, and the strings are compared.</span></dd>
+          <dt><span class="ko">결과</span><span class="en">Result</span></dt><dd><span class="ko">미리 적어 둔 성공 기준으로 합성 렌더 50장을 검사: 정확도 90%(45/50), 물러남 10%(5/50), 자신 있게 틀림 0건 · <a href="https://github.com/Sweet-Butters/train" target="_blank" rel="noopener">github.com/Sweet-Butters/train</a></span><span class="en">Against success criteria written down in advance, on 50 synthetic renders: 90% correct (45/50), 10% declined (5/50), 0 confidently wrong · <a href="https://github.com/Sweet-Butters/train" target="_blank" rel="noopener">github.com/Sweet-Butters/train</a></span></dd>
+          <dt><span class="ko">느낀 점</span><span class="en">Takeaway</span></dt><dd class="felt"><span class="ko">맞힐 수 없는 그림을 억지로 판정하지 않는 것이 이 도구에서 가장 중요했습니다.</span><span class="en">The most important thing in this tool was not forcing a verdict on a drawing it couldn't read.</span></dd>
+        </dl>
+        <a class="go" href="#stop-cursor"><span class="ko">노선도에서 보기 ↓</span><span class="en">On the map ↓</span></a>
+      </article>
+      <article class="story-card" style="--s:var(--d)">
+        <span class="no">04 · 2026-09</span>
+        <h3><span class="ko">학교 밖 청소년의 진로</span><span class="en">Career paths for out-of-school youth</span></h3>
+        <dl>
+          <dt><span class="ko">문제</span><span class="en">Problem</span></dt><dd><span class="ko">어렸을 때부터 과학도의 길을 걸어왔지만 진로에 확신이 없었습니다. 작년 고1 학업중단자가 1만 명이 넘었다는 뉴스와, 학업을 그만둔 청소년의 가장 큰 어려움이 진로 찾기라는 통계를 보고 이 문제에 도움을 주고 싶었습니다.</span><span class="en">I have been on a science track since childhood and still wasn't sure of my path. Reading that more than 10,000 first-year high-school students left school last year, and that finding a career path is the biggest difficulty for young people who leave school, I wanted to help.</span></dd>
+          <dt><span class="ko">방법</span><span class="en">How</span></dt><dd><span class="ko">Claude Code로 만든 사이트가 큐넷 기능사, 한국장학재단, 청소년활동 인증 등 출처 14곳을 매일 06:00에 모읍니다. "학교 밖 청소년도 신청할 수 있나" 같은 문제는 규칙이 먼저 판단하고 Jev가 두 번째 의견을 냅니다. 이용자는 희망하는 진로에 맞는 혜택과 도움이 되는 일정의 마일스톤을 확인할 수 있습니다.</span><span class="en">The site, built with Claude Code, collects from 14 sources such as national skills exams (Q-Net), the Korea Student Aid Foundation and certified youth activities every day at 06:00. Questions like "can out-of-school youth apply?" are decided by rules first, with Jev as a second opinion. Users see the benefits and the milestones that fit the career they want.</span></dd>
+          <dt><span class="ko">결과</span><span class="en">Result</span></dt><dd><span class="ko">약 8,200개 수집 (2026-09-28 기준 8,225개: 장학금 2,503 · 봉사·체험 3,765 · 공모전 1,702). 10월 꿈드림 봉사에서 학생 5~10명이 직접 써 보게 할 예정 · <a href="https://sweet-butters.github.io/youth-benefit-finder/" target="_blank" rel="noopener">사이트 보기</a></span><span class="en">About 8,200 items collected (8,225 on 2026-09-28: 2,503 scholarships, 3,765 volunteering and activities, 1,702 contests). 5–10 students will try it themselves at a Kkumdream volunteer session in October · <a href="https://sweet-butters.github.io/youth-benefit-finder/" target="_blank" rel="noopener">Visit the site</a></span></dd>
+          <dt><span class="ko">느낀 점</span><span class="en">Takeaway</span></dt><dd class="felt"><span class="ko">정보를 많이 모으는 일만큼, 실제로 신청할 수 있는 정보인지 확인하는 일이 중요했습니다.</span><span class="en">Checking that information is something a person can actually apply for mattered as much as collecting a lot of it.</span></dd>
+        </dl>
+        <a class="go" href="#stop-youth"><span class="ko">노선도에서 보기 ↓</span><span class="en">On the map ↓</span></a>
+      </article>
+    </div>
+  </section>
+
   <div class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 
   <section class="ride" id="ride">
@@ -299,6 +367,12 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
   };
   // Stops in ride order. Only things that are true today. `photo` = a file in /work/img (real screenshots so far).
   const STOPS = () => [
+    { s: "c", id: "mail", tags: ["c", "d"], short: { en: "Mail alerts (first project)", ko: "메일 알림 (첫 프로젝트)" },
+      title: { en: "Mail alerts: only the email that matters, on Telegram", ko: "메일 알림: 중요한 메일만 텔레그램으로" },
+      when: { en: "2026-05 · running since", ko: "2026-05 · 지금까지 운영 중" },
+      text: { en: "Gmail → an AI (Gemini) sorts new mail into interview, acceptance, key sender or unrelated → only the important ones reach Telegram. Runs every 10 minutes on GitHub Actions at $0 a month; key senders can be added from Telegram with /add.",
+        ko: "Gmail의 새 메일을 AI(Gemini)가 면접·합격 여부·중요 인물·무관 넷으로 나누고, 중요한 것만 텔레그램으로 보내요. GitHub Actions가 10분마다 돌리고 비용은 월 0원이에요. 중요한 발신자는 텔레그램에서 /add로 바로 추가해요." },
+      link: ["https://github.com/Sweet-Butters/mail-notifier", { en: "See the code", ko: "코드 보기" }] },
     { s: "c", id: "radar", big: true, on: true, tags: ["c", "d"],
       short: { en: "AI Contest Radar", ko: "AI 공모전 레이더" }, title: { en: "AI Contest Radar", ko: "AI 공모전 레이더" },
       when: { en: "2026 · running daily", ko: "2026 · 매일 운영 중" },
@@ -323,16 +397,19 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       short: { en: "Youth Benefit Finder", ko: "청소년 혜택 찾기" }, title: { en: "Youth Benefit Finder", ko: "청소년 혜택 찾기" },
       when: { en: "2026 · in progress", ko: "2026 · 진행 중" },
       text: { en: "A service that gathers the public and private benefits young people can get, matched to their career goals. It reuses the radar's AI judge.", ko: "진로 목표에 맞춰 청소년이 받을 수 있는 공공·민간 혜택을 모아 보여 주는 서비스예요. 레이더의 AI 판정기를 가져와 재사용했어요." },
-      list: { en: ["Collects from 5 official sources: national exam schedules (Q-Net), student scholarships, certified youth activities and youth volunteering",
-        "Collects daily at 06:00; after seeing where the AI was wrong, I changed the design to treat its stage guess as a hint only"],
-        ko: ["공식 출처 5곳 수집: 큐넷 시험 일정, 장학재단 장학금, 청소년활동 인증·신고, 청소년 자원봉사", "매일 06:00 자동 수집, AI가 틀린 사례를 보고 \"단계 판단은 힌트로만\" 쓰도록 설계를 고침"] },
-      photo: ["/work/img/youth.jpg", { en: "Repository: 78 commits, daily automatic collection (2026-09-27)", ko: "저장소 화면: 커밋 78개, 매일 자동 수집 (2026-09-27)" }],
-      link: ["https://github.com/Sweet-Butters/youth-benefit-finder", { en: "See the code", ko: "코드 보기" }] },
+      list: { en: ["Collects from 14 sources every day at 06:00, including Q-Net skills exams, the Korea Student Aid Foundation and certified youth activities",
+        "\"Can out-of-school youth apply?\" is decided by rules first, with Jev as a second opinion; after seeing where the AI was wrong, its stage guess is a hint only",
+        "October 2026: 5–10 students will try it themselves at a Kkumdream volunteer session"],
+        ko: ["큐넷 기능사, 한국장학재단, 청소년활동 인증 등 출처 14곳을 매일 06:00에 수집", "\"학교 밖 청소년도 신청할 수 있나\"는 규칙이 먼저, Jev가 두 번째 의견. AI가 틀린 사례를 보고 단계 판단은 힌트로만 쓰도록 고침",
+        "2026년 10월 꿈드림 봉사에서 학생 5~10명이 직접 써 볼 예정"] },
+      photo: ["/work/img/youth-site.jpg", { en: "The live site (in Korean): career paths as subway maps, and benefits open for application now", ko: "실제 사이트: 진로를 지하철 노선도로, 지금 신청할 수 있는 혜택" }],
+      nums: [["8,225", { en: "items collected (2026-09-28)", ko: "개 수집 (2026-09-28)" }], ["2,503", { en: "scholarships", ko: "장학금" }], ["14", { en: "sources", ko: "출처" }]],
+      link: ["https://sweet-butters.github.io/youth-benefit-finder/", { en: "Visit the site", ko: "사이트 보기" }] },
     { s: "c", id: "replydesk", big: true, tags: ["c", "d"], short: { en: "replydesk", ko: "replydesk" },
       title: { en: "replydesk: judge the email before writing the reply", ko: "replydesk: 답장을 쓰기 전에 메일부터 판단한다" },
       when: { en: "2026-09 · measured on real inboxes", ko: "2026-09 · 실제 메일함에서 측정" },
-      text: { en: "Instead of handing the thread to an LLM, it first asks Jev eight questions: is a reply needed, is this handled by a form or link rather than a reply, what do they want, how urgent, how annoyed, can it be answered now, should a person write it, did we promise something. Then an LLM writes three drafts, Jev checks each for facts not in the thread, and ranks the rest. A person sends.",
-        ko: "메일 스레드를 바로 LLM에 넘기지 않고, Jev에게 여덟 가지를 먼저 물어요: 답장이 필요한가, 답장 말고 폼·링크에서 처리하는 건인가, 무엇을 원하나, 얼마나 급한가, 얼마나 화가 났나, 지금 답할 수 있나, 사람이 써야 하나, 약속한 것이 있나. 그다음 LLM이 초안 3개를 쓰고, Jev가 대화에 없는 사실을 단정한 초안을 걸러 낸 뒤 순위를 매겨요. 보내는 건 사람이에요." },
+      text: { en: "Instead of handing the thread to an LLM, it first asks Jev eight questions: is a reply needed, is this handled by a form or link rather than a reply, what do they want, how urgent, how annoyed, can it be answered now, should a person write it, did we promise something. Then Gemini writes three drafts, Jev checks each for facts not in the thread, and ranks the rest. A person sends. Code by Claude Code and Codex.",
+        ko: "메일 스레드를 바로 LLM에 넘기지 않고, Jev에게 여덟 가지를 먼저 물어요: 답장이 필요한가, 답장 말고 폼·링크에서 처리하는 건인가, 무엇을 원하나, 얼마나 급한가, 얼마나 화가 났나, 지금 답할 수 있나, 사람이 써야 하나, 약속한 것이 있나. 그다음 Gemini가 초안 3개를 쓰고, Jev가 대화에 없는 사실을 단정한 초안을 걸러 낸 뒤 순위를 매겨요. 보내는 건 사람이에요. 코드는 Claude Code와 Codex로 썼어요." },
       photo: ["/work/img/replydesk.jpg", { en: "Triage on the sample inbox from the README: the refund demand goes to \"a person writes this\"", ko: "README의 샘플 받은편지함 판단 결과: 환불 요구는 \"사람이 직접\"으로" }],
       mine: { en: [
         "Hallucination was not fixed by the prompt: even with a stricter rule, 2 of 3 drafts claimed \"I've already signed up\". The fix was structural: Jev checks every draft for facts not in the thread and drops it before a person sees it",
@@ -411,11 +488,11 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         ["258 + 36", { en: "round 2 tests passing (JVM + on-device)", ko: "2차 테스트 통과 (JVM + 기기)" }],
         [{ en: "1 of 21", ko: "21명 중 1명" }, { en: "finalists", ko: "본선 진출" }]],
       link: [{ en: "/scpc/", ko: "/ko/scpc/" }, { en: "Read the full record", ko: "전체 기록 읽기" }] },
-    { s: "u", id: "cursor", big: true, tags: ["u", "d"], short: { en: "Cursor Hackathon: chemcheck", ko: "Cursor 해커톤: chemcheck" },
+    { s: "u", id: "cursor", big: true, tags: ["u", "d"], short: { en: "Cursor camp 999: chemcheck", ko: "Cursor 캠프 999: chemcheck" },
       title: { en: "chemcheck: is the molecule the AI drew really that molecule?", ko: "chemcheck: AI가 그린 분자, 정말 그 분자일까" },
-      when: { en: "2026-09 · Cursor Hackathon", ko: "2026-09 · Cursor 해커톤 참가" },
-      text: { en: "At a Cursor hackathon I built a tool that checks whether a chemical structure drawn by ChatGPT or Gemini is really the molecule it's named as, and shows where it differs. I started it on a KTX train with Cursor on my phone.",
-        ko: "Cursor 해커톤에서, ChatGPT나 Gemini가 그린 화학 구조가 정말 그 이름의 분자인지 검사하고 어디가 다른지 보여 주는 도구를 만들었어요. KTX 안에서 휴대폰의 Cursor로 시작했어요." },
+      when: { en: "2026-09 · Cursor AI startup camp 999", ko: "2026-09 · Cursor AI 창업 캠프 999 참여" },
+      text: { en: "At Cursor's AI startup camp 999 I built a tool that checks whether a chemical structure drawn by ChatGPT or Gemini is really the molecule it's named as, and shows where it differs. I started it on a KTX train with Cursor on my phone.",
+        ko: "Cursor AI 창업 캠프 999에서, ChatGPT나 Gemini가 그린 화학 구조가 정말 그 이름의 분자인지 검사하고 어디가 다른지 보여 주는 도구를 만들었어요. KTX 안에서 휴대폰의 Cursor로 시작했어요." },
       photo: ["/work/img/chemcheck.jpg", { en: "The live site: Gemini's drawing of caffeine is flagged as a different molecule, with one carbon too many", ko: "실제 사이트: Gemini가 그린 카페인을 \"다름\"으로 판정 (탄소 하나 많음)" }],
       mine: { en: [
         "Kept LLMs out of the verdict: a model that can't read structures can't check them either. The name (via PubChem) and the drawing (via structure recognition) both become InChIKeys and are compared as plain strings",
@@ -427,7 +504,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         "\"맞는 걸 틀렸다고 하지 않기\"를 최우선으로 둠: 확신이 없으면 추측하지 않고 \"판정 불가\"로 물러남",
         "숫자를 보기 전에 성공 기준부터 적어 둠",
         "서로의 약점을 메우는 구조 인식기 두 개를, 라이브러리가 충돌해 별도 프로세스로 나눠 돌림"] },
-      nums: [["6 / 10", { en: "AI drawings it could judge that were a different molecule (Gemini and GPT)", ko: "판정한 AI 그림 중 다른 분자였던 것 (Gemini·GPT)" }],
+      nums: [["45 / 50", { en: "correct on 50 synthetic renders (5 declined, 0 confidently wrong)", ko: "합성 렌더 50장 중 정확 (물러남 5, 자신 있게 틀림 0)" }],
+        ["6 / 10", { en: "AI drawings it could judge that were a different molecule (Gemini and GPT)", ko: "판정한 AI 그림 중 다른 분자였던 것 (Gemini·GPT)" }],
         ["0 / 50", { en: "confidently wrong, on 50 test images", ko: "시험 이미지 50장 중 자신 있게 틀림" }], ["204", { en: "commits", ko: "커밋" }]],
       link: [CHEM, { en: "Try it", ko: "직접 해 보기" }] },
     { s: "u", id: "jevchat", big: true, tags: ["u"], short: { en: "Open source: jev-chat-windows", ko: "오픈소스 기여: jev-chat-windows" },
@@ -452,8 +530,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       when: { en: "starts 2026-11", ko: "2026.11 시작 예정" },
       text: { en: "From November 2026 I start teaching AI to primary, middle and high school students.", ko: "2026년 11월부터 초·중·고 학생 대상 AI 강의를 시작해요." } },
     { s: "u", id: "youthclass", soon: true, tags: ["u", "d"], short: { en: "Out-of-school youth", ko: "학교 밖 청소년 교육" }, title: { en: "AI classes for out-of-school youth", ko: "학교 밖 청소년 AI 교육 봉사" },
-      when: { en: "planned", ko: "예정" },
-      text: { en: "I'm preparing to volunteer, teaching AI to young people who have left school.", ko: "학교를 떠난 청소년에게 AI 쓰는 법을 가르치는 봉사를 준비하고 있어요." } },
+      when: { en: "2026-10 · planned", ko: "2026-10 · 예정" },
+      text: { en: "At a Kkumdream (out-of-school youth support centre) volunteer session in October, 5–10 students will use the Youth Benefit Finder themselves.", ko: "10월 꿈드림 봉사에서 학생 5~10명이 청소년 혜택 찾기 사이트를 직접 써 보게 할 예정이에요." } },
 
     { s: "d", id: "d-radar", big: true, tags: ["c", "d"], short: { en: "Hunting for contests", ko: "공모전 찾는 수고" }, title: { en: "Hunting for contests", ko: "공모전 찾는 수고" },
       before: { en: "To find AI contests, you had to go through contest sites one by one, every day", ko: "AI 대회를 찾으려고 여러 공모전 사이트를 매일 하나씩 돌아다녀야 했음" },
