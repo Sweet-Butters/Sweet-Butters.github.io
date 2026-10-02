@@ -1,0 +1,431 @@
+<!doctype html>
+<!-- GENERATED from trippups/index.html by tools/make_ko.py. Edit that file, not this one. -->
+<html lang="ko" data-default-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- head:start (generated Korean head) -->
+<title>사람일까, 봇일까 · TripPups 트래픽 · 정회광</title>
+<meta name="description" content="제 창업 사이트에 18일 동안 들어온 트래픽을 사람과 봇으로 나누고, 그 결과로 바뀐 계획을 정리한 기록.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="내 창업 사이트에 온 건 사람일까, 봇일까">
+<meta property="og:description" content="요청 19,813건, 페이지 조회의 93%는 자바스크립트를 실행하지 않았고 38%는 비밀 파일을 찾는 스캐너였어요. 출시 뒤 사람은 하루 5명 안팎.">
+<meta property="og:url" content="https://sweet-butters.github.io/ko/trippups/">
+<meta property="og:image" content="https://sweet-butters.github.io/work/img/radar.jpg">
+<meta property="og:locale" content="ko_KR">
+<link rel="canonical" href="https://sweet-butters.github.io/ko/trippups/">
+<link rel="alternate" hreflang="en" href="https://sweet-butters.github.io/trippups/">
+<link rel="alternate" hreflang="ko" href="https://sweet-butters.github.io/ko/trippups/">
+<!-- head:end -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231b1f2a'/><circle cx='16' cy='16' r='9' fill='white' stroke='%232456c9' stroke-width='4'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Sans+SC:wght@400;700;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Same route-map look as the home page and /jev/. */
+:root {
+  --ink: #1b1f2a; --ink-2: #4a5061; --paper: #f2efe8; --board: #fbfaf6; --rule: #d9d4c8; --mark: #f3e3a8; --led: #ffc94a;
+  --teach: #1f8a4c; --make: #2456c9; --gather: #c8356e; --c: var(--make);
+  --display: "Black Han Sans", "IBM Plex Sans KR", sans-serif;
+  --ui: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+/* Black Han Sans has no Chinese glyphs, so Chinese uses Noto Sans SC at its heaviest for headings. */
+[lang|="zh"] { --display: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif; --ui: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; }
+[lang|="zh"] h1, [lang|="zh"] h2, [lang|="zh"] .sb.cur b, [lang|="zh"] .stats b { font-weight: 900; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16.5px/1.75 var(--ui); word-break: keep-all; overflow-wrap: anywhere; }
+[lang="en"] body, [lang|="zh"] body { word-break: normal; }
+[lang="en"] .ko, [lang="en"] .zh, [lang="ko"] .en, [lang="ko"] .zh, [lang|="zh"] .en, [lang|="zh"] .ko { display: none; }
+a { color: inherit; text-underline-offset: 3px; }
+a:hover { color: var(--make); }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 16px; }
+.stripe { display: flex; height: 6px; }
+.stripe span { flex: 1; }
+.stripe span:nth-child(1) { background: var(--teach); } .stripe span:nth-child(2) { background: var(--make); } .stripe span:nth-child(3) { background: var(--gather); }
+
+.topbar { background: var(--ink); color: #fff; }
+.topbar .wrap { max-width: 1180px; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; }
+.topbar .name { font: 400 20px/1 "Black Han Sans", "IBM Plex Sans KR", sans-serif; text-decoration: none; color: #fff; }
+.lang { display: inline-flex; }
+.lang a { min-height: 34px; display: inline-flex; align-items: center; padding: 0 12px; border: 1.5px solid rgba(255,255,255,.7); color: #fff; font-size: 13.5px; font-weight: 600; text-decoration: none; }
+.lang a + a { border-left: 0; }
+.lang a[aria-current="true"] { background: #fff; color: var(--ink); }
+
+/* the station sign at the top of the page */
+.sign { margin-top: 40px; background: #fff; border: 2px solid var(--ink); }
+.sign-board { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 8px solid var(--c); }
+.sb { padding: 6px 12px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.sb.cur { grid-column: 1 / -1; background: var(--c); color: #fff; text-align: center; padding: 12px; }
+.sb.cur small { font: 600 13px var(--ui); opacity: .9; }
+.sb.cur b { font: 400 30px/1.2 var(--display); }
+.sb.next { text-align: right; align-items: flex-end; }
+.sb .dir { font-size: 12.5px; color: var(--ink-2); }
+.sb a, .sb .none { min-height: 40px; display: inline-flex; align-items: center; font-weight: 600; font-size: 15px; }
+.sb .none { color: var(--ink-2); font-weight: 400; }
+
+header { padding: 36px 0 0; }
+.eyebrow { margin: 0; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+h1 { margin: 8px 0 0; font: 400 clamp(32px, 5.4vw, 52px)/1.2 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.lead { margin: 18px 0 0; font-size: 18px; max-width: 38em; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: 16px; font-size: 15px; font-weight: 600; }
+.links a::after { content: " ↗"; }
+
+.stats { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.stats li { background: #fff; border: 2px solid var(--ink); border-bottom: 6px solid var(--c); padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--ink-2); line-height: 1.4; }
+.stats b { font: 400 30px/1.1 var(--display); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* the article */
+h2 { margin: 64px 0 14px; font: 400 clamp(24px, 3.4vw, 32px)/1.25 var(--display); display: flex; align-items: center; gap: 12px; }
+h2::before { content: ""; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 4px solid var(--c); }
+h3 { font-size: 17px; font-weight: 700; margin: 0; }
+p { margin: 12px 0; }
+ul, ol { padding-left: 22px; margin: 12px 0; }
+li { margin: 4px 0; }
+code { font-family: var(--mono); font-size: .86em; background: var(--mark); padding: 0 4px; }
+.table { overflow-x: auto; margin: 18px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; background: #fff; border: 2px solid var(--ink); }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { background: var(--ink); color: #fff; font-weight: 600; font-size: 13.5px; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.box { background: #fff; border: 2px solid var(--ink); border-bottom: 6px solid var(--c); padding: 14px 18px; margin: 14px 0; }
+.box p { margin: 4px 0 0; color: var(--ink-2); }
+.note { color: var(--ink-2); font-size: 14.5px; }
+
+/* progress log drawn as a short route */
+.timeline { list-style: none; padding: 0; margin: 18px 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 9px; top: 12px; bottom: 12px; width: 6px; border-radius: 3px; background: var(--c); }
+.timeline li { position: relative; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 8px 0 8px 40px; margin: 0; }
+.timeline li::before { content: ""; position: absolute; left: 3px; top: 13px; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3.5px solid var(--c); }
+.timeline time { color: var(--ink-2); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+footer { margin-top: 72px; border-top: 2px solid var(--ink); padding: 20px 0 48px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 14px; color: var(--ink-2); }
+footer a { font-weight: 700; color: var(--ink); }
+
+.lang a, .topbar .name { white-space: nowrap; }
+@media (max-width: 640px) {
+  .topbar .name { font-size: 17px; }
+  .lang a { padding: 0 9px; font-size: 13px; }
+  .stats { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .sb.cur b { font-size: 24px; }
+}
+figure { margin: 18px 0; }
+.chart { width: 100%; height: auto; display: block; background: #fff; border: 2px solid var(--ink); }
+.chart .grid { stroke: var(--rule); stroke-width: 1; }
+.chart .ax { font: 500 11px var(--mono); fill: var(--ink-2); }
+.chart .bar.off { opacity: .35; }
+figcaption { margin-top: 6px; }
+ol.ko, ol.en, ol.zh { padding-left: 22px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="name" href="/"><span class="en">Hoekwang Chung</span><span class="ko">정회광</span><span class="zh">Hoekwang Chung</span></a>
+    <span class="lang"><a href="/trippups/" data-lang="en">EN</a><a href="/ko/trippups/" data-lang="ko">한국어</a><a href="/trippups/?lang=zh" data-lang="zh">中文</a></span>
+  </div>
+  <div class="stripe" aria-hidden="true"><span></span><span></span><span></span></div>
+</header>
+
+<main class="wrap">
+  <nav class="sign" aria-label="Station">
+    <div class="sign-board">
+      <div class="sb cur"><small><span class="ko">읽는 선 · 트래픽 기록</span><span class="en">Reading Line · traffic notes</span><span class="zh">阅读线 · 流量记录</span></small><b><span class="ko">사람일까, 봇일까</span><span class="en">People or bots?</span><span class="zh">是人还是机器人？</span></b></div>
+      <div class="sb prev"><span class="dir"><span class="ko">이전 역</span><span class="en">Previous</span><span class="zh">上一站</span></span><a href="/work/#stop-trippups" data-ko-href="/ko/work/#stop-trippups"><span class="ko">노선도</span><span class="en">Route map</span><span class="zh">线路图</span></a></div>
+      <div class="sb next"><span class="dir"><span class="ko">다음 역</span><span class="en">Next</span><span class="zh">下一站</span></span><span class="none"><span class="ko">종착역</span><span class="en">End of the line</span><span class="zh">终点站</span></span></div>
+    </div>
+  </nav>
+
+  <header>
+    <p class="eyebrow"><span class="ko">TripPups · 공개 후 18일 트래픽 분석 · 2026년 10월</span><span class="en">TripPups · traffic in the first 18 days · October 2026</span><span class="zh">TripPups · 上线后 18 天的流量分析 · 2026年10月</span></p>
+    <h1 class="ko">내 창업 사이트에 온 건<br>사람일까, 봇일까</h1>
+    <h1 class="en">Who actually visited my startup's site: people or bots?</h1>
+    <h1 class="zh">访问我创业网站的，<br>是人还是机器人？</h1>
+    <p class="lead ko">한국에 온 외국인 자유여행객이 계획이 틀어졌을 때 지금 있는 곳에서 갈 곳을 추천하는 앱, <b>TripPups</b>를 9월 15일 <code>trip-pups.com</code>에 공개했습니다. Cloudflare 대시보드는 "방문 1.7k"를 보여 줬지만, 다음 계획을 세우려면 <b>그중 사람이 몇인지</b> 알아야 했습니다. 18일 치 기록을 사람과 봇으로 나눠 봤습니다.</p>
+    <p class="lead en">On 15 September I put <b>TripPups</b> live at <code>trip-pups.com</code>: an app that tells foreign travellers in Korea where to go from where they are when their plan falls apart. The Cloudflare dashboard said "1.7k visits", but to plan what comes next I needed to know <b>how many of those were people</b>. I split 18 days of records into people and bots.</p>
+    <p class="lead zh">9 月 15 日，我把 <b>TripPups</b> 上线到 <code>trip-pups.com</code>：一个在外国自由行游客行程被打乱时，从他们所在的地方推荐去处的应用。Cloudflare 后台显示“访问 1.7k”，但要规划下一步，我得知道<b>其中有多少是真人</b>。于是我把 18 天的记录拆成了人和机器人两部分。</p>
+    <nav class="links">
+      <a href="https://trip-pups.com"><span class="ko">서비스 보기</span><span class="en">See the service</span><span class="zh">查看服务</span></a>
+    </nav>
+  </header>
+
+  <ul class="stats" aria-label="summary">
+    <li><b>19,813</b><span><span class="ko">18일 동안의 전체 요청</span><span class="en">requests in 18 days, everything included</span><span class="zh">18 天内的全部请求</span></span></li>
+    <li><b>93%</b><span><span class="ko">자바스크립트를 실행하지 않은 페이지 조회 (사람이 아님)</span><span class="en">of page views never ran JavaScript (not people)</span><span class="zh">的页面浏览从未执行 JavaScript（不是人）</span></span></li>
+    <li><b>38%</b><span><span class="ko">비밀 파일·관리자 페이지를 찾는 스캐너 요청</span><span class="en">of requests were scanners hunting for secrets and admin pages</span><span class="zh">的请求是寻找密钥文件和后台的扫描器</span></span></li>
+    <li><b>0.40s</b><span><span class="ko">사람에게 첫 화면이 뜨는 시간 (중간값)</span><span class="en">median page load for people</span><span class="zh">真人打开首页的耗时（中位数）</span></span></li>
+  </ul>
+
+  <h2 class="ko">대시보드 숫자를 그대로 믿을 수 없었던 이유</h2>
+  <h2 class="en">Why I couldn't take the dashboard at its word</h2>
+  <h2 class="zh">为什么不能直接相信后台的数字</h2>
+  <div class="ko">
+    <p>대시보드의 국가별 지도에서 러시아가 2위(880건)였습니다. 러시아어 화면도, 러시아 사용자도 없는 앱인데요. 경로를 열어 보니 <b>880건 중 873건이 <code>/wp-admin/install.php</code> 하나</b>였습니다. 워드프레스 설치 페이지를 찾아다니는 자동 스캐너였습니다. 우리 사이트는 워드프레스가 아닙니다.</p>
+    <p>"Visits 1.7k"도 사람 수가 아니었습니다. 다른 곳에서 넘어온 페이지 요청을 센 값이라 봇이 그대로 들어갑니다. 이 숫자로 "사람들이 우리 앱을 찾는다"고 판단하면 계획이 처음부터 틀어집니다.</p>
+  </div>
+  <div class="en">
+    <p>On the dashboard's country map, Russia came second with 880 requests, for an app with no Russian screens and no Russian users. Opening the paths showed that <b>873 of those 880 were a single URL, <code>/wp-admin/install.php</code></b>: an automated scanner looking for WordPress installers. My site is not WordPress.</p>
+    <p>"Visits 1.7k" wasn't a head count either. It counts page requests that arrive from somewhere else, so bots go straight in. Plan from that number, and the plan is wrong from the first step.</p>
+  </div>
+  <div class="zh">
+    <p>后台的国家地图上，俄罗斯排第二（880 次）。可这个应用既没有俄语界面，也没有俄罗斯用户。打开路径一看，<b>880 次里有 873 次都是同一个地址 <code>/wp-admin/install.php</code></b>：到处寻找 WordPress 安装页的自动扫描器。我的网站并不是 WordPress。</p>
+    <p>“Visits 1.7k”也不是人数。它统计的是从别处跳转来的页面请求，机器人照样算进去。如果据此判断“有人在找我们的应用”，计划从第一步就错了。</p>
+  </div>
+
+  <h2 class="ko">어떻게 나눴나</h2>
+  <h2 class="en">How I separated them</h2>
+  <h2 class="zh">怎么区分的</h2>
+  <p class="ko">읽기 전용 API 토큰으로 Cloudflare GraphQL Analytics API를 조회했습니다. 성격이 다른 기록 네 가지를 서로 맞대어 봤습니다.</p>
+  <p class="en">I queried the Cloudflare GraphQL Analytics API with a read-only token and played four different kinds of record against each other.</p>
+  <p class="zh">我用只读 API 令牌查询 Cloudflare GraphQL Analytics API，把四种性质不同的记录相互对照。</p>
+  <div class="table">
+  <table>
+    <thead><tr>
+      <th><span class="ko">기록</span><span class="en">Record</span><span class="zh">记录</span></th>
+      <th><span class="ko">잡는 것</span><span class="en">What it catches</span><span class="zh">能抓到什么</span></th>
+      <th><span class="ko">한계</span><span class="en">Catch</span><span class="zh">局限</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="ko">전체 요청</span><span class="en">All requests</span><span class="zh">全部请求</span></td><td><span class="ko">경로·국가·브라우저 이름, 빠짐없이</span><span class="en">Path, country, browser name, every one</span><span class="zh">路径、国家、浏览器名称，一条不漏</span></td><td><span class="ko">봇이 섞임. 브라우저 이름은 꾸밀 수 있음</span><span class="en">Bots mixed in; browser names can be faked</span><span class="zh">混有机器人；浏览器名称可以伪装</span></td></tr>
+      <tr><td><span class="ko">Web Analytics</span><span class="en">Web Analytics</span><span class="zh">Web Analytics</span></td><td><span class="ko">자바스크립트를 실제로 실행한 브라우저</span><span class="en">Browsers that actually ran JavaScript</span><span class="zh">真正执行了 JavaScript 的浏览器</span></td><td><span class="ko">약 1/10 표본이라 10 단위로 움직임. 첫 로드만 잡힘</span><span class="en">About a 1-in-10 sample, so it moves in tens; first load only</span><span class="zh">约 1/10 抽样，数字以 10 为单位；只记首次加载</span></td></tr>
+      <tr><td><span class="ko">기능 코드 파일</span><span class="en">Feature code files</span><span class="zh">功能代码文件</span></td><td><span class="ko">지도·추천 같은 기능을 열 때만 받는 코드</span><span class="en">Code fetched only when a feature such as the map opens</span><span class="zh">只有打开地图、推荐等功能时才下载的代码</span></td><td><span class="ko">브라우저 캐시 때문에 기기당·배포본당 한 번만 잡힘</span><span class="en">Cached, so roughly once per device per release</span><span class="zh">有浏览器缓存，每台设备每个版本大约只记一次</span></td></tr>
+      <tr><td><span class="ko">Worker 실행</span><span class="en">Worker runs</span><span class="zh">Worker 执行</span></td><td><span class="ko"><code>/api/*</code> 호출</span><span class="en"><code>/api/*</code> calls</span><span class="zh"><code>/api/*</code> 调用</span></td><td><span class="ko">페이지는 정적 파일이라 방문과 무관</span><span class="en">Pages are static files, so this says nothing about visits</span><span class="zh">页面是静态文件，与访问量无关</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="ko">그리고 <b>우리 자신을 뺐습니다.</b> 배포를 확인하는 <code>curl</code>과 자동 화면 검사(ChromeHeadless)가 사람 쪽 숫자의 약 1/3을 차지하고 있었습니다.</p>
+  <p class="en">Then I <b>took myself out</b>. My own deploy checks (<code>curl</code>) and automated screen tests (ChromeHeadless) made up about a third of the "people" numbers.</p>
+  <p class="zh">然后<b>把我们自己剔除</b>。我自己用来确认部署的 <code>curl</code> 和自动化界面测试（ChromeHeadless），占了“真人”数字的约三分之一。</p>
+
+  <h2 class="ko">봇: 찾는 것은 비밀 파일</h2>
+  <h2 class="en">Bots: they came for secrets</h2>
+  <h2 class="zh">机器人：它们在找密钥文件</h2>
+  <figure>
+<svg viewBox="0 0 760 220" role="img" class="chart">
+<line x1="44" x2="752" y1="192.0" y2="192.0" class="grid"/><text x="38" y="196.0" class="ax" text-anchor="end">0</text>
+<line x1="44" x2="752" y1="103.0" y2="103.0" class="grid"/><text x="38" y="107.0" class="ax" text-anchor="end">2,500</text>
+<line x1="44" x2="752" y1="14.0" y2="14.0" class="grid"/><text x="38" y="18.0" class="ax" text-anchor="end">5,000</text>
+<rect x="46.0" y="100.5" width="35.3" height="91.5" class="bar" style="fill:var(--ink-2)"><title>2026-09-15: 2,569</title></rect>
+<text x="63.7" y="212" class="ax" text-anchor="middle">09/15</text>
+<rect x="85.3" y="14.0" width="35.3" height="178.0" class="bar" style="fill:var(--ink-2)"><title>2026-09-16: 5,000</title></rect>
+<rect x="124.7" y="138.4" width="35.3" height="53.6" class="bar" style="fill:var(--ink-2)"><title>2026-09-17: 1,506</title></rect>
+<rect x="164.0" y="101.5" width="35.3" height="90.5" class="bar" style="fill:var(--ink-2)"><title>2026-09-18: 2,541</title></rect>
+<text x="181.7" y="212" class="ax" text-anchor="middle">09/18</text>
+<rect x="203.3" y="161.8" width="35.3" height="30.2" class="bar" style="fill:var(--ink-2)"><title>2026-09-19: 848</title></rect>
+<rect x="242.7" y="150.3" width="35.3" height="41.7" class="bar" style="fill:var(--ink-2)"><title>2026-09-20: 1,170</title></rect>
+<rect x="282.0" y="162.8" width="35.3" height="29.2" class="bar" style="fill:var(--ink-2)"><title>2026-09-21: 819</title></rect>
+<text x="299.7" y="212" class="ax" text-anchor="middle">09/21</text>
+<rect x="321.3" y="142.7" width="35.3" height="49.3" class="bar" style="fill:var(--ink-2)"><title>2026-09-22: 1,384</title></rect>
+<rect x="360.7" y="171.2" width="35.3" height="20.8" class="bar" style="fill:var(--ink-2)"><title>2026-09-23: 583</title></rect>
+<rect x="400.0" y="180.5" width="35.3" height="11.5" class="bar" style="fill:var(--ink-2)"><title>2026-09-24: 322</title></rect>
+<text x="417.7" y="212" class="ax" text-anchor="middle">09/24</text>
+<rect x="439.3" y="176.9" width="35.3" height="15.1" class="bar" style="fill:var(--ink-2)"><title>2026-09-25: 424</title></rect>
+<rect x="478.7" y="177.0" width="35.3" height="15.0" class="bar" style="fill:var(--ink-2)"><title>2026-09-26: 420</title></rect>
+<rect x="518.0" y="181.1" width="35.3" height="10.9" class="bar" style="fill:var(--ink-2)"><title>2026-09-27: 306</title></rect>
+<text x="535.7" y="212" class="ax" text-anchor="middle">09/27</text>
+<rect x="557.3" y="169.4" width="35.3" height="22.6" class="bar" style="fill:var(--ink-2)"><title>2026-09-28: 635</title></rect>
+<rect x="596.7" y="158.0" width="35.3" height="34.0" class="bar" style="fill:var(--ink-2)"><title>2026-09-29: 954</title></rect>
+<rect x="636.0" y="188.0" width="35.3" height="4.0" class="bar off" style="fill:var(--ink-2)"><title>2026-09-30: 111</title></rect>
+<text x="653.7" y="212" class="ax" text-anchor="middle">09/30</text>
+<rect x="675.3" y="188.3" width="35.3" height="3.7" class="bar off" style="fill:var(--ink-2)"><title>2026-10-01: 103</title></rect>
+<rect x="714.7" y="187.8" width="35.3" height="4.2" class="bar off" style="fill:var(--ink-2)"><title>2026-10-02: 118</title></rect>
+</svg>
+    <figcaption class="note"><span class="ko">하루 전체 요청(봇 포함, UTC). 흐린 막대는 도메인 정지 기간입니다(아래 기록 참고).</span><span class="en">All requests per day, bots included (UTC). Faded bars: the domain was suspended (see the log below).</span><span class="zh">每天的全部请求（含机器人，UTC）。浅色柱为域名被暂停期间（见下方记录）。</span></figcaption>
+  </figure>
+  <div class="table">
+  <table>
+    <thead><tr><th><span class="ko">스캐너가 찾은 것</span><span class="en">What scanners asked for</span><span class="zh">扫描器在找什么</span></th><th class="num"><span class="ko">요청</span><span class="en">Requests</span><span class="zh">请求</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko"><code>.env</code> 파일 (API 키·비밀번호를 두는 곳)</span><span class="en"><code>.env</code> files (where API keys and passwords live)</span><span class="zh"><code>.env</code> 文件（存放 API 密钥和密码的地方）</span></td><td class="num">4,262</td></tr>
+      <tr><td><span class="ko">워드프레스 설치·관리 페이지</span><span class="en">WordPress install and admin pages</span><span class="zh">WordPress 安装和后台页面</span></td><td class="num">1,675</td></tr>
+      <tr><td><span class="ko">PHP 정보 페이지</span><span class="en">PHP info pages</span><span class="zh">PHP 信息页面</span></td><td class="num">843</td></tr>
+      <tr><td><span class="ko">설정·백업·관리자 경로</span><span class="en">Config, backup and admin paths</span><span class="zh">配置、备份和管理路径</span></td><td class="num">400</td></tr>
+      <tr><td><span class="ko"><code>.git</code> 저장소 기록</span><span class="en"><code>.git</code> repository data</span><span class="zh"><code>.git</code> 仓库数据</span></td><td class="num">302</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="ko">
+    <p>공개한 첫날부터 이런 요청이 왔습니다. 우리를 노린 게 아니라 인터넷에 열린 주소를 전부 훑는 것입니다. 실제로 새는 것이 있는지 직접 확인했습니다.</p>
+    <ul>
+      <li><code>/.env</code>, <code>/.git/config</code>를 직접 요청하면 앱 첫 화면만 돌아옵니다. 정적 사이트라 그런 파일이 배포물에 없습니다.</li>
+      <li>배포된 자바스크립트에서 키 형태의 문자열을 검색해 0건이었습니다. 원본 코드를 드러내는 소스맵도 없습니다.</li>
+      <li>AI 기능의 키는 서버(Worker) 비밀값에만 있고, 접근 코드·IP별 횟수 제한·지출 상한을 따로 걸어 두었습니다.</li>
+    </ul>
+    <p>막는 것보다 <b>배포물에 비밀이 없는지</b>가 먼저였습니다. 다음 단계는 이런 경로를 Cloudflare 규칙으로 아예 차단해, 통계와 서버 모두를 깨끗하게 만드는 것입니다.</p>
+  </div>
+  <div class="en">
+    <p>These arrived from the first day. Nobody was aiming at me; scanners sweep every address that is open to the internet. I checked whether anything was actually leaking.</p>
+    <ul>
+      <li>Requesting <code>/.env</code> or <code>/.git/config</code> returns only the app's first screen. It is a static site, so those files are not in the build.</li>
+      <li>A search of the deployed JavaScript for key-shaped strings found nothing, and no source maps expose the original code.</li>
+      <li>The AI feature's key lives only in the server (Worker) secrets, behind an access code, a per-IP limit and a spending cap.</li>
+    </ul>
+    <p>Making sure <b>the build holds no secrets</b> came before blocking anything. The next step is a Cloudflare rule that refuses these paths outright, which also cleans up the numbers.</p>
+  </div>
+  <div class="zh">
+    <p>从上线第一天起就有这样的请求。不是冲着我来的，扫描器会扫遍所有对外开放的地址。我亲自确认了是否真有泄露。</p>
+    <ul>
+      <li>直接请求 <code>/.env</code>、<code>/.git/config</code>，只会返回应用首页。这是静态网站，发布物里没有这些文件。</li>
+      <li>在已发布的 JavaScript 里搜索密钥格式的字符串，结果为 0；也没有暴露源码的 source map。</li>
+      <li>AI 功能的密钥只存在服务器（Worker）的机密变量里，另外设置了访问码、按 IP 的次数限制和支出上限。</li>
+    </ul>
+    <p>比起拦截，先确认<b>发布物里没有机密</b>。下一步是用 Cloudflare 规则直接拒绝这类路径，让统计和服务器都干净。</p>
+  </div>
+
+  <h2 class="ko">사람: 출시 이틀, 그리고 하루 몇 명</h2>
+  <h2 class="en">People: two launch days, then a handful a day</h2>
+  <h2 class="zh">真人：上线两天，之后每天寥寥几人</h2>
+  <figure>
+<svg viewBox="0 0 760 220" role="img" class="chart">
+<line x1="44" x2="752" y1="192.0" y2="192.0" class="grid"/><text x="38" y="196.0" class="ax" text-anchor="end">0</text>
+<line x1="44" x2="752" y1="103.0" y2="103.0" class="grid"/><text x="38" y="107.0" class="ax" text-anchor="end">50</text>
+<line x1="44" x2="752" y1="14.0" y2="14.0" class="grid"/><text x="38" y="18.0" class="ax" text-anchor="end">100</text>
+<rect x="46.0" y="167.1" width="35.3" height="24.9" class="bar" style="fill:var(--c)"><title>2026-09-15: 14</title></rect>
+<text x="63.7" y="212" class="ax" text-anchor="middle">09/15</text>
+<rect x="85.3" y="31.8" width="35.3" height="160.2" class="bar" style="fill:var(--c)"><title>2026-09-16: 90</title></rect>
+<rect x="124.7" y="167.1" width="35.3" height="24.9" class="bar" style="fill:var(--c)"><title>2026-09-17: 14</title></rect>
+<rect x="164.0" y="188.4" width="35.3" height="3.6" class="bar" style="fill:var(--c)"><title>2026-09-18: 2</title></rect>
+<text x="181.7" y="212" class="ax" text-anchor="middle">09/18</text>
+<rect x="203.3" y="172.4" width="35.3" height="19.6" class="bar" style="fill:var(--c)"><title>2026-09-19: 11</title></rect>
+<rect x="242.7" y="192.0" width="35.3" height="0.5" class="bar" style="fill:var(--c)"><title>2026-09-20: 0</title></rect>
+<rect x="282.0" y="188.4" width="35.3" height="3.6" class="bar" style="fill:var(--c)"><title>2026-09-21: 2</title></rect>
+<text x="299.7" y="212" class="ax" text-anchor="middle">09/21</text>
+<rect x="321.3" y="186.7" width="35.3" height="5.3" class="bar" style="fill:var(--c)"><title>2026-09-22: 3</title></rect>
+<rect x="360.7" y="183.1" width="35.3" height="8.9" class="bar" style="fill:var(--c)"><title>2026-09-23: 5</title></rect>
+<rect x="400.0" y="174.2" width="35.3" height="17.8" class="bar" style="fill:var(--c)"><title>2026-09-24: 10</title></rect>
+<text x="417.7" y="212" class="ax" text-anchor="middle">09/24</text>
+<rect x="439.3" y="188.4" width="35.3" height="3.6" class="bar" style="fill:var(--c)"><title>2026-09-25: 2</title></rect>
+<rect x="478.7" y="177.8" width="35.3" height="14.2" class="bar" style="fill:var(--c)"><title>2026-09-26: 8</title></rect>
+<rect x="518.0" y="184.9" width="35.3" height="7.1" class="bar" style="fill:var(--c)"><title>2026-09-27: 4</title></rect>
+<text x="535.7" y="212" class="ax" text-anchor="middle">09/27</text>
+<rect x="557.3" y="188.4" width="35.3" height="3.6" class="bar" style="fill:var(--c)"><title>2026-09-28: 2</title></rect>
+<rect x="596.7" y="184.9" width="35.3" height="7.1" class="bar" style="fill:var(--c)"><title>2026-09-29: 4</title></rect>
+<rect x="636.0" y="188.4" width="35.3" height="3.6" class="bar off" style="fill:var(--c)"><title>2026-09-30: 2</title></rect>
+<text x="653.7" y="212" class="ax" text-anchor="middle">09/30</text>
+<rect x="675.3" y="184.9" width="35.3" height="7.1" class="bar off" style="fill:var(--c)"><title>2026-10-01: 4</title></rect>
+<rect x="714.7" y="190.2" width="35.3" height="1.8" class="bar off" style="fill:var(--c)"><title>2026-10-02: 1</title></rect>
+</svg>
+    <figcaption class="note"><span class="ko">한국에서 사람이 쓰는 브라우저로 첫 화면을 연 요청(전수, UTC). 우리 자동 검사와 <code>curl</code>은 뺐습니다.</span><span class="en">First-screen requests from people's browsers in Korea, counted in full (UTC), with my own tests and <code>curl</code> removed.</span><span class="zh">在韩国用真人浏览器打开首页的请求（全量，UTC），已剔除我们自己的自动测试和 <code>curl</code>。</span></figcaption>
+  </figure>
+  <div class="ko">
+    <ul>
+      <li>한국에서 사람이 첫 화면을 연 요청은 18일 동안 <b>178건</b>이었습니다. 그중 104건이 출시 이틀(9/15·16)에 몰렸고, 그 뒤로는 <b>하루 평균 5건 정도</b>입니다.</li>
+      <li>Web Analytics 방문(표본)은 한국 130, 미국 60이었습니다. 앱의 목표인 <b>외국인 여행객은 출시일 미국 묶음 정도</b>이고, 중국어 화면은 아무도 열지 않았습니다.</li>
+      <li>기기는 모바일이 대부분입니다(로드 510 대 100). 메신저 앱 안 브라우저로 열린 방문이 있어 링크가 메신저로 공유됐다는 걸 알 수 있었고, 구글 검색 유입도 시작됐습니다.</li>
+      <li>첫 화면이 뜨는 시간은 중간값 0.40초, 느린 10%도 1.19초였습니다. 속도는 문제가 아니었습니다.</li>
+    </ul>
+  </div>
+  <div class="en">
+    <ul>
+      <li>People in Korea opened the first screen <b>178 times</b> in 18 days. 104 of those came in the two launch days (15–16 Sep); after that it was <b>about 5 a day</b>.</li>
+      <li>Web Analytics visits (sampled) were 130 from Korea and 60 from the US. The people the app is for, <b>foreign travellers, amounted to roughly the US group on launch day</b>, and nobody opened the Chinese screens.</li>
+      <li>Mostly phones (510 loads to 100). Visits from in-app messenger browsers showed the link had been shared in chats, and Google search traffic had begun.</li>
+      <li>First screen in 0.40 s at the median and 1.19 s for the slowest tenth. Speed was not the problem.</li>
+    </ul>
+  </div>
+  <div class="zh">
+    <ul>
+      <li>18 天里，韩国的真人共打开首页 <b>178 次</b>。其中 104 次集中在上线的两天（9/15、9/16），之后<b>每天约 5 次</b>。</li>
+      <li>Web Analytics 的访问（抽样）为韩国 130、美国 60。应用真正的目标用户<b>外国游客，大约只有上线当天的美国那一批</b>，中文界面没有人打开过。</li>
+      <li>以手机为主（加载 510 比 100）。有来自聊天软件内置浏览器的访问，说明链接在聊天里被分享过；谷歌搜索带来的流量也开始出现。</li>
+      <li>首页加载中位数 0.40 秒，最慢的 10% 也在 1.19 秒内。速度不是问题。</li>
+    </ul>
+  </div>
+
+  <h3 class="ko">앱 안에서 연 기능</h3>
+  <h3 class="en">Features people opened</h3>
+  <h3 class="zh">打开过的功能</h3>
+  <p class="ko">이 앱은 한 화면에서 주소가 바뀌지 않아, 화면 이동은 방문 기록에 남지 않습니다. 대신 기능을 열 때만 받는 코드 파일을 세었습니다. 한국의 사람 브라우저 기준입니다.</p>
+  <p class="en">The app never changes its URL, so moving between screens leaves no trace in visit records. Instead I counted the code each feature downloads when it opens, from people's browsers in Korea.</p>
+  <p class="zh">这个应用在同一个地址里切换界面，所以界面跳转不会留在访问记录里。我改为统计每个功能打开时才下载的代码文件（韩国真人浏览器）。</p>
+  <div class="table">
+  <table>
+    <thead><tr><th><span class="ko">기능</span><span class="en">Feature</span><span class="zh">功能</span></th><th class="num"><span class="ko">연 횟수</span><span class="en">Opened</span><span class="zh">打开次数</span></th></tr></thead>
+    <tbody>
+      <tr><td><span class="ko">지도</span><span class="en">Map</span><span class="zh">地图</span></td><td class="num">39</td></tr>
+      <tr><td><span class="ko">일정</span><span class="en">Plan</span><span class="zh">行程</span></td><td class="num">28</td></tr>
+      <tr><td><span class="ko">여정 화면(본 앱)</span><span class="en">Journey (the main app)</span><span class="zh">旅程界面（主应用）</span></td><td class="num">25</td></tr>
+      <tr><td><span class="ko">대안 추천</span><span class="en">Alternatives</span><span class="zh">替代推荐</span></td><td class="num">21</td></tr>
+      <tr><td><span class="ko">장소 검색</span><span class="en">Place search</span><span class="zh">地点搜索</span></td><td class="num">14</td></tr>
+      <tr><td><span class="ko">예약 캡처 읽기 · 취향 고르기 · 숙소</span><span class="en">Read a booking · pick tastes · stays</span><span class="zh">读取预订截图 · 选择偏好 · 住宿</span></td><td class="num">6 · 5 · 2</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="ko">숫자가 작아 순서만 봅니다. 들어온 사람이 가장 많이 연 것은 <b>지도</b>였습니다.</p>
+  <p class="en">The numbers are small, so only the order means anything: the <b>map</b> is what people opened most.</p>
+  <p class="zh">数字太小，只看顺序：大家打开最多的是<b>地图</b>。</p>
+
+  <h2 class="ko">처음에 틀리게 읽은 것 세 가지</h2>
+  <h2 class="en">Three things I read wrong at first</h2>
+  <h2 class="zh">一开始读错的三件事</h2>
+  <div class="box ko"><h3>"AI 기능 수요가 있다"</h3><p>AI 일정 기능은 키를 넣지 않아 꺼져 있는데, 그 주소에 503 오류가 세 번 찍혀 있었습니다. 사람들이 눌러 봤다고 읽었다가, 브라우저 이름을 보고 세 번 모두 <b>내가 보낸 <code>curl</code></b>이라는 걸 알았습니다. 하나는 분석하는 도중에 확인하려고 보낸 요청이었습니다. 분석하는 사람의 행동도 데이터에 들어갑니다.</p></div>
+  <div class="box en"><h3>"There is demand for the AI feature"</h3><p>The AI planner is switched off until a key goes in, yet its address showed three 503 errors. I read that as people trying it, until the browser names showed all three were <b>my own <code>curl</code></b>, one of them sent mid-analysis to check something. The analyst's own actions end up in the data.</p></div>
+  <div class="box zh"><h3>“AI 功能有需求”</h3><p>AI 行程功能因为还没放入密钥而处于关闭状态，但那个地址上记录了三次 503 错误。我先读成有人试用过，看了浏览器名称才发现三次都是<b>我自己发的 <code>curl</code></b>，其中一次是分析途中为了确认而发的。分析者自己的操作也会进入数据。</p></div>
+  <div class="box ko"><h3>"들어온 사람의 1/3이 본 앱까지 간다"</h3><p>처음 계산에서는 기능별 CSS와 JS를 함께 세어 전환율을 만들었습니다. JS만 다시 세니 "본 앱"보다 "지도"가 더 많이 열려, 단계별 비율이 성립하지 않았습니다. 그래서 비율은 버리고 순서만 남겼습니다.</p></div>
+  <div class="box en"><h3>"A third of visitors reach the main app"</h3><p>My first pass counted CSS and JS together to build conversion rates. Counting JS only, the map was opened more often than the main app itself, so step-by-step ratios didn't hold. I dropped the ratios and kept the order.</p></div>
+  <div class="box zh"><h3>“三分之一的访客进入了主应用”</h3><p>第一次计算时，我把 CSS 和 JS 一起统计来算转化率。只统计 JS 后，地图被打开的次数反而比主应用还多，逐步转化率不成立。于是放弃比率，只保留顺序。</p></div>
+  <div class="box ko"><h3>"이 앱에는 추적 기능이 없다"</h3><p>앱의 위치 안내에는 "분석이나 추적 기능이 없다"고 적혀 있었습니다. 그런데 도메인을 Cloudflare에 연결하는 순간 Web Analytics 스크립트가 자동으로 켜져 있었습니다. 코드에는 없어서 몰랐고, 브라우저처럼 요청해야만 보였습니다. 쿠키 없는 방문 통계라 계속 쓰기로 하고, 사실과 다른 그 문장을 지웠습니다.</p></div>
+  <div class="box en"><h3>"This app has no tracking"</h3><p>The app's location notice said it had "no analytics or tracking". But the moment the domain joined Cloudflare, a Web Analytics script had been switched on automatically. It wasn't in my code, and it only appeared when the page was requested like a browser would. It is cookieless, so I kept it and deleted the sentence that was no longer true.</p></div>
+  <div class="box zh"><h3>“这个应用没有追踪功能”</h3><p>应用的位置说明里写着“没有分析或追踪功能”。可是域名接入 Cloudflare 的那一刻，Web Analytics 脚本就被自动打开了。代码里没有它，只有像浏览器那样请求页面时才看得到。它不使用 cookie，所以我决定继续用，并删掉了那句不再属实的话。</p></div>
+
+  <h2 class="ko">그래서 계획이 이렇게 바뀌었습니다</h2>
+  <h2 class="en">What this changed in my plan</h2>
+  <h2 class="zh">计划因此这样调整</h2>
+  <ol class="ko">
+    <li><b>기능보다 유입이 먼저입니다.</b> 지금까지의 데이터는 제품 검증이 아니라 지인 반응입니다. 외국인 여행객이 모이는 곳에 링크를 두고, 채널마다 <code>?src=</code> 꼬리표를 붙여 쿠키 없이 구분합니다.</li>
+    <li><b>측정의 사각지대를 메웁니다.</b> 행사장 판넬의 QR은 예전 주소를 가리켜 통계에 전혀 잡히지 않았습니다. 판넬을 다시 인쇄하지 않고, 예전 주소에서 새 도메인으로 넘기도록 바꿉니다.</li>
+    <li><b>지도를 먼저 다듬습니다.</b> 들어온 사람이 가장 많이 연 화면입니다.</li>
+    <li><b>스캐너는 규칙으로 막습니다.</b> 비밀이 새지 않는 건 확인했으니, 이제 통계를 흐리지 않게 문 앞에서 돌려보냅니다.</li>
+  </ol>
+  <ol class="en">
+    <li><b>Reach comes before features.</b> So far this is data about friends' reactions, not a test of the product. Links go where foreign travellers actually gather, each tagged with <code>?src=</code> so channels can be told apart without cookies.</li>
+    <li><b>Close the blind spot.</b> The QR code on the event panel points at the old address, which no statistic covers. Instead of reprinting, the old address will forward to the new domain.</li>
+    <li><b>The map comes first.</b> It is the screen people opened most.</li>
+    <li><b>Turn scanners away with a rule.</b> Nothing leaks, so the job now is to stop them at the door before they blur the numbers.</li>
+  </ol>
+  <ol class="zh">
+    <li><b>先有流量，再谈功能。</b>目前的数据是熟人的反应，而不是产品验证。把链接放到外国游客真正聚集的地方，每个渠道加上 <code>?src=</code> 标记，不用 cookie 也能区分。</li>
+    <li><b>补上统计盲区。</b>活动展板上的二维码指向旧地址，完全不在统计范围内。不重印展板，而是让旧地址转到新域名。</li>
+    <li><b>先打磨地图。</b>这是大家打开最多的界面。</li>
+    <li><b>用规则挡住扫描器。</b>已经确认没有泄露，接下来是在门口就把它们挡回去，免得干扰统计。</li>
+  </ol>
+
+  <div class="box ko"><h3>이 숫자의 한계</h3><p>Web Analytics는 약 1/10 표본이라 작은 날은 0과 10 사이를 오갑니다. 쿠키를 쓰지 않아 같은 사람이 다시 왔는지는 알 수 없습니다. 브라우저 이름으로 사람을 고른 숫자에는 사람인 척하는 봇이 남아 있을 수 있습니다. 그래서 숫자 하나가 아니라 <b>서로 다른 기록이 같은 방향을 가리키는지</b>로 판단했습니다.</p></div>
+  <div class="box en"><h3>What these numbers don't prove</h3><p>Web Analytics is roughly a 1-in-10 sample, so quiet days jump between 0 and 10. With no cookies there is no telling whether the same person came back. Counts filtered by browser name may still hold bots dressed as people. So I judged by whether <b>different records pointed the same way</b>, not by any single number.</p></div>
+  <div class="box zh"><h3>这些数字证明不了什么</h3><p>Web Analytics 约为 1/10 抽样，访问少的日子会在 0 和 10 之间跳动。不使用 cookie，就无法知道是不是同一个人回访。按浏览器名称筛出的“真人”里，可能还混着伪装成人的机器人。所以我不看单个数字，而是看<b>不同的记录是否指向同一个方向</b>。</p></div>
+
+  <h2 class="ko">진행 기록</h2>
+  <h2 class="en">Log</h2>
+  <h2 class="zh">进展记录</h2>
+  <ol class="timeline">
+    <li><time>2026-09-15</time><span class="ko">도메인 <code>trip-pups.com</code>을 사서 Cloudflare Workers 앱에 연결하고 공개</span><span class="en">Bought <code>trip-pups.com</code>, connected it to the Cloudflare Workers app and went live</span><span class="zh">购买域名 <code>trip-pups.com</code>，接入 Cloudflare Workers 应用并上线</span></li>
+    <li><time>2026-09-30</time><span class="ko">등록 기관의 연락처 인증 메일을 놓쳐 도메인이 정지됨. 사이트는 멀쩡한데 주소만 끊김</span><span class="en">Missed the registrar's contact-verification email and the domain was suspended: the site was fine, only the address was cut off</span><span class="zh">错过了注册商的联系人验证邮件，域名被暂停：网站本身没问题，只是地址断了</span></li>
+    <li><time>2026-10-02</time><span class="ko">네임서버를 보고 원인을 찾아 인증, 약 50분 만에 복구. 같은 날 읽기 전용 토큰으로 18일 치를 분석</span><span class="en">Traced it through the nameservers, verified, and was back in about 50 minutes. The same day, analysed the 18 days with a read-only token</span><span class="zh">从域名服务器查出原因并完成验证，约 50 分钟恢复。同一天用只读令牌分析了 18 天的数据</span></li>
+  </ol>
+
+  <footer>
+    <a href="/work/#stop-trippups" data-ko-href="/ko/work/#stop-trippups"><span class="ko">← 노선도로 돌아가기</span><span class="en">← Back to the route map</span><span class="zh">← 返回线路图</span></a>
+    <span>© 2026 Hoekwang Chung</span>
+  </footer>
+</main>
+<script>
+(() => {
+  const set = (lang) => {
+    document.documentElement.lang = lang === "zh" ? "zh-Hans" : lang;
+    document.querySelectorAll(".lang a").forEach((a) => a.setAttribute("aria-current", a.dataset.lang === lang));
+    document.title = { en: "People or bots? TripPups traffic · Hoekwang Chung", ko: "사람일까, 봇일까 · TripPups 트래픽 · 정회광", zh: "是人还是机器人？TripPups 流量 · Hoekwang Chung" }[lang];
+  };
+  // /trippups/ is English, /ko/trippups/ is Korean (the file says which); ?lang=zh shows Chinese.
+  const q = new URLSearchParams(location.search).get("lang");
+  const pick = q || document.documentElement.dataset.defaultLang || "en";
+  const lang = ["en", "ko", "zh"].includes(pick) ? pick : "en";
+  set(lang);
+  if (lang === "ko") document.querySelectorAll("a[data-ko-href]").forEach((a) => { a.href = a.dataset.koHref; });
+})();
+</script>
+</body>
+</html>
