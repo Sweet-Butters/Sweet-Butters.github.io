@@ -4,7 +4,7 @@ Each English page holds both languages; the Korean copy only differs in
 <html lang>, and in the <head> block between the head:start / head:end
 markers (title, description and link-preview tags in Korean).
 
-Run after editing work/index.html, jev/index.html or scpc/index.html:
+Run after editing work/index.html, jev/index.html, scpc/index.html or trippups/index.html:
     python tools/make_ko.py
 """
 import pathlib
@@ -40,6 +40,15 @@ PAGES = {
         "og_title": "SCPC AI 챌린지: 예선 두 번을 넘어 본선 발표까지",
         "og_description": "언어모델 없는 규칙 엔진(비공개 채점 35위 / 127), 작업이 바뀌어도 기억을 이어 가는 안드로이드 비서, 그리고 본선 발표.",
         "og_image": f"{SITE}/work/img/scpc.jpg",
+    },
+    "trippups/index.html": {
+        "out": "ko/trippups/index.html",
+        "path": "/trippups/",
+        "title": "사람일까, 봇일까 · TripPups 트래픽 · 정회광",
+        "description": "제 창업 사이트에 18일 동안 들어온 트래픽을 사람과 봇으로 나누고, 그 결과로 바뀐 계획을 정리한 기록.",
+        "og_title": "내 창업 사이트에 온 건 사람일까, 봇일까",
+        "og_description": "요청 19,813건, 페이지 조회의 93%는 자바스크립트를 실행하지 않았고 38%는 비밀 파일을 찾는 스캐너였어요. 출시 뒤 사람은 하루 5명 안팎.",
+        "og_image": f"{SITE}/work/img/radar.jpg",
     },
 }
 

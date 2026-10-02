@@ -471,6 +471,20 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         ["1.00", { en: "recall: no AI contest missed", ko: "재현율: 놓친 AI 대회 없음" }],
         ["0.961", { en: "AUROC, \"is it an AI contest\"", ko: "AUROC, AI 대회 판정" }]],
       link: [{ en: "/jev/", ko: "/ko/jev/" }, { en: "See the evaluation", ko: "평가 결과 보기" }] },
+    { s: "r", id: "trippups", big: true, tags: ["r"], short: { en: "My site's traffic: people or bots", ko: "내 사이트 트래픽: 사람 vs 봇" },
+      title: { en: "Who actually visited my startup's site?", ko: "내 창업 사이트에 온 건 사람일까, 봇일까" }, when: "2026-10",
+      text: { en: "18 days after putting TripPups live, I split its Cloudflare traffic into people and bots with a read-only API token, took my own test traffic out, and changed the plan based on what was left.",
+        ko: "TripPups를 공개하고 18일 뒤, 읽기 전용 API 토큰으로 Cloudflare 트래픽을 사람과 봇으로 나누고 제 테스트 트래픽을 뺀 뒤, 남은 숫자로 계획을 바꿨어요." },
+      list: { en: [
+        "Russia was #2 on the dashboard map: 873 of its 880 requests were one WordPress-installer URL",
+        "38% of all requests were scanners hunting for .env files, .git and admin pages. Nothing leaked: the build holds no secrets",
+        "Three things I read wrong at first, including \"AI demand\" that turned out to be my own curl"],
+        ko: [
+        "대시보드 지도 2위 러시아: 880건 중 873건이 워드프레스 설치 주소 하나",
+        "전체 요청의 38%가 .env·.git·관리자 페이지를 찾는 스캐너. 배포물에 비밀이 없어 새는 것은 없었음",
+        "처음에 틀리게 읽은 세 가지. \"AI 수요\"로 보였던 건 제가 보낸 curl이었음"] },
+      nums: [["19,813", { en: "requests in 18 days", ko: "18일 전체 요청" }], ["93%", { en: "of page views never ran JavaScript", ko: "자바스크립트를 실행하지 않은 페이지 조회" }], ["~5/day", { en: "people after launch week", ko: "출시 이틀 뒤 하루 사람 방문" }]],
+      link: [{ en: "/trippups/", ko: "/ko/trippups/" }, { en: "Read the notes", ko: "기록 읽기" }] },
 
     { s: "u", id: "scpc", big: true, tags: ["u"], short: { en: "SCPC AI Challenge finals", ko: "SCPC AI 챌린지 본선" },
       title: { en: "SCPC AI Challenge: two qualifying rounds, then the finals", ko: "SCPC AI 챌린지: 예선 두 번을 넘어 본선 발표까지" },
