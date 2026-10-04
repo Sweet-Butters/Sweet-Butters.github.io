@@ -76,6 +76,8 @@ h2 { font: 400 25px/1.25 var(--display); margin: 1px 0 3px; }
 .say b { color: var(--ink); background: var(--mark); padding: 0 3px; font-weight: 600; }
 
 .row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: start; }
+.row.stack { grid-template-columns: 1fr; gap: 8px; }
+.row.stack .say br { display: none; }
 .stop h2 { font-size: 21px; }
 .stop .say { font-size: 13.5px; margin: 0; }
 .ph { border: 2px solid var(--ink); background: var(--board); }
@@ -84,9 +86,9 @@ figcaption { font-size: 11.5px; color: var(--ink-2); padding: 4px 8px; border-to
 .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .gw { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; align-items: start; }
-.gw img { aspect-ratio: 1 / 1.05 !important; object-fit: cover; object-position: top; }
+.gw img { aspect-ratio: 1 / 1.12 !important; object-fit: cover; object-position: top; }
 .crop img { aspect-ratio: 4 / 3; object-fit: cover; }
-.phone img { aspect-ratio: 600 / 820; object-fit: cover; object-position: top; }
+.phone img { aspect-ratio: 600 / 860; object-fit: cover; object-position: top; }
 
 .next-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .next-list div { border: 2px dashed var(--ink); background: var(--board); padding: 9px 12px; }
@@ -175,7 +177,7 @@ figcaption { font-size: 11.5px; color: var(--ink-2); padding: 4px 8px; border-to
   <div class="inner">
     <div class="route" style="margin-top:4px">
       <section class="stop c">
-        <span class="node" aria-hidden="true"></span><div class="row"><div class="txt">
+        <span class="node" aria-hidden="true"></span><div class="row stack"><div class="txt">
         <p class="code">03 · 만들어서</p>
         <h2>지금 있는 곳에서, 다음 갈 곳</h2>
         <p class="say">카드를 넘겨 일정을 짜고, 가게가 닫혀 있으면 <b>그 자리에서 다른 곳을 다시 추천</b>합니다.</p></div>
@@ -187,7 +189,7 @@ figcaption { font-size: 11.5px; color: var(--ink-2); padding: 4px 8px; border-to
       </section>
 
       <section class="stop c">
-        <span class="node" aria-hidden="true"></span><div class="row"><div class="txt">
+        <span class="node" aria-hidden="true"></span><div class="row stack"><div class="txt">
         <p class="code">04 · 머물게</p>
         <h2>서울 여행에 지역의 하루를 더하기</h2>
         <p class="say">여행 기간에 열리는 <b>지역 축제와 1박 숙소</b>를 제안해, 서울에서 끝날 일정을 지방으로 늘립니다.</p></div>
@@ -196,13 +198,6 @@ figcaption { font-size: 11.5px; color: var(--ink-2); padding: 4px 8px; border-to
           <figure class="ph"><img src="img/gangwon-festival.jpg" width="390" height="760" alt="서울 4박 5일 일정 기간에 열리는 강릉커피축제를 보여 주고 강원 1박 2일 추가를 묻는 화면" style="aspect-ratio:390/560;object-fit:cover;object-position:top"><figcaption>여행 중 열리는 강릉 축제</figcaption></figure>
           <figure class="ph"><img src="img/gangwon-stay.jpg" width="332" height="538" alt="강릉역 근처 숙소를 좋아요·패스로 고르는 숙소 스와이프 화면" style="aspect-ratio:332/400;object-fit:cover;object-position:top"><figcaption>주변 숙소 스와이프</figcaption></figure>
         </div></div></div>
-      </section>
-
-      <section class="stop r">
-        <span class="node" aria-hidden="true"></span><div class="row"><div class="txt">
-        <p class="code">05 · 숫자로</p>
-        <h2>교내 검증에서 지역 실증까지</h2></div>
-        <div class="media"><figure class="ph"><img src="img/roadmap.jpg" width="1400" height="783" alt="TripPups 사업화 로드맵: 교내 검증, 앱 출시와 첫 매출, 강원 실증, 글로벌 확장의 4단계" style="aspect-ratio:1400/620;object-fit:cover;object-position:top"><figcaption>모두의 창업 지원서에 넣은 사업화 로드맵</figcaption></figure></div></div>
       </section>
 
       <section class="stop next d">
