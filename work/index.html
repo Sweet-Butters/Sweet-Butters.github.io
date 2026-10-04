@@ -73,6 +73,14 @@ h1 { margin: 8px 0 0; font: 400 clamp(38px, 6vw, 72px)/1.08 var(--display); lett
 
 /* ---------- the ride: pinned vertical map on the left, stops scroll past on the right ---------- */
 /* four stories: each starts from a problem, ends at a stop on the map */
+.joined { padding-block: 0 40px; }
+.joined-grid { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.joined-grid a { display: flex; flex-direction: column; gap: 4px; height: 100%; box-sizing: border-box; padding: 14px 16px 16px; background: #fff; border: 2px solid var(--ink); border-top: 8px solid var(--u); color: var(--ink); text-decoration: none; }
+.joined-grid a:hover { background: var(--mark); }
+.joined-grid a:focus-visible { outline: 3px solid var(--u); outline-offset: 2px; }
+.joined-grid .what { font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
+.joined-grid b { font: 400 28px/1.15 var(--display); }
+.joined-grid .how { font-size: 14px; line-height: 1.45; color: var(--ink-2); }
 .all { padding-block: 0 36px; }
 .all-groups { display: grid; gap: 14px; margin-top: 16px; }
 .all-group { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: start; }
@@ -219,6 +227,10 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
   .ba { grid-template-columns: minmax(0, 1fr); }
   .ba .arrow { transform: rotate(90deg); justify-self: center; }
   .facts { grid-template-columns: minmax(0, 1fr); }
+  .joined-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .joined-grid a { padding: 10px 12px 12px; border-top-width: 6px; }
+  .joined-grid b { font-size: 22px; }
+  .joined-grid .how { font-size: 13px; }
 }
 @media (prefers-reduced-motion: reduce) { .train { transition: none; } .live::before { animation: none; } }
 @media print {
@@ -270,6 +282,21 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       <div><span class="k"><span class="en">AI Contest Radar</span><span class="ko">AI 공모전 레이더</span></span> <span class="en">collected</span><span class="ko">수집</span> <b id="led-c">4,133</b><span class="ko">건</span> → <span class="en">live</span><span class="ko">게시</span> <b id="led-end">551</b><span class="ko">건</span></div>
       <div><span class="k"><span class="en">Runs</span><span class="ko">자동 실행</span></span> <span class="en">daily 06:00 KST, GitHub Actions</span><span class="ko">GitHub Actions 매일 06:00</span></div>
     </div>
+  </section>
+
+  <!-- What I joined: the outside proof, first. Each tile rides down to its stop. -->
+  <section class="wrap joined" id="joined" aria-labelledby="joined-h" style="--s:var(--u)">
+    <div class="sec-head">
+      <h2 id="joined-h"><span class="ko">참여한 것</span><span class="en">What I joined</span></h2>
+      <p><span class="ko">혼자 만드는 데서 멈추지 않고, 대회·오픈소스·연구 커뮤니티에 직접 나가 부딪혔어요.</span><span class="en">I don't stop at building alone: I take my work into contests, open source and research communities.</span></p>
+    </div>
+    <ul class="joined-grid">
+      <li><a href="#stop-scpc"><span class="what"><span class="ko">삼성 SCPC AI 챌린지</span><span class="en">Samsung SCPC AI Challenge</span></span><b><span class="ko">본선 진출</span><span class="en">Finalist</span></b><span class="how"><span class="ko">21명 중 1명 · 1차 비공개 채점 35위 / 127</span><span class="en">1 of 21 · round 1 hidden set 35th / 127</span></span></a></li>
+      <li><a href="#stop-jevchat"><span class="what"><span class="ko">오픈소스 기여</span><span class="en">Open source</span></span><b><span class="ko">PR 2건 병합</span><span class="en">2 PRs merged</span></b><span class="how"><span class="ko">jev-chat-windows(별 732)에 한국어 지원</span><span class="en">Korean support for jev-chat-windows (732 stars)</span></span></a></li>
+      <li><a href="#stop-cursor"><span class="what"><span class="ko">Cursor AI 창업 캠프 999</span><span class="en">Cursor AI startup camp 999</span></span><b>45 / 50</b><span class="how"><span class="ko">chemcheck 정확도, 자신 있게 틀림 0</span><span class="en">chemcheck correct, 0 confidently wrong</span></span></a></li>
+      <li><a href="#stop-pseudolab"><span class="what"><span class="ko">가짜연구소 13기</span><span class="en">Pseudo Lab, season 13</span></span><b><span class="ko">러너</span><span class="en">Runner</span></b><span class="how"><span class="ko">Physical AI · 시뮬레이션에서 실패하는 3D 에셋 도감 · 14주</span><span class="en">Physical AI · 3D assets that fail in simulation · 14 weeks</span></span></a></li>
+      <li><a href="#stop-lecturer"><span class="what"><span class="ko">가르치는 일</span><span class="en">Teaching</span></span><b><span class="ko">AI 강사</span><span class="en">AI instructor</span></b><span class="how"><span class="ko">대학생·직장인·중장년층 · 11월부터 초중고</span><span class="en">students, office workers, older learners · K-12 from November</span></span></a></li>
+    </ul>
   </section>
 
   <!-- Everything at a glance: one small box per stop, built from STOPS; a click rides down to that stop. -->
@@ -623,9 +650,9 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       link: [CHEM, { en: "Try it", ko: "직접 해 보기" }] },
     { s: "u", id: "jevchat", big: true, tags: ["u"], short: { en: "Open source: jev-chat-windows", ko: "오픈소스 기여: jev-chat-windows" },
       title: { en: "Making a Chinese open-source copilot work in Korean", ko: "중국 오픈소스 부조종사를 한국어에서 동작하게" },
-      when: { en: "2026-09 · 2 pull requests, open (not merged)", ko: "2026-09 · PR 2건, 열린 상태 (병합 안 됨)" },
-      text: { en: "jev-chat-windows (616 stars) reads a chat window with OCR, lets Jev judge, and suggests replies. I found it through GitHub trending and contributed Korean support. The judging core and the problem are upstream's; my part is making it work in Korean.",
-        ko: "jev-chat-windows(별 616)는 채팅 창을 OCR로 읽어 Jev가 판단하고 답장을 제안하는 도구예요. GitHub 트렌딩에서 찾아 한국어 지원을 기여했어요. 판단 커널과 문제 정의는 원작자의 것이고, 제 몫은 한국어에서 동작하게 만든 것이에요." },
+      when: { en: "2026-09 · 2 pull requests merged (28 Sep), 1 follow-up open", ko: "2026-09 · PR 2건 병합 (9.28), 후속 1건 검토 중" },
+      text: { en: "jev-chat-windows (732 stars on 4 Oct) reads a chat window with OCR, lets Jev judge, and suggests replies. I found it through GitHub trending and contributed Korean support. The judging core and the problem are upstream's; my part is making it work in Korean.",
+        ko: "jev-chat-windows(10월 4일 기준 별 732)는 채팅 창을 OCR로 읽어 Jev가 판단하고 답장을 제안하는 도구예요. GitHub 트렌딩에서 찾아 한국어 지원을 기여했어요. 판단 커널과 문제 정의는 원작자의 것이고, 제 몫은 한국어에서 동작하게 만든 것이에요." },
       photo: ["/work/img/jevchat-pr.jpg", { en: "PR #42 on the upstream repository: the same KakaoTalk window before and after", ko: "원작 저장소의 PR #42: 같은 카카오톡 창, 바꾸기 전과 후" }],
       mine: { en: [
         "Found why Korean failed: the built-in OCR only had Chinese and English models (0 of 9 bubbles read), and a WeChat-only rule (\"green bubble = me\") marked all 9 as the other person",
@@ -635,7 +662,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         "한국어가 안 되는 원인을 찾음: 내장 OCR이 중국어·영어 모델뿐이라 말풍선 9개 중 0개 인식, 위챗 전용 규칙(\"초록 배경 = 내 말\") 때문에 9개 전부 상대방 것으로 분류",
         "위챗 규칙을 땜질하지 않고, 윈도우 내장 OCR 백엔드와 앱별 프로필 구조로 바꿈",
         "화면 문구 112곳을 다국어 구조로 감싸 한국어 150개를 번역하되, 원문을 키로 써서 기존 중국어 사용자에게는 변화가 없게 함"] },
-      nums: [["0 → 9 / 9", { en: "Korean chat bubbles read", ko: "한국어 말풍선 인식" }], ["2.0s → 0.20s", { en: "per frame", ko: "프레임당 처리 시간" }], ["2", { en: "pull requests, open", ko: "PR (열린 상태)" }]],
+      nums: [["0 → 9 / 9", { en: "Korean chat bubbles read", ko: "한국어 말풍선 인식" }], ["2.0s → 0.20s", { en: "per frame", ko: "프레임당 처리 시간" }], ["2", { en: "pull requests merged upstream", ko: "건 원본 저장소에 병합된 PR" }]],
       link: ["https://github.com/jev-chat/jev-chat-windows/pull/42", { en: "See the pull request", ko: "PR 보기" }] },
     { s: "u", id: "pseudolab", big: true, tags: ["u", "r"], short: { en: "Pseudo Lab: Physical AI", ko: "가짜연구소: Physical AI" },
       title: { en: "Pseudo Lab season 13: a catalogue of 3D assets that fail in simulation", ko: "가짜연구소 13기: Physical AI 시뮬레이션에서 실패하는 3D 에셋 도감" },
@@ -660,19 +687,20 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
   let rows = [], cur = 0;
   const tagHtml = (ks) => ks.map((k) => `<i style="--t:var(--${k})">${SECTIONS[k].letter}</i>`).join("");
   const code = (st, n) => `${SECTIONS[st.s].letter}${String(n).padStart(2, "0")}`;
-  const TRACK = { c: 0, r: 1, u: 2, d: 3 };
+  const ORDER = ["u", "c", "r"];          // ride order: what I joined comes first
+  const TRACK = { u: 0, c: 1, r: 2, d: 3 };
 
   function build() {
     const stops = STOPS();
     rows = [];
     const count = { c: 0, r: 0, u: 0, d: 0 };
-    for (const k of ["c", "r", "u"]) {
+    for (const k of ORDER) {
       rows.push({ hd: true, s: k, id: "sec-" + k, short: t(SECTIONS[k].title) });
       stops.filter((x) => x.s === k).forEach((x) => rows.push({ ...x, tags: [...new Set([x.s, ...(x.tags || [])])].sort((a, b) => TRACK[a] - TRACK[b]),
         short: t(x.short), title: t(x.title), code: code(x, ++count[k]) }));
     }
     // "Everything at a glance": one box per stop, grouped by section.
-    $("all-grid").innerHTML = ["c", "r", "u"].map((k) => {
+    $("all-grid").innerHTML = ORDER.map((k) => {
       const items = rows.filter((x) => !x.hd && x.s === k).map((x) => {
         const when = t(x.when);
         const also = x.tags.filter((g) => g !== k).map((g) => `<i style="--t:var(--${g})">${SECTIONS[g].letter}</i>`).join("");
@@ -685,7 +713,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     const map = $("map");
     map.style.setProperty("--n", rows.length);
     let html = "";
-    ["c", "r", "u", "d"].forEach((k) => {
+    ["u", "c", "r", "d"].forEach((k) => {
       const on = rows.map((r, i) => (r.hd ? r.s === k : r.tags.includes(k)) ? i : -1).filter((i) => i >= 0);
       if (!on.length) return;
       const a = on[0], b = on[on.length - 1];
@@ -759,13 +787,15 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     if (hit !== undefined && hit !== cur) { cur = hit; update(); }
   }, { rootMargin: "-45% 0px -45% 0px" });
   function observe() { io.disconnect(); seen.clear(); $$("#stories [data-i]").forEach((el) => io.observe(el)); }
-  $("all-grid").addEventListener("click", (e) => {
-    const a = e.target.closest("a[data-i]"); if (!a) return;
+  const rideTo = (e) => {
+    const a = e.target.closest('a[href^="#stop-"]'); if (!a) return;
+    const el = document.querySelector(a.getAttribute("href")); if (!el) return;
     e.preventDefault();
-    const el = document.querySelector(`#stories [data-i="${a.dataset.i}"]`);
     el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     history.replaceState(null, "", a.getAttribute("href"));
-  });
+  };
+  $("all-grid").addEventListener("click", rideTo);
+  $("joined").addEventListener("click", rideTo);
   $("map").addEventListener("click", (e) => {
     const b = e.target.closest(".row"); if (!b) return;
     document.querySelector(`#stories [data-i="${b.dataset.i}"]`).scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
@@ -778,6 +808,20 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     $$(".f-agree").forEach((el) => { el.textContent = Math.round(N.agreed / N.judged * 100); });
   }
   build(); update(); showRadar();
+
+  // Opening a link to a stop (/work/#stop-lecturer): the browser jumps before fonts and live numbers
+  // change the height above it, so line it up again until the reader scrolls on their own.
+  let moved = false;
+  ["wheel", "touchstart", "keydown", "mousedown"].forEach((ev) => addEventListener(ev, () => { moved = true; }, { once: true, passive: true }));
+  const jump = () => {
+    if (moved || !/^#(stop|sec)-/.test(location.hash)) return false;
+    const el = document.querySelector(location.hash);
+    if (el) el.scrollIntoView({ block: "start" });
+    return !!el;
+  };
+  jump();
+  addEventListener("load", jump);
+  if (document.fonts) document.fonts.ready.then(jump);
 
   // Live numbers from the radar's own data files.
   (async () => {
@@ -800,7 +844,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         recat: o.recategorized ?? N.recat,
         dropRule: o.agreed_drop ?? N.dropRule, dropWeak: o.dropped_weak ?? N.dropWeak, dropNot: o.dropped_not_contest ?? N.dropNot,
       });
-      const y = scrollY; build(); update(); showRadar(); scrollTo(0, y);
+      const y = scrollY; build(); update(); showRadar(); if (!jump()) scrollTo(0, y);
     } catch { /* keep the 2026-09-27 numbers */ }
   })();
 })();
