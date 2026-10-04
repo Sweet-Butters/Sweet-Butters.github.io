@@ -66,8 +66,7 @@ h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--l
 .act time { font: 600 12px var(--mono); color: var(--t); white-space: nowrap; }
 .act p { font-size: 13.5px; color: var(--ink-2); }
 .act p b { color: var(--ink); }
-.act .take { border-top: 1px dashed var(--rule); padding-top: 6px; font-size: 13px; }
-.act .take::before { content: "남은 것 "; font-weight: 700; color: var(--t); }
+.badge { display: inline-block; vertical-align: 4px; margin-left: 8px; font: 400 15px/1 var(--display); color: #fff; background: var(--c); padding: 5px 10px 4px; border-radius: 4px; }
 .pics { display: grid; gap: 8px; grid-template-columns: var(--cols, 1fr 1fr); }
 .pics figure { border: 2px solid var(--ink); background: #fff; }
 .pics img { width: 100%; height: var(--h, 170px); object-fit: cover; object-position: var(--pos, center); }
@@ -128,38 +127,35 @@ h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--l
 
     <div class="sum">
       <div style="--t:var(--u)"><b>SCPC AI 본선</b><span>삼성전자 · 2026.08</span></div>
-      <div style="--t:var(--c)"><b>Top 10</b><span>연세대 AI 창업캠프 999</span></div>
+      <div style="--t:var(--c)"><b>Top 10 선정</b><span>연세대 AI 창업캠프 999</span></div>
       <div style="--t:var(--r)"><b>인강 5기 튜터</b><span>연세프리미엄 인강</span></div>
       <div style="--t:var(--d)"><b>AI 교습소</b><span>당근 모임 · 40명</span></div>
     </div>
 
     <section class="act" style="--t:var(--u)">
       <header><h2>삼성전자 SCPC AI 챌린지 본선</h2><time>2026.08.21</time></header>
-      <p>제12회 삼성전자 대학생 프로그래밍 챌린지 AI 부문. 예선 두 번을 거쳐 <b>21명이 오른 본선</b>에서 직접 만든 안드로이드 비서를 발표하고 심사위원 질문에 답했습니다.</p>
+      <p>제12회 삼성전자 대학생 프로그래밍 챌린지 AI 부문. <b>1,845명이 참가해 예선 두 번을 거쳐 21명이 오른 본선</b>에서, AI 전공자들과 겨루며 직접 만든 안드로이드 비서를 삼성전자 현장에서 발표했습니다.</p>
       <div class="pics" style="--cols:1.25fr 1.25fr .8fr;--h:140px">
-        <figure><img src="/work/img/act-scpc-hall.jpg" width="1600" height="900" alt="SCPC 2026 AI 본선 행사장 무대. 화면 속 좌석 배치도는 흐리게 처리함"><figcaption>본선 행사장 (좌석표의 이름은 가림)</figcaption></figure>
+        <figure><img src="/work/img/act-scpc-hall.jpg" width="1600" height="900" alt="SCPC 2026 AI 본선 행사장 무대와 좌석 배치도"><figcaption>본선 좌석 배치도에 오른 제 이름</figcaption></figure>
         <figure><img src="/work/img/act-scpc-lobby.jpg" width="1600" height="1200" alt="제12회 삼성전자 대학생 프로그래밍 챌린지 현수막이 걸린 행사장 로비"><figcaption>행사장 로비</figcaption></figure>
         <figure><img src="/work/img/act-scpc-keyboard.jpg" width="1200" height="1600" alt="SCPC 2026 로고가 들어간 키보드" style="object-position:center 40%"><figcaption>SCPC 2026</figcaption></figure>
       </div>
-      <p class="take">작업이 바뀌어도 유효한 정보만 이어받게 만들면서, 유지할 정보와 다시 확인할 정보를 나누는 법을 익혔습니다.</p>
     </section>
 
     <section class="act" style="--t:var(--c)">
-      <header><h2>연세대학교 AI 창업캠프 999: Trainthon · Top 10</h2><time>2026.09.09–10</time></header>
-      <p>Team 29, 1인 참가. AI가 그린 화학 구조가 정말 그 분자인지 검사하는 <b>chemcheck</b>를 만들어 발표했습니다. KTX로 이동하면서 휴대폰의 Cursor로 시작했습니다.</p>
+      <header><h2>연세대학교 AI 창업캠프 999: Trainthon<span class="badge">Top 10 선정</span></h2><time>2026.09.09–10</time></header>
+      <p>Team 29, 1인 참가로 <b>Top 10에 선정</b>되었습니다. AI가 그린 화학 구조가 정말 그 분자인지 검사하는 <b>chemcheck</b>를 KTX로 이동하며 휴대폰의 Cursor로 시작해 완성하고 발표했습니다. 합성 렌더 50장 중 45장을 정확히 판정했습니다.</p>
       <div class="pics" style="--h:150px">
         <figure><img src="/work/img/act-camp-room.jpg" width="1600" height="1200" alt="연세대 AI 창업캠프 해커톤 현장. 참가자들이 노트북으로 작업 중"><figcaption>해커톤 현장</figcaption></figure>
         <figure><img src="/work/img/act-camp-pitch.jpg" width="1600" height="1200" alt="Chemcheck: AI 생성 분자구조 검증 Guardrail, Team 29 정회광 발표 화면" style="object-position:center 35%"><figcaption>chemcheck 발표</figcaption></figure>
       </div>
-      <p class="take">맞힐 수 없는 그림은 억지로 판정하지 않는 것. 합성 렌더 50장 중 45장 정확, 자신 있게 틀린 것은 0장이었습니다.</p>
     </section>
 
     <section class="act" style="--t:var(--d)">
       <div class="side">
         <div style="display:grid;gap:8px">
           <header><h2>AI 교습소 (당근 모임)</h2><time>2026.08 –</time></header>
-          <p>2인 공동 운영. 대학생·직장인·중장년층이 모인 <b>40명 규모의 AI 모임</b>에서 Claude Code 설치부터 사용법, 각자의 프로젝트 진행과 공유까지 함께합니다.</p>
-          <p class="take">대학생, 건설업 감리 종사자, 온라인 쇼핑몰 사업자처럼 배경이 다른 사람마다 AI를 붙일 자리가 다르다는 것.</p>
+          <p>2인 공동 운영. 대학생·직장인·중장년층이 모인 <b>40명 규모의 AI 모임</b>에서 Claude Code 설치부터 각자의 프로젝트 진행과 공유까지 함께합니다. 건설업 감리 종사자, 온라인 쇼핑몰 사업자처럼 배경이 다른 참여자와 각자의 일에 AI를 적용하는 방법을 찾고, 서강대학교에서도 AI 교육을 진행하고 있습니다.</p>
         </div>
         <div class="pics" style="--cols:1fr;--h:150px"><figure><img src="/work/img/act-aiclass.jpg" width="1600" height="1200" alt="'Starting Claude Code' 화면 앞에서 강의하는 모습"><figcaption>Starting Claude Code 강의 · 9.5</figcaption></figure></div>
       </div>
@@ -176,22 +172,21 @@ h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--l
     <div class="two">
       <section class="act" style="--t:var(--r)">
         <header><h2>연세프리미엄 인강 5기 튜터</h2><time>2026.09</time></header>
-        <p>교무처 선발. <b>"(입문) 바이브코딩의 한계를 부수자: 클로드 코드 실전용 skills"</b> 강의를 직접 기획·촬영·편집합니다. 법률·전공 교수 자문을 거쳐 2027년 2월 공개 예정.</p>
-        <div class="pics" style="--cols:1fr;--h:156px;--pos:center top"><figure><img src="/work/img/act-yonsei-tutor.jpg" width="935" height="1158" alt="2026 연세 프리미엄 인강 5기 튜터 선발 결과 공지"><figcaption>5기 튜터 선발 결과 공지</figcaption></figure></div>
-        <p class="take">짧은 강의 영상도 편집에 시간이 오래 걸린다는 것. 이번 DevDay 주제의 출발점입니다.</p>
+        <p>5기 튜터로 선발되어 <b>"(입문) 바이브코딩의 한계를 부수자: 클로드 코드 실전용 skills"</b> 강의를 런칭합니다. 기획부터 촬영·편집까지 직접 하며, 법률·전공 교수 자문을 거쳐 2027년 2월에 공개됩니다.</p>
+        <div class="pics" style="--cols:1fr;--h:156px;--pos:center top"><figure><img src="/work/img/act-yonsei-tutor.png" width="935" height="1158" alt="2026 연세 프리미엄 인강 5기 튜터 선발 결과 공지"><figcaption>5기 튜터 선발 결과 공지</figcaption></figure></div>
       </section>
       <section class="act" style="--t:var(--u)">
-        <header><h2>LOOKIE 네트워킹 데이 오픈마이크</h2><time>2026.09.22</time></header>
-        <p>창업학회 LOOKIE의 2026 네트워킹 데이(이화여대)에서 <b>오픈마이크 무대</b>에 섰습니다.</p>
-        <div class="pics" style="--cols:1fr;--h:156px"><figure><img src="/work/img/act-lookie-openmic.jpg" width="1290" height="834" alt="LOOKIE 네트워킹 데이 오픈마이크에서 마이크를 들고 말하는 모습"><figcaption>오픈마이크</figcaption></figure></div>
+        <header><h2>소셜벤처 창업학회 LOOKIE</h2><time>2026.09 –</time></header>
+        <p>사회적 공헌을 위해, 학교를 그만둔 <b>학교 밖 청소년을 위한 진로 설계 서비스</b>를 개발하고 있습니다. 2026 네트워킹 데이(이화여대)에서는 오픈마이크로 무대에 섰습니다.</p>
+        <div class="pics" style="--cols:1fr;--h:156px"><figure><img src="/work/img/act-lookie-openmic.jpg" width="1290" height="834" alt="LOOKIE 네트워킹 데이 오픈마이크에서 마이크를 들고 말하는 모습"><figcaption>2026 네트워킹 데이 오픈마이크 · 9.22</figcaption></figure></div>
       </section>
     </div>
 
     <section class="act" style="--t:var(--c)">
       <div class="side" style="grid-template-columns:1fr 330px">
         <div style="display:grid;gap:8px">
-          <header><h2>연세대 캠퍼스타운 스타트업 성장 세미나</h2><time>2026.09.30</time></header>
-          <p>연세대학교 캠퍼스타운사업단이 연 <b>스타트업 성장 세미나</b>에 참가했습니다.</p>
+          <header><h2>창업 세미나</h2><time>2026 –</time></header>
+          <p>창업에 관심이 많아 평소 <b>다양한 창업 세미나</b>에 참가합니다. 사진은 연세대학교 캠퍼스타운사업단의 스타트업 성장 세미나(9.30)입니다.</p>
         </div>
         <div class="pics" style="--h:150px"><figure><img src="/work/img/act-seminar-badge.jpg" width="1200" height="1600" alt="2026 연세대 캠퍼스타운사업단 스타트업 성장 세미나 명찰" style="object-position:center 55%"><figcaption>참가 명찰</figcaption></figure><figure><img src="/work/img/act-seminar-hall.jpg" width="1200" height="1600" alt="스타트업 성장 세미나 안내 배너가 놓인 복도"><figcaption>세미나장</figcaption></figure></div>
       </div>
@@ -203,7 +198,7 @@ h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--l
           <header><h2>가짜연구소 13기 러너 · Physical AI</h2><time>2026.10 –</time></header>
           <p>Reachy Mini와 Micro Duck을 사며 Physical AI에 관심이 생겨 합류했습니다. <b>"Physical AI 시뮬레이션에서 실패하는 3D 에셋 도감"</b>: 공개 3D 에셋 50개 이상을 MuJoCo·Isaac Sim에서 시험해 가라앉음·떨림·미끄러짐을 자동으로 재는 14주 프로젝트입니다.</p>
         </div>
-        <div class="pics" style="--h:150px;--pos:center top"><figure><img src="/work/img/act-pseudolab-cover.jpg" width="732" height="784" alt="SimAsset Evaluation 프로젝트 소개 화면"><figcaption>프로젝트 소개</figcaption></figure><figure><img src="/work/img/act-pseudolab-page.jpg" width="1292" height="1269" alt="가짜연구소 프로젝트 페이지: 팀 구성과 일정"><figcaption>프로젝트 페이지</figcaption></figure></div>
+        <div class="pics" style="--h:150px;--pos:center top"><figure><img src="/work/img/act-pseudolab-cover.png" width="732" height="784" alt="SimAsset Evaluation 프로젝트 소개 화면"><figcaption>프로젝트 소개</figcaption></figure><figure><img src="/work/img/act-pseudolab-page.png" width="1292" height="1269" alt="가짜연구소 프로젝트 페이지: 팀 구성과 일정"><figcaption>프로젝트 페이지</figcaption></figure></div>
       </div>
     </section>
 
@@ -217,14 +212,14 @@ h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--l
         </ul>
       </div>
       <div class="box plan">
-        <h3>이번 DevDay에서</h3>
-        <p>강의 영상을 만들며 겪은 반복 편집(찾기 → 배치 → 수정)을 줄이는 <b>대본 중심 AI 영상 편집</b> 도구를 만듭니다. 첫 실사용자는 저 자신이며, 시간 절감 효과는 아직 측정 전입니다.</p>
+        <h3>이번 DevDay에서 · SceneWhisk</h3>
+        <p><b>1인 정보성 영상 제작자</b>에게 대본에 맞는 화면·짤·효과음을 추천하고 설명 시점에 배치하는 AI 웹서비스. 확정된 대본·장면은 잠그고 필요한 부분만 수정·복구합니다. 60~90초 영상의 입력 → 추천·배치 → 부분 수정 → MP4 출력을 시연하며, 기존 방식 대비 <b>작업 시간 30% 감소</b>가 목표입니다.</p>
       </div>
     </div>
 
     <div class="foot">
-      <p><b>제가 다음 영상부터 사용할 도구를 만듭니다.</b>정회광 · 연세대학교 화학과 · 1인 팀 sweetbutters</p>
-      <p class="links">github.com/Sweet-Butters<br><a href="/ko/work/">전체 포트폴리오 ↗</a></p>
+      <p><b>만들고, 가르치고, 나가서 발표합니다.</b>정회광 · 연세대학교 화학과 · 1인 팀 sweetbutters</p>
+      <p class="links">github.com/Sweet-Butters</p>
       <img class="qr" src="img/qr.svg" width="80" height="80" alt="이 페이지 주소 QR 코드">
     </div>
   </div>
