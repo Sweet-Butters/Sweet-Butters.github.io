@@ -74,6 +74,17 @@ h1 { margin: 8px 0 0; font: 400 clamp(38px, 6vw, 72px)/1.08 var(--display); lett
 
 /* ---------- the ride: pinned vertical map on the left, stops scroll past on the right ---------- */
 /* four stories: each starts from a problem, ends at a stop on the map */
+.all { padding-block: 0 36px; }
+.all-groups { display: grid; gap: 14px; margin-top: 16px; }
+.all-group { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: start; }
+.all-group > i { width: 34px; height: 34px; border-radius: 50%; background: var(--s); color: #fff; display: grid; place-items: center; font: 400 17px/1 var(--display); font-style: normal; margin-top: 2px; }
+.all-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 8px; }
+.all-grid a { display: flex; flex-direction: column; gap: 2px; min-height: 64px; height: 100%; box-sizing: border-box; padding: 8px 10px; background: #fff; border: 2px solid var(--ink); border-left: 7px solid var(--s); color: var(--ink); text-decoration: none; line-height: 1.3; }
+.all-grid a:hover { background: var(--mark); }
+.all-grid a:focus-visible { outline: 3px solid var(--s); outline-offset: 2px; }
+.all-grid small { font: 600 11.5px/1.2 var(--mono); color: var(--ink-2); }
+.all-grid b { font-size: 14.5px; font-weight: 700; }
+.all-grid .soon { border-style: dashed; border-left-style: solid; }
 .why { padding-block: 8px 44px; }
 .why-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
 .story-card { background: #fff; border: 2px solid var(--ink); border-top: 8px solid var(--s); padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
@@ -182,6 +193,11 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
   .facts { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .story, .story.big { min-height: 0; }
   .section-head, .story { scroll-margin-top: 70px; }
+  .all-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .all-group { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .all-group > i { width: 28px; height: 28px; font-size: 15px; }
+  .all-grid a { min-height: 56px; padding: 6px 8px; }
+  .all-grid b { font-size: 13.5px; }
 }
 @media (max-width: 560px) {
   .topbar nav a.opt { display: none; }
@@ -241,6 +257,15 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       <div><span class="k"><span class="en">AI Contest Radar</span><span class="ko">AI 공모전 레이더</span></span> <span class="en">collected</span><span class="ko">수집</span> <b id="led-c">4,133</b><span class="ko">건</span> → <span class="en">live</span><span class="ko">게시</span> <b id="led-end">551</b><span class="ko">건</span></div>
       <div><span class="k"><span class="en">Runs</span><span class="ko">자동 실행</span></span> <span class="en">daily 06:00 KST, GitHub Actions</span><span class="ko">GitHub Actions 매일 06:00</span></div>
     </div>
+  </section>
+
+  <!-- Everything at a glance: one small box per stop, built from STOPS; a click rides down to that stop. -->
+  <section class="wrap all" id="all" aria-labelledby="all-h">
+    <div class="sec-head">
+      <h2 id="all-h"><span class="ko">한눈에 보기</span><span class="en">Everything at a glance</span></h2>
+      <p><span class="ko">제가 한 일을 모두 작은 상자로 모았어요. 누르면 노선도의 그 역으로 내려가요.</span><span class="en">Everything I've done, one small box each. Click one to ride down to its stop on the map.</span></p>
+    </div>
+    <div class="all-groups" id="all-grid"></div>
   </section>
 
   <!-- Four stories, each from a problem I actually had or saw, to a result on the map below. -->
@@ -437,6 +462,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       when: { en: "2026-10 · in progress, for Hangul Day (9 Oct)", ko: "2026-10 · 진행 중 · 한글날(10.9)을 앞두고" },
       text: { en: "A browser tool that turns a saved video into black-and-white Hangul art, entirely on your own device: nothing is uploaded. For Hangul Day I'm making two dance pieces on a 96 × 96 grid of Hangul: one where single consonants and vowels combine into whole syllables across the dancer's silhouette, and one where the silhouette is written in the opening line of the Hunminjeongeum (the 1446 text that introduced Hangul).",
         ko: "저장된 영상을 흑백 한글 글자 그림으로 바꾸는 브라우저 도구예요. 변환은 전부 내 기기 안에서 하고, 영상을 어디에도 올리지 않아요. 한글날을 위해 96 × 96 한글 격자 위에 두 가지 춤 영상을 만들고 있어요. 하나는 자음·모음 낱자가 춤추는 실루엣을 따라 완성된 글자로 합쳐지는 장면, 다른 하나는 훈민정음 서문의 첫 구절로 실루엣을 그리는 장면이에요." },
+      photo: ["/work/img/hangul.jpg", { en: "A dancer pose I drew in code, filled with the opening line of the Hunminjeongeum on a Hangul grid (stand-in until I have dance footage I can share)", ko: "코드로 그린 춤 동작 실루엣을 훈민정음 서문으로 채운 한글 격자 (공유할 수 있는 춤 영상을 구하기 전까지의 대체 장면)" }],
       list: { en: [
         "Limit, written down: the dancer is separated from a plain light background by colour, not by recognising a person",
         "The sample dance clip has no confirmed licence to redistribute, so the pieces aren't published until I have footage I'm allowed to share"],
@@ -448,6 +474,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       when: { en: "2026-10 · in progress · private project", ko: "2026-10 · 진행 중 · 비공개 프로젝트" },
       text: { en: "For people improving 2D illustrations they made with AI. Give it one picture and what you wanted, and it points out where the picture misses the request (glasses, colours, props) and where shapes look wrong (parts fused or broken), with its evidence and how unsure it is. You choose what to fix and compare before and after.",
         ko: "AI로 만든 2D 그림을 고치려는 사람을 위한 도구예요. 그림 한 장과 원했던 것을 넣으면, 요청과 어긋난 곳(안경·색·소품)과 형태가 이상한 곳(엉겨 붙거나 끊긴 부분)을 근거와 불확실성까지 함께 짚어 줘요. 무엇을 고칠지는 사용자가 고르고, 고치기 전후를 비교해서 정해요." },
+      photo: ["/work/img/illust.jpg", { en: "The review screen: the character reference sheet (left) beside the panels to check (right)", ko: "검수 화면: 캐릭터 기준표(왼쪽)와 검사할 컷들(오른쪽)" }],
       list: { en: [
         "Taste is kept apart from defects: colour or composition ideas are suggestions, never a \"fail\"",
         "Deliberate style (chibi, exaggerated proportions) is not treated as a defect, and there is no single quality score for the whole picture",
@@ -593,6 +620,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       when: { en: "2026-10 · 14 weeks · Runner", ko: "2026-10 · 14주 · 러너" },
       text: { en: "I got interested in Physical AI and bought two small robots, Reachy Mini and Micro Duck. To learn how to put them to real use, I joined Pseudo Lab, a Korean open AI research community, as a Runner on a season-13 project. 3D assets that look fine on screen can sink through the floor, shake or slide once a physics engine runs them; the project tests 50+ public assets in MuJoCo and Isaac Sim, measures those failures automatically, and will publish the inspection tool and the dataset.",
         ko: "Physical AI에 관심이 생겨 작은 로봇 Reachy Mini와 Micro Duck을 샀어요. 이걸 제대로 활용하는 법을 배우려고, 오픈 AI 연구 커뮤니티인 가짜연구소 13기 프로젝트에 러너로 합류했어요. 화면에서는 멀쩡한 3D 에셋도 물리 엔진 안에서는 바닥을 뚫고 가라앉거나, 떨리거나, 미끄러질 수 있어요. 공개 3D 에셋 50개 이상을 MuJoCo와 Isaac Sim에서 시험해 이런 실패를 자동으로 재고 판정하고, 검사 도구와 평가 데이터셋을 공개하는 프로젝트예요." },
+      photo: ["/work/img/pseudolab.jpg", { en: "My own MuJoCo drop test: three crates that look identical. With no collision shape the middle one falls through the floor; with one that's too small the right one sinks halfway", ko: "직접 돌린 MuJoCo 낙하 시험: 겉모습이 같은 상자 셋. 충돌 형상이 없는 가운데는 바닥을 뚫고, 충돌 형상이 작은 오른쪽은 반쯤 박힘" }],
       nums: [["50+", { en: "public 3D assets to test", ko: "개 이상의 공개 3D 에셋 검사" }], ["2", { en: "robots of my own: Reachy Mini, Micro Duck", ko: "대의 내 로봇: Reachy Mini, Micro Duck" }]],
       link: ["https://pseudo-lab.com/projects/a7849f26-0c40-4cc2-be22-a4ec9c11b690", { en: "See the project", ko: "프로젝트 보기" }] },
     { s: "u", id: "lecturer", tags: ["u", "d"], short: { en: "AI instructor", ko: "AI 강사" }, title: { en: "AI instructor", ko: "AI 강사" }, when: "2026 –",
@@ -646,6 +674,15 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       rows.push({ hd: true, s: k, id: "sec-" + k, short: t(SECTIONS[k].title) });
       stops.filter((x) => x.s === k).forEach((x) => rows.push({ ...x, short: t(x.short), title: t(x.title), code: code(x, ++count[k]) }));
     }
+    // "Everything at a glance": one box per stop, grouped by section.
+    $("all-grid").innerHTML = ["c", "r", "u", "d"].map((k) => {
+      const items = rows.filter((x) => !x.hd && x.s === k).map((x) => {
+        const when = t(x.when);
+        return `<li><a href="#stop-${x.id}" data-i="${rows.indexOf(x)}" class="${x.soon ? "soon" : ""}" style="--s:var(--${k})"><small>${x.code}${when ? " · " + when.split(" · ")[0] : ""}</small><b>${x.short}</b></a></li>`;
+      }).join("");
+      return `<div class="all-group" style="--s:var(--${k})"><i aria-hidden="true">${SECTIONS[k].letter}</i><ul class="all-grid" aria-label="${t(SECTIONS[k].title)}">${items}</ul></div>`;
+    }).join("");
+
     // map: one line, coloured by section
     const map = $("map");
     map.style.setProperty("--n", rows.length);
@@ -713,6 +750,13 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     if (hit !== undefined && hit !== cur) { cur = hit; update(); }
   }, { rootMargin: "-45% 0px -45% 0px" });
   function observe() { io.disconnect(); seen.clear(); $$("#stories [data-i]").forEach((el) => io.observe(el)); }
+  $("all-grid").addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-i]"); if (!a) return;
+    e.preventDefault();
+    const el = document.querySelector(`#stories [data-i="${a.dataset.i}"]`);
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    history.replaceState(null, "", a.getAttribute("href"));
+  });
   $("map").addEventListener("click", (e) => {
     const b = e.target.closest(".row"); if (!b) return;
     document.querySelector(`#stories [data-i="${b.dataset.i}"]`).scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
