@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>정회광 · 빌더 포트폴리오</title>
+<meta name="description" content="AI로 만들고, 매일 돌아가게 하고, 나가서 발표하는 빌더 정회광의 전체 포트폴리오. THE HACK CAMPUS 지원용.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="정회광 · AI로 만들고, 매일 돌아가게 합니다">
+<meta property="og:description" content="SCPC AI 본선, 연세대 AI 창업캠프 Top 10, 오픈소스 PR 병합, 매일 돌아가는 서비스 4개, 40명 AI 교습소. 사진으로 보는 전체 작업.">
+<meta property="og:url" content="https://sweet-butters.github.io/campus/">
+<meta property="og:image" content="https://sweet-butters.github.io/work/img/act-camp-pitch.jpg">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://sweet-butters.github.io/campus/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231b1f2a'/><circle cx='16' cy='16' r='9' fill='white' stroke='%23b8860b' stroke-width='4'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<!-- Full builder portfolio for THE HACK CAMPUS (Season 2). Six A4 sheets, photos first, short text.
+     Same look as /devday/. Each .sheet is one A4 page when printed (840 px layout zoomed onto 210 mm).
+     Images are the original files; the PDF upload (10 MB cap) is made separately. -->
+<style>
+:root {
+  --ink: #1b1f2a; --ink-2: #4a5061; --paper: #f2efe8; --board: #fbfaf6; --rule: #d9d4c8; --mark: #f3e3a8; --led: #ffc94a;
+  --c: #1f8a4c; --r: #2456c9; --u: #b8860b; --d: #c8356e;
+  --display: "Black Han Sans", "IBM Plex Sans KR", sans-serif;
+  --ui: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: #e4e0d6; color: var(--ink); font: 400 14px/1.55 var(--ui); word-break: keep-all; overflow-wrap: anywhere; }
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+h1, h2, h3, p, figure, ul, ol { margin: 0; }
+img { display: block; max-width: 100%; }
+
+.sheet { width: min(840px, 100%); min-height: 1188px; margin: 24px auto; background: var(--paper); box-shadow: 0 2px 0 var(--rule), 0 10px 30px rgba(27,31,42,.12); overflow: hidden; display: flex; flex-direction: column; }
+.bar { background: var(--ink); color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 10px 28px; font-size: 13px; }
+.bar b { font-family: var(--display); font-weight: 400; font-size: 17px; letter-spacing: .02em; }
+.bar span { font-family: var(--mono); color: #c9cbd3; }
+.stripe { display: flex; height: 5px; } .stripe i { flex: 1; }
+.stripe i:nth-child(1) { background: var(--c); } .stripe i:nth-child(2) { background: var(--r); } .stripe i:nth-child(3) { background: var(--u); } .stripe i:nth-child(4) { background: var(--d); }
+.inner { padding: 18px 28px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+
+.eyebrow { font: 600 12px var(--mono); color: var(--ink-2); letter-spacing: .02em; }
+h1 { font: 400 44px/1.12 var(--display); margin: 6px 0 10px; }
+h1 em { font-style: normal; background: linear-gradient(transparent 62%, var(--led) 62%); }
+.motto { font: 400 22px/1.2 var(--display); }
+.motto b { font-weight: 400; background: var(--led); padding: 0 6px; }
+.lead { font-size: 15px; color: var(--ink-2); }
+.lead b { color: var(--ink); }
+.cover { display: grid; grid-template-columns: 1fr 330px; gap: 20px; align-items: stretch; }
+.cover figure { border: 2px solid var(--ink); background: #fff; }
+.cover img { width: 100%; height: 100%; min-height: 470px; object-fit: cover; object-position: center 40%; }
+.who { font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+.who b { color: var(--ink); font-size: 15px; }
+
+.sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.sum div { background: var(--board); border: 2px solid var(--ink); border-top: 6px solid var(--t); padding: 7px 11px 8px; }
+.sum b { display: block; font: 400 22px/1.2 var(--display); }
+.sum span { font-size: 12px; color: var(--ink-2); line-height: 1.4; display: block; }
+
+.toc { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.toc li { border: 2px solid var(--ink); background: var(--board); padding: 8px 12px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; }
+.toc i { width: 34px; height: 34px; border-radius: 50%; background: var(--t); color: #fff; display: grid; place-items: center; font: 400 15px/1 var(--display); font-style: normal; }
+.toc b { display: block; font: 400 17px/1.25 var(--display); }
+.toc span { font-size: 12.5px; color: var(--ink-2); }
+
+/* a section opener on each sheet */
+.sec { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; border-bottom: 2px solid var(--ink); padding-bottom: 10px; }
+.sec i { width: 46px; height: 46px; border-radius: 50%; background: var(--t); color: #fff; display: grid; place-items: center; font: 400 22px/1 var(--display); font-style: normal; }
+.sec h2 { font: 400 28px/1.15 var(--display); }
+.sec p { font-size: 13.5px; color: var(--ink-2); }
+
+/* one piece of work: photos first, a title, one or two short lines, a number or two */
+.act { background: var(--board); border: 2px solid var(--ink); border-left: 8px solid var(--t); padding: 9px 13px 10px; display: grid; gap: 6px; }
+.act header { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; }
+.act h3 { font: 400 19px/1.3 var(--display); }
+.act time { font: 600 11.5px var(--mono); color: var(--t); white-space: nowrap; }
+.act p { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+.act p b { color: var(--ink); }
+.badge { display: inline-block; vertical-align: 3px; margin-left: 6px; font: 400 14px/1 var(--display); color: #fff; background: var(--t); padding: 4px 9px 3px; border-radius: 4px; }
+.n { display: flex; flex-wrap: wrap; gap: 6px; }
+.n span { font-size: 12px; color: var(--ink-2); background: #fff; border: 1.5px solid var(--rule); padding: 1px 8px; border-radius: 10px; }
+.n b { color: var(--ink); font-weight: 700; }
+.pics { display: grid; gap: 8px; grid-template-columns: var(--cols, 1fr 1fr); }
+.pics figure { border: 2px solid var(--ink); background: #fff; }
+.pics img { width: 100%; height: var(--h, 160px); object-fit: cover; object-position: var(--pos, center); }
+.pics figcaption { font-size: 11px; color: var(--ink-2); padding: 2px 7px; border-top: 1px solid var(--rule); background: var(--board); }
+.side { display: grid; grid-template-columns: 1fr var(--w, 260px); gap: 12px; align-items: start; }
+.side > div:first-child { display: grid; gap: 6px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: start; }
+.soon { border-style: dashed; }
+
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-top: auto; padding-top: 12px; border-top: 2px solid var(--ink); }
+.foot p { font-size: 13px; color: var(--ink-2); }
+.foot p b { color: var(--ink); font: 400 21px/1.3 var(--display); display: block; }
+.foot .links { font: 600 12.5px/1.8 var(--mono); }
+.qr { width: 84px; flex: none; border: 2px solid var(--ink); background: #fff; padding: 4px; }
+.page-no { font: 600 11px var(--mono); color: var(--ink-2); text-align: right; margin-top: auto; }
+
+@media (max-width: 700px) {
+  .sheet { margin: 0 auto; min-height: 0; box-shadow: none; border-bottom: 8px solid #e4e0d6; }
+  .bar, .inner { padding-left: 14px; padding-right: 14px; }
+  .cover, .side, .side[style], .two, .three, .toc { grid-template-columns: 1fr !important; }
+  .sum { grid-template-columns: 1fr 1fr; }
+  h1 { font-size: 34px; }
+  .pics { --cols: 1fr 1fr !important; }
+  .pics img { height: 130px; }
+  .foot { flex-wrap: wrap; }
+}
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { width: 840px; height: 1188px; min-height: 0; margin: 0; box-shadow: none; zoom: 0.945; break-after: page; }
+  .sheet:last-child { break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1 · cover -->
+<article class="sheet" aria-label="1쪽">
+  <div class="bar"><b>정회광</b><span>THE HACK CAMPUS · 빌더 포트폴리오 · 1 / 6</span></div>
+  <div class="stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="inner">
+    <div class="cover">
+      <div>
+        <p class="motto"><b>Proactive.</b></p>
+        <p class="eyebrow" style="margin-top:10px">AI 시대에는 실행력이 가장 중요하다고 생각합니다</p>
+        <h1>AI로 만들고,<br><em>매일 돌아가게</em> 합니다.</h1>
+        <p class="lead">데모로 끝내지 않고 <b>매일 실제로 돌아가는 서비스</b>를 만들고, 대회와 커뮤니티에 나가 발표하고, 배운 것을 가르칩니다.</p>
+        <p class="who"><b>정회광</b> · 연세대학교 화학과 · 1인 팀 sweetbutters<br>github.com/Sweet-Butters · sweet-butters.github.io</p>
+      </div>
+      <figure><img src="/work/img/act-camp-pitch.jpg" width="4000" height="3000" alt="연세대 AI 창업캠프 999: Trainthon에서 chemcheck를 발표하는 모습"></figure>
+    </div>
+
+    <div class="sum">
+      <div style="--t:var(--u)"><b>SCPC AI 본선</b><span>삼성전자 · 1,845명 참가, 본선 21명</span></div>
+      <div style="--t:var(--c)"><b>Top 10 선정</b><span>연세대 AI 창업캠프 999: Trainthon</span></div>
+      <div style="--t:var(--r)"><b>PR 2건 병합</b><span>오픈소스 jev-chat-windows (별 732)</span></div>
+      <div style="--t:var(--c)"><b>매일 운영 4개</b><span>공모전 레이더 · 청소년 혜택 찾기 · 메일 알림 · TripPups</span></div>
+      <div style="--t:var(--d)"><b>AI 교습소 40명</b><span>당근 모임 · 대학생·직장인·중장년층</span></div>
+      <div style="--t:var(--u)"><b>인강 5기 튜터</b><span>연세프리미엄 인강 · 바이브코딩 강의</span></div>
+    </div>
+
+    <ol class="toc" aria-label="목차">
+      <li style="--t:var(--u)"><i>2</i><div><b>대회 · 해커톤</b><span>SCPC 본선, Trainthon Top 10, DevDay, 해커톤 운영</span></div></li>
+      <li style="--t:var(--c)"><i>3</i><div><b>매일 돌아가는 서비스</b><span>공모전 레이더, 청소년 혜택 찾기, TripPups</span></div></li>
+      <li style="--t:var(--r)"><i>4</i><div><b>판단 먼저 하는 AI · 오픈소스</b><span>Jev 실사용, replydesk, 오픈소스 PR</span></div></li>
+      <li style="--t:var(--d)"><i>5</i><div><b>가르치고 연결하기</b><span>AI 교습소, 인강 튜터, 창업 커뮤니티</span></div></li>
+      <li style="--t:var(--r)"><i>6</i><div><b>실험 · 연구</b><span>가짜연구소 Physical AI, 초파리 뇌, 한글 아트</span></div></li>
+      <li style="--t:var(--ink)"><i>↗</i><div><b>전체 작업 기록</b><span>sweet-butters.github.io/work</span></div></li>
+    </ol>
+    <p class="page-no">→</p>
+  </div>
+</article>
+
+<!-- 2 · compete -->
+<article class="sheet" aria-label="2쪽">
+  <div class="bar"><b>정회광</b><span>대회 · 해커톤 · 2 / 6</span></div>
+  <div class="stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="inner">
+    <div class="sec" style="--t:var(--u)"><i>2</i><div><h2>대회 · 해커톤</h2><p>혼자 만든 것을 밖에 내놓고, 심사위원 앞에서 설명합니다.</p></div></div>
+
+    <section class="act" style="--t:var(--u)">
+      <header><h3>삼성전자 SCPC AI 챌린지 본선</h3><time>2026.07 – 08</time></header>
+      <div class="pics" style="--cols:1.3fr 1.3fr .75fr;--h:205px">
+        <figure><img src="/work/img/act-scpc-hall.jpg" width="1920" height="1080" alt="SCPC 2026 AI 본선 행사장 무대와 좌석 배치도"><figcaption>본선 좌석 배치도에 오른 제 이름</figcaption></figure>
+        <figure><img src="/work/img/act-scpc-lobby.jpg" width="4000" height="3000" alt="제12회 삼성전자 대학생 프로그래밍 챌린지 현수막이 걸린 로비"><figcaption>본선 행사장 · 8.21</figcaption></figure>
+        <figure><img src="/work/img/act-scpc-keyboard.jpg" width="4000" height="3000" alt="SCPC 2026 로고가 들어간 키보드" style="object-position:center 40%"><figcaption>SCPC 2026</figcaption></figure>
+      </div>
+      <p>1차는 언어모델 없는 규칙 엔진, 2차는 작업이 바뀌어도 기억을 이어 가는 안드로이드 비서. AI 전공자들과 겨뤄 본선에서 발표했습니다.</p>
+      <div class="n"><span><b>1,845명</b> 참가</span><span><b>21명</b> 본선</span><span>1차 비공개 채점 <b>35위 / 127</b></span><span>테스트 <b>294개</b> 통과</span></div>
+    </section>
+
+    <section class="act" style="--t:var(--c)">
+      <header><h3>연세대학교 AI 창업캠프 999: Trainthon<span class="badge">Top 10 선정</span></h3><time>2026.09.09 – 10</time></header>
+      <div class="pics" style="--cols:1fr 1fr 1fr;--h:190px">
+        <figure><img src="/work/img/act-camp-room.jpg" width="4000" height="3000" alt="해커톤 현장에서 참가자들이 노트북으로 작업 중"><figcaption>해커톤 현장</figcaption></figure>
+        <figure><img src="/work/img/act-camp-pitch.jpg" width="4000" height="3000" alt="Chemcheck: AI 생성 분자구조 검증 Guardrail, Team 29 발표" style="object-position:center 35%"><figcaption>chemcheck 발표 · Team 29</figcaption></figure>
+        <figure><img src="/work/img/chemcheck.jpg" width="1280" height="800" alt="chemcheck가 Gemini가 그린 카페인을 다른 분자로 판정한 화면" style="object-position:left top"><figcaption>실제 판정 화면</figcaption></figure>
+      </div>
+      <p>AI가 그린 화학 구조가 정말 그 분자인지 검사하는 <b>chemcheck</b>. KTX 안에서 휴대폰의 Cursor로 시작해 1인 팀으로 완성했습니다.</p>
+      <div class="n"><span><b>45 / 50</b> 정확</span><span>자신 있게 틀림 <b>0</b></span><span>판정에 LLM <b>0</b></span></div>
+    </section>
+
+    <div class="two">
+      <section class="act soon" style="--t:var(--d)">
+        <header><h3>SceneWhisk · DevDay 해커톤</h3><time>2026.10</time></header>
+        <p>1인 정보성 영상 제작자에게 대본에 맞는 화면·짤·효과음을 추천하고 설명 시점에 배치하는 AI 웹서비스. Track 2 AI for Human Life.</p>
+        <div class="n"><span>60~90초 영상 → <b>MP4</b></span><span>작업 시간 <b>30% 감소</b> 목표</span></div>
+      </section>
+      <section class="act" style="--t:var(--c)">
+        <header><h3>ElevenLabs 후원 AI 해커톤 운영</h3><time>2026.10.31</time></header>
+        <p>콜드메일로 TTS 기업 ElevenLabs의 후원을 받아내, 참가자에서 운영자·출제자·심사자로. 2인 공동 운영, 선릉역.</p>
+        <div class="n"><span>후원 <b>$1,500</b></span><span>참가자 <b>16명</b> 모집</span></div>
+      </section>
+    </div>
+    <p class="page-no">→</p>
+  </div>
+</article>
+
+<!-- 3 · build and run -->
+<article class="sheet" aria-label="3쪽">
+  <div class="bar"><b>정회광</b><span>매일 돌아가는 서비스 · 3 / 6</span></div>
+  <div class="stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="inner">
+    <div class="sec" style="--t:var(--c)"><i>3</i><div><h2>매일 돌아가는 서비스</h2><p>제가 겪은 불편에서 시작해, 만든 뒤에도 매일 자동으로 돌아가게 합니다.</p></div></div>
+
+    <section class="act" style="--t:var(--c)">
+      <header><h3>AI 공모전 레이더</h3><time>2026.09 – · 매일 06:00</time></header>
+      <div class="pics" style="--cols:1.4fr 1fr;--h:176px;--pos:left top">
+        <figure><img src="/work/img/radar.jpg" width="1280" height="800" alt="AI 공모전 레이더 화면: 대회 검색과 분야 필터"><figcaption>실제 사이트</figcaption></figure>
+        <figure><img src="/work/img/radar-code.jpg" width="1280" height="800" alt="korea-ai-contest-tracker GitHub 저장소"><figcaption>GitHub Actions로 매일 자동 실행</figcaption></figure>
+      </div>
+      <p>국내 AI 대회·해커톤을 13개 사이트에서 매일 자동으로 모아, 가짜와 중복을 걸러 한곳에 보여 줍니다. 비용 때문에 LLM 검색을 걷어 내고 규칙 + Jev 판정으로 바꿨습니다.</p>
+      <div class="n"><span>사이트 <b>13개</b></span><span>하루 약 <b>4,000건</b> 수집</span><span>판정 비용 <b>$0.0004</b>/일</span><span>날짜 불일치 <b>108 → 15</b></span></div>
+    </section>
+
+    <div class="two">
+      <section class="act" style="--t:var(--c)">
+        <header><h3>청소년 혜택 찾기</h3><time>2026.09 –</time></header>
+        <div class="pics" style="--cols:1fr;--h:170px;--pos:left top"><figure><img src="/work/img/youth-site.jpg" width="1280" height="800" alt="청소년 혜택 찾기 사이트 화면"><figcaption>"뭘 하고 싶은지 몰라도 돼요"</figcaption></figure></div>
+        <p>학교 밖 청소년이 진로에 맞는 장학금·활동·공모전을 한곳에서. 출처 14곳을 매일 모읍니다.</p>
+        <div class="n"><span><b>8,225개</b> 수집 (9.28)</span><span>출처 <b>14곳</b></span></div>
+      </section>
+      <section class="act" style="--t:var(--c)">
+        <header><h3>메일 알림 (첫 프로젝트)</h3><time>2026.05 –</time></header>
+        <p>언제 올지 모르는 공모전·교수님 메일을 Gemini가 분류해, 원하는 것만 텔레그램으로 보냅니다. 지금도 매일 돌아갑니다.</p>
+        <div class="n"><span>운영비 <b>월 0원</b></span><span>2026.05부터 <b>운영 중</b></span></div>
+      </section>
+    </div>
+
+    <section class="act" style="--t:var(--r)">
+      <header><h3>TripPups · 외국인 자유여행 앱</h3><time>2026.09 공개 · trip-pups.com</time></header>
+      <div class="pics" style="--cols:1fr 1fr 1fr 1.6fr;--h:170px;--pos:center top">
+        <figure><img src="/insight-trip/img/app-swipe.jpg" width="600" height="1185" alt="스와이프로 여행 짜기 화면"><figcaption>스와이프로 일정</figcaption></figure>
+        <figure><img src="/insight-trip/img/app-plan.jpg" width="600" height="1185" alt="숙소 주변 하루 코스 지도"><figcaption>하루 코스</figcaption></figure>
+        <figure><img src="/insight-trip/img/app-today.jpg" width="600" height="1185" alt="여기서 다음은? 화면"><figcaption>"여기서 다음은?"</figcaption></figure>
+        <figure><img src="/insight-trip/img/interview.jpg" width="1280" height="720" alt="교내 외국인 유학생 인터뷰와 QR 포스터"><figcaption>유학생 인터뷰 · QR 포스터</figcaption></figure>
+      </div>
+      <p>카드를 넘겨 일정을 짜고, 가게가 닫혀 있으면 그 자리에서 다른 곳을 다시 추천합니다. 공개 후 트래픽을 사람과 봇으로 나눠 계획을 고쳤습니다.</p>
+      <div class="n"><span>유학생 <b>약 50명</b> 인터뷰</span><span>18일 요청 <b>19,813건</b> 분석</span><span><b>모두의 창업</b> 지원</span></div>
+    </section>
+    <p class="page-no">→</p>
+  </div>
+</article>
+
+<!-- 4 · judge-first AI and open source -->
+<article class="sheet" aria-label="4쪽">
+  <div class="bar"><b>정회광</b><span>판단 먼저 하는 AI · 오픈소스 · 4 / 6</span></div>
+  <div class="stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="inner">
+    <div class="sec" style="--t:var(--r)"><i>4</i><div><h2>판단 먼저 하는 AI · 오픈소스</h2><p>판단은 Jev, 생성은 LLM, 마지막 행동은 사람. 새 AI를 실제 문제에 붙이고 숫자로 확인합니다.</p></div></div>
+
+    <section class="act" style="--t:var(--r)">
+      <header><h3>새 AI 모델 Jev를 실제 서비스의 판정기로</h3><time>2026.09</time></header>
+      <div class="pics" style="--h:225px;--pos:center top">
+        <figure><img src="/work/img/jev.jpg" width="1280" height="800" alt="Jev 실사용 기록 페이지"><figcaption>실사용 기록</figcaption></figure>
+        <figure><img src="/work/img/jev-results.jpg" width="1280" height="800" alt="첫 전체 실행 결과 표"><figcaption>첫 전체 실행 결과</figcaption></figure>
+      </div>
+      <p>텍스트 대신 확률로 답하는 모델을 레이더에 붙이고, 100건에 정답을 달아 규칙·Jev·규칙+Jev를 같은 기준으로 채점했습니다.</p>
+      <div class="n"><span><b>3,728건</b> 판정</span><span>전체 비용 <b>$0.11</b></span><span>규칙+Jev <b>F1 0.876</b></span><span>놓친 AI 대회 <b>0</b></span></div>
+    </section>
+
+    <div class="two">
+      <section class="act" style="--t:var(--r)">
+        <header><h3>replydesk</h3><time>2026.09</time></header>
+        <div class="pics" style="--cols:1fr;--h:150px;--pos:left top"><figure><img src="/work/img/replydesk.jpg" width="1280" height="800" alt="replydesk 메일 판단 결과"><figcaption>답장 쓰기 전에 메일부터 판단</figcaption></figure></div>
+        <p>Jev가 8가지를 먼저 묻고, 필요한 메일에만 초안을 씁니다. 보내는 건 사람.</p>
+        <div class="n"><span>실제 메일함 <b>34건</b></span><span><b>19 / 20</b> 답장 불필요</span></div>
+      </section>
+      <section class="act" style="--t:var(--r)">
+        <header><h3>reply-copilot</h3><time>2026.09</time></header>
+        <div class="pics" style="--cols:1fr;--h:150px;--pos:left top"><figure><img src="/work/img/reply-copilot.jpg" width="1280" height="800" alt="reply-copilot 시험 실행 화면"><figcaption>유튜브·인스타 댓글에 같은 흐름</figcaption></figure></div>
+        <p>스팸·악플·답장 불필요면 초안 모델을 아예 부르지 않습니다. 발송 코드가 없습니다.</p>
+        <div class="n"><span>테스트 <b>39개</b></span><span>불필요 초안 <b>3 → 0</b></span></div>
+      </section>
+    </div>
+
+    <section class="act" style="--t:var(--u)">
+      <div class="side" style="--w:390px">
+        <div>
+          <header><h3>오픈소스 기여 · jev-chat-windows</h3><time>2026.09</time></header>
+          <p>중국에서 만들어진 채팅 부조종사(별 732)가 한국어에서 동작하지 않던 원인을 찾아, 윈도우 내장 OCR 백엔드와 다국어 UI를 기여했습니다.</p>
+          <div class="n"><span><b>PR 2건 병합</b> (9.28)</span><span>한국어 인식 <b>0 → 9 / 9</b></span><span>프레임당 <b>2.0초 → 0.2초</b></span></div>
+        </div>
+        <div class="pics" style="--cols:1fr;--h:175px;--pos:left top"><figure><img src="/work/img/jevchat-pr.jpg" width="1280" height="800" alt="원작 저장소의 PR #42"><figcaption>원본 저장소의 PR #42</figcaption></figure></div>
+      </div>
+    </section>
+    <p class="page-no">→</p>
+  </div>
+</article>
+
+<!-- 5 · teach and connect -->
+<article class="sheet" aria-label="5쪽">
+  <div class="bar"><b>정회광</b><span>가르치고 연결하기 · 5 / 6</span></div>
+  <div class="stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="inner">
+    <div class="sec" style="--t:var(--d)"><i>5</i><div><h2>가르치고 연결하기</h2><p>만든 것을 설명하고, 배우려는 사람을 모으고, 창업 커뮤니티에 나갑니다.</p></div></div>
+
+    <section class="act" style="--t:var(--d)">
+      <div class="side" style="--w:340px">
+        <div>
+          <header><h3>AI 교습소 (당근 모임)</h3><time>2026.08 –</time></header>
+          <p>2인 공동 운영. Claude Code 설치부터 각자의 프로젝트 공유까지. 건설업 감리 종사자, 온라인 쇼핑몰 사업자처럼 배경이 다른 사람들과 각자의 일에 AI를 붙입니다. 서강대학교에서도 AI 교육을 진행합니다.</p>
+          <div class="n"><span><b>40명</b> 커뮤니티</span><span>대학생·직장인·중장년층</span></div>
+        </div>
+        <div class="pics" style="--cols:1fr;--h:250px"><figure><img src="/work/img/act-aiclass.jpg" width="4032" height="3024" alt="Starting Claude Code 화면 앞에서 강의하는 모습"><figcaption>Starting Claude Code 강의 · 9.5</figcaption></figure></div>
+      </div>
+    </section>
+
+    <div class="two">
+      <section class="act" style="--t:var(--u)">
+        <header><h3>연세프리미엄 인강 5기 튜터</h3><time>2026.09</time></header>
+        <div class="pics" style="--cols:1fr;--h:215px;--pos:center top"><figure><img src="/work/img/act-yonsei-tutor.png" width="935" height="1158" alt="연세프리미엄 인강 5기 튜터 선발 결과 공지"><figcaption>5기 튜터 선발 결과 공지</figcaption></figure></div>
+        <p><b>"(입문) 바이브코딩의 한계를 부수자: 클로드 코드 실전용 skills"</b> 강의 런칭. 기획·촬영·편집 직접, 2027.02 공개.</p>
+      </section>
+      <section class="act" style="--t:var(--c)">
+        <header><h3>소셜벤처 창업학회 LOOKIE</h3><time>2026.09 –</time></header>
+        <div class="pics" style="--cols:1fr;--h:215px"><figure><img src="/work/img/act-lookie-openmic.jpg" width="1290" height="834" alt="LOOKIE 네트워킹 데이 오픈마이크"><figcaption>2026 네트워킹 데이 오픈마이크 · 9.22</figcaption></figure></div>
+        <p>사회적 공헌을 위해 <b>학교 밖 청소년을 위한 진로 설계 서비스</b>를 개발하고 있습니다.</p>
+      </section>
+    </div>
+
+    <section class="act" style="--t:var(--c)">
+      <div class="side" style="--w:360px">
+        <div>
+          <header><h3>창업 세미나</h3><time>2026 –</time></header>
+          <p>창업에 관심이 많아 평소 다양한 창업 세미나에 참가합니다. 사진은 연세대학교 캠퍼스타운사업단의 스타트업 성장 세미나(9.30).</p>
+          <p style="margin-top:6px"><b>AI 강사</b> · 대학생·직장인·중장년층 대상 온·오프라인 강의. 2026년 11월부터 초·중·고 강의를 시작하고, 학교 밖 청소년 AI 교육 봉사도 준비하고 있습니다.</p>
+        </div>
+        <div class="pics" style="--h:175px"><figure><img src="/work/img/act-seminar-badge.jpg" width="4000" height="3000" alt="스타트업 성장 세미나 명찰" style="object-position:center 55%"><figcaption>참가 명찰</figcaption></figure><figure><img src="/work/img/act-seminar-hall.jpg" width="4000" height="3000" alt="세미나 안내 배너가 놓인 복도"><figcaption>세미나장</figcaption></figure></div>
+      </div>
+    </section>
+    <p class="page-no">→</p>
+  </div>
+</article>
+
+<!-- 6 · experiments, and how to reach me -->
+<article class="sheet" aria-label="6쪽">
+  <div class="bar"><b>정회광</b><span>실험 · 연구 · 6 / 6</span></div>
+  <div class="stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="inner">
+    <div class="sec" style="--t:var(--r)"><i>6</i><div><h2>실험 · 연구</h2><p>궁금한 것은 직접 돌려 보고, 결과가 기대와 달라도 그대로 기록합니다.</p></div></div>
+
+    <section class="act" style="--t:var(--u)">
+      <div class="side" style="--w:380px">
+        <div>
+          <header><h3>가짜연구소 13기 러너 · Physical AI</h3><time>2026.10 –</time></header>
+          <p>Reachy Mini와 Micro Duck을 사며 Physical AI에 관심이 생겨 합류했습니다. 공개 3D 에셋 50개 이상을 MuJoCo·Isaac Sim에서 시험해 가라앉음·떨림·미끄러짐을 자동으로 잽니다.</p>
+          <div class="n"><span><b>14주</b> 프로젝트</span><span>에셋 <b>50+</b></span><span>내 로봇 <b>2대</b></span></div>
+        </div>
+        <div class="pics" style="--h:270px;--pos:center top"><figure><img src="/work/img/act-pseudolab-cover.png" width="732" height="784" alt="SimAsset Evaluation 프로젝트 소개"><figcaption>프로젝트 소개</figcaption></figure><figure><img src="/work/img/act-pseudolab-page.png" width="1292" height="1269" alt="가짜연구소 프로젝트 페이지"><figcaption>프로젝트 페이지</figcaption></figure></div>
+      </div>
+    </section>
+
+    <div class="three">
+      <section class="act" style="--t:var(--r)">
+        <header><h3>초파리 뇌 학습</h3></header>
+        <div class="pics" style="--cols:1fr;--h:210px"><figure><img src="/work/img/fly.png" width="1760" height="1120" alt="첫 실제 기출 파일럿의 학습·검증 곡선"><figcaption>첫 기출 파일럿</figcaption></figure></div>
+        <p>실제 초파리 뇌 연결(뉴런 64·연결 163)로 만든 신경망에 IQ형 문제와 수능 기출을 학습시킵니다.</p>
+      </section>
+      <section class="act" style="--t:var(--c)">
+        <header><h3>글결 · 한글날 아트</h3></header>
+        <div class="pics" style="--cols:1fr;--h:210px"><figure><img src="/work/img/hangul.png" width="1280" height="800" alt="훈민정음 서문으로 채운 춤 실루엣"><figcaption>훈민정음 서문으로 그린 춤</figcaption></figure></div>
+        <p>춤 영상을 기기 안에서 흑백 한글 글자 그림으로 바꾸는 브라우저 도구.</p>
+      </section>
+      <section class="act" style="--t:var(--c)">
+        <header><h3>AI 이미지 판별</h3></header>
+        <div class="pics" style="--cols:1fr;--h:210px;--pos:left top"><figure><img src="/work/img/illust.png" width="1320" height="825" alt="캐릭터 기준표와 검사할 컷들"><figcaption>검수 화면</figcaption></figure></div>
+        <p>AI로 만든 2D 그림에서 요청과 어긋난 곳을 근거와 함께 짚어 주는 도구.</p>
+      </section>
+    </div>
+
+    <div class="foot">
+      <p><b>만들고, 매일 돌아가게 하고, 나가서 발표합니다.</b>정회광 · 연세대학교 화학과 · 1인 팀 sweetbutters</p>
+      <p class="links">github.com/Sweet-Butters<br><a href="/ko/work/">sweet-butters.github.io/work ↗</a></p>
+      <img class="qr" src="img/qr.svg" width="84" height="84" alt="이 페이지 주소 QR 코드">
+    </div>
+  </div>
+</article>
+</body>
+</html>
