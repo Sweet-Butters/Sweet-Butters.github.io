@@ -11,7 +11,6 @@
 <meta property="og:title" content="SCPC AI 챌린지: 예선 두 번을 넘어 본선 발표까지">
 <meta property="og:description" content="언어모델 없는 규칙 엔진(비공개 채점 35위 / 127), 작업이 바뀌어도 기억을 이어 가는 안드로이드 비서, 그리고 본선 발표.">
 <meta property="og:url" content="https://sweet-butters.github.io/ko/scpc/">
-<meta property="og:image" content="https://sweet-butters.github.io/work/img/scpc.jpg">
 <meta property="og:locale" content="ko_KR">
 <link rel="canonical" href="https://sweet-butters.github.io/ko/scpc/">
 <link rel="alternate" hreflang="en" href="https://sweet-butters.github.io/scpc/">
@@ -278,10 +277,6 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
     <p><b>What I built.</b> A <b>field maintenance assistant</b> for lift (elevator) service technicians. I picked this job because every property the brief asked for happens there naturally: the same preparation repeats, night call-outs interrupt jobs, diagnoses flip on site, parts news arrives late, and one site's items must not leak into another. The app runs a deterministic core with no model calls, entirely on the phone, and sends no data to any server.</p>
     <p><b>The core rule.</b> Past items that are still valid carry into the next job without being asked again, and only what changed is re-planned. <b>Safety checks are the exception: they are asked every time.</b> Other jobs' items are shown but not used for this job's decisions.</p>
   </div>
-  <figure>
-    <img src="/work/img/scpc.jpg" alt="" width="1280" height="800" loading="lazy">
-    <figcaption><span class="ko">실제 앱 화면: 이번 작업 항목, 이전 작업에서 이월된 표준 항목(근거가 바뀌어 다시 계산 대기), 판단에 쓰지 않는 다른 작업의 항목(회색)</span><span class="en">The real app (in Korean): this job's items, a standard item carried over from an earlier job (waiting to be recalculated because its basis changed), and other jobs' items, greyed out and not used</span></figcaption>
-  </figure>
 
   <h3 class="ko">설계 결정: 기능을 더한 게 아니라, 사고가 날 자리를 없앴습니다</h3>
   <h3 class="en">Design calls: each one removes a way things could go wrong, rather than adding a feature</h3>
@@ -316,14 +311,6 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
     <li>Safety-check prompts were the same, 5 each: what shouldn't be reduced wasn't.</li>
     <li>Across 22,402 steps in total: 0 contract violations, 0 breaks in the state record, 0 exceptions. 258 JVM tests and 36 on-device tests pass.</li>
   </ul>
-  <figure>
-    <a href="/work/img/scpc-burden.jpg"><img src="/work/img/scpc-burden.jpg" alt="" width="1280" height="720" loading="lazy"></a>
-    <figcaption><span class="ko">본선 발표자료 3쪽: 같은 계획에 도달하기까지 사용자 조작은 5회 → 3회로 줄고, 안전 확인은 5 = 5로 그대로</span><span class="en">Finals slide 3 (in Korean): user actions to reach the same plan drop from 5 to 3, while safety checks stay at 5 = 5</span></figcaption>
-  </figure>
-  <figure>
-    <a href="/work/img/scpc-result.jpg"><img src="/work/img/scpc-result.jpg" alt="" width="1280" height="720" loading="lazy"></a>
-    <figcaption><span class="ko">본선 발표자료 13쪽: 작업이 길어질수록 차이가 벌어짐 (80단계에서 규칙을 끈 쪽의 재입력 요구 270건, 켠 쪽 0건). 판단 상태는 끝까지 같음</span><span class="en">Finals slide 13 (in Korean): the gap grows with longer runs (at 80 steps, 270 re-entry requests with the rule off, 0 with it on), while the decisions stay identical</span></figcaption>
-  </figure>
   <p class="ko">검사도 믿지 않았습니다. 테스트가 통과하는 것만으로는 아무것도 증명되지 않아서, <b>고친 부분을 되돌리면 그 테스트가 실제로 실패하는지</b>까지 확인했습니다. 시나리오 일부는 제가 쓰지 않은 평범한 서술로 만들고, 돌리기 전에 기대 결과를 먼저 적어 두었습니다.</p>
   <p class="en">I didn't trust the checks either. A passing test proves little, so I also checked that <b>undoing a fix makes its test actually fail</b>. Some scenarios came from plain descriptions I didn't write, and I wrote down the expected results before running them.</p>
 
@@ -345,10 +332,6 @@ figcaption { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
   <p class="round" id="finals"><span class="ko">본선 · 2026년 8월 21일</span><span class="en">FINALS · 21 AUGUST 2026</span></p>
   <h2 class="ko">동결한 앱을 설명하는 발표</h2>
   <h2 class="en">Presenting the frozen app</h2>
-  <figure>
-    <a href="/work/img/scpc-cover.jpg"><img src="/work/img/scpc-cover.jpg" alt="" width="1280" height="720" loading="lazy"></a>
-    <figcaption><span class="ko">본선 발표자료 표지: "유효한 과거만 이어받는 결정론적 상태 코어". 기능을 쌓은 게 아니라 문제를 하나씩 막았고, 그중 제 것은 하나라는 주장으로 시작했습니다</span><span class="en">Finals cover slide (in Korean): "A deterministic state core that inherits only the past that is still valid". It opens with the claim that I blocked problems one by one rather than piling up features, and that only one of the fixes is mine</span></figcaption>
-  </figure>
   <div class="ko">
     <h3>형식</h3>
     <p>2차 예선 결과로 21명이 본선에 올랐습니다. 본선은 새로 만드는 자리가 아니라, <b>제출 후 동결한 2차 앱</b>을 현장에서 설명하는 자리였습니다. 10분 발표 기준의 발표자료를 미리 제출하고, 발표 뒤에 심사위원 질의응답을 받았습니다. 발표자료에는 개인 식별 정보를 넣을 수 없었고, 현장에는 휴대폰·노트북을 가져갈 수 없었습니다. 저는 21명 중 한 명으로 발표했고, 수상은 하지 못했습니다.</p>

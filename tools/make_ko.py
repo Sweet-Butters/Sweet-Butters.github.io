@@ -39,7 +39,6 @@ PAGES = {
         "description": "2026 SCPC AI 챌린지 세 라운드에서 무엇을 만들었고 어떤 판단을 했는지, 제 말로 정리한 기록.",
         "og_title": "SCPC AI 챌린지: 예선 두 번을 넘어 본선 발표까지",
         "og_description": "언어모델 없는 규칙 엔진(비공개 채점 35위 / 127), 작업이 바뀌어도 기억을 이어 가는 안드로이드 비서, 그리고 본선 발표.",
-        "og_image": f"{SITE}/work/img/scpc.jpg",
     },
     "trippups/index.html": {
         "out": "ko/trippups/index.html",
@@ -54,6 +53,7 @@ PAGES = {
 
 
 def korean_head(page):
+    og_image = f'<meta property="og:image" content="{page["og_image"]}">\n' if page.get("og_image") else ""
     url_en, url_ko = SITE + page["path"], SITE + "/ko" + page["path"]
     return f"""<!-- head:start (generated Korean head) -->
 <title>{page['title']}</title>
@@ -62,8 +62,7 @@ def korean_head(page):
 <meta property="og:title" content="{page['og_title']}">
 <meta property="og:description" content="{page['og_description']}">
 <meta property="og:url" content="{url_ko}">
-<meta property="og:image" content="{page['og_image']}">
-<meta property="og:locale" content="ko_KR">
+{og_image}<meta property="og:locale" content="ko_KR">
 <link rel="canonical" href="{url_ko}">
 <link rel="alternate" hreflang="en" href="{url_en}">
 <link rel="alternate" hreflang="ko" href="{url_ko}">
