@@ -107,20 +107,34 @@ h1 { margin: 8px 0 0; font: 400 clamp(38px, 6vw, 72px)/1.08 var(--display); lett
 .led b { font-weight: 500; color: #fff; }
 .led .chip { display: inline-block; padding: 0 6px; margin-right: 6px; border-radius: 9px; background: var(--s); color: #fff; font-size: 11.5px; line-height: 18px; }
 .mapbox { background: #fff; border: 2px solid var(--ink); border-top: 0; padding: 8px 12px; }
-.map { position: relative; --x: 22px; --row: clamp(24px, calc((100vh - 170px) / var(--n)), 38px); height: calc(var(--n) * var(--row)); }
-.seg { position: absolute; left: calc(var(--x) - 4px); width: 8px; border-radius: 4px; background: var(--s); top: calc((var(--a) + .5) * var(--row)); height: calc((var(--b) - var(--a)) * var(--row)); }
+.map { position: relative; --x: 14px; --gap: 14px; --row: clamp(26px, calc((100vh - 200px) / var(--n)), 38px); height: calc(var(--n) * var(--row)); }
+.seg { position: absolute; left: calc(var(--x) + var(--k) * var(--gap) - 3px); width: 6px; border-radius: 4px; background: var(--s); top: calc((var(--a) + .5) * var(--row)); height: calc((var(--b) - var(--a)) * var(--row)); }
 .seg.soon { background: repeating-linear-gradient(var(--s) 0 8px, transparent 8px 13px); }
-.row { position: absolute; left: 0; right: 0; top: calc(var(--o) * var(--row)); height: var(--row); display: flex; align-items: center; padding: 0 0 0 calc(var(--x) + 22px); border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; width: 100%; }
-.row .dot { position: absolute; left: calc(var(--x) - 7px); top: calc(50% - 7px); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 3px solid var(--s); z-index: 2; }
+.row { position: absolute; left: 0; right: 0; top: calc(var(--o) * var(--row)); height: var(--row); display: flex; align-items: center; padding: 0 0 0 calc(var(--x) + 3 * var(--gap) + 20px); border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; width: 100%; }
+.row .dot { position: absolute; left: calc(var(--x) + var(--k) * var(--gap) - 7px); top: calc(50% - 7px); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 3px solid var(--s); z-index: 2; }
 .row.soon .dot { border-style: dashed; }
 .row .t { font-size: 14px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .row.past .t { color: var(--ink-2); }
 .row.on .t { font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .row.hd { cursor: pointer; }
-.row.hd .dot { left: calc(var(--x) - 13px); top: calc(50% - 13px); width: 26px; height: 26px; background: var(--s); border: 3px solid #fff; box-shadow: 0 0 0 2.5px var(--s); display: grid; place-items: center; color: #fff; font: 400 14px/1 var(--display); }
+.row.hd .dot { left: calc(var(--x) + var(--k) * var(--gap) - 13px); top: calc(50% - 13px); width: 26px; height: 26px; background: var(--s); border: 3px solid #fff; box-shadow: 0 0 0 2.5px var(--s); display: grid; place-items: center; color: #fff; font: 400 14px/1 var(--display); }
 .row.hd .t { font: 400 16px/1.2 var(--display); color: var(--s); }
-.train { position: absolute; z-index: 4; left: calc(var(--x) - 12px); top: calc((var(--cur) + .5) * var(--row) - 12px); width: 24px; height: 24px; border-radius: 7px; background: var(--ink); border: 3px solid #fff; box-shadow: 0 0 0 2.5px var(--s), 0 3px 8px rgba(0,0,0,.25);
-  transition: top .5s cubic-bezier(.3,.7,.25,1); pointer-events: none; }
+.xfer { position: absolute; z-index: 2; top: calc(50% - 9px); height: 18px; left: calc(var(--x) + var(--k0) * var(--gap) - 9px); width: calc((var(--k1) - var(--k0)) * var(--gap) + 18px); box-sizing: border-box; border-radius: 9px; background: #fff; border: 2.5px solid var(--ink); }
+.xfer i { position: absolute; top: 2.5px; left: calc((var(--k) - var(--k0)) * var(--gap) + 2.5px); width: 8px; height: 8px; border-radius: 50%; background: var(--t); }
+.row.soon .xfer { border-style: dashed; }
+.legend { margin: 8px 0 2px; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); display: flex; gap: 8px; align-items: center; }
+.legend .pill { flex: none; position: relative; width: 32px; height: 16px; border-radius: 8px; border: 2.5px solid var(--ink); box-sizing: border-box; background: #fff; }
+.legend .pill i { position: absolute; top: 1.5px; width: 8px; height: 8px; border-radius: 50%; background: var(--t); }
+.legend .pill i:first-child { left: 2px; } .legend .pill i:last-child { right: 2px; }
+.del { max-width: 680px; display: grid; gap: 8px; }
+.del > b { font-size: 13.5px; letter-spacing: .02em; display: flex; gap: 6px; align-items: center; color: var(--d); }
+.del > b i { font: 700 11.5px/20px var(--ui); font-style: normal; color: #fff; background: var(--d); padding: 0 7px; border-radius: 10px; }
+.del em { display: block; font-style: normal; font-weight: 400; font-size: 13.5px; color: var(--ink-2); margin-top: 4px; }
+.del em b { color: var(--ink); }
+.all-grid .also { margin-left: 6px; display: inline-flex; gap: 3px; vertical-align: 1px; }
+.all-grid .also i { font: 700 10px/15px var(--ui); font-style: normal; color: #fff; background: var(--t); padding: 0 5px; border-radius: 8px; }
+.train { position: absolute; z-index: 4; left: calc(var(--x) + var(--k, 0) * var(--gap) - 12px); top: calc((var(--cur) + .5) * var(--row) - 12px); width: 24px; height: 24px; border-radius: 7px; background: var(--ink); border: 3px solid #fff; box-shadow: 0 0 0 2.5px var(--s), 0 3px 8px rgba(0,0,0,.25);
+  transition: top .5s cubic-bezier(.3,.7,.25,1), left .3s; pointer-events: none; }
 .train::after { content: ""; position: absolute; inset: 5px 4px 9px; background: var(--led); border-radius: 2px; }
 
 .stories { display: flex; flex-direction: column; }
@@ -327,7 +341,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     <div class="wrap ride-grid">
       <div class="pin">
         <div class="led" id="led" aria-live="polite"></div>
-        <div class="mapbox"><div class="map" id="map" role="group" aria-label="CRUD route map"></div></div>
+        <div class="mapbox"><div class="map" id="map" role="group" aria-label="CRUD route map"></div><p class="legend" id="legend"></p></div>
       </div>
       <div class="stories" id="stories"></div>
     </div>
@@ -384,12 +398,14 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     thisStop: { en: "This stop", ko: "이번 역" }, next: { en: "Next", ko: "다음 역" }, end: { en: "End of the line", ko: "종착역" },
     main: { en: "Main stop", ko: "주요 역" }, running: { en: "Running", ko: "운영 중" }, planned: { en: "Planned", ko: "예정" },
     before: { en: "Before", ko: "전" }, after: { en: "After", ko: "후" }, mine: { en: "My calls", ko: "제가 정한 것" },
+    del: { en: "Hassle deleted", ko: "없앤 불편함" },
+    legend: { en: "A white pill is a transfer station: that stop is on more than one line.", ko: "흰 캡슐은 환승역: 그 역이 여러 노선에 걸쳐 있어요." },
   };
   const SECTIONS = {
     c: { letter: "C", en: "CREATE", title: { en: "What I made", ko: "만든 것" }, note: { en: "Services, groups and events I planned and built myself.", ko: "직접 기획하고 만든 서비스, 모임, 행사예요." } },
     r: { letter: "R", en: "READ", title: { en: "What I watch closely", ko: "관심 있게 보는 것" }, note: { en: "I don't just use new AI. I plug it into a real problem and check it with numbers.", ko: "새로 나온 AI를 그냥 쓰지 않고, 실제 문제에 붙여 보고 숫자로 확인해요." } },
     u: { letter: "U", en: "UPDATE", title: { en: "What I joined", ko: "참여한 것" }, note: { en: "Contests and classes I took part in, updating my skills along the way.", ko: "대회와 수업에 참여하며 제 실력을 업데이트했어요." } },
-    d: { letter: "D", en: "DELETE", title: { en: "Hassles deleted", ko: "없앤 불편함" }, note: { en: "What the things I made and joined actually removed. This section passes back through those stops, like a transfer line.", ko: "만들고 참여한 것들이 실제로 무엇을 지웠는지예요. 그 역들을 다시 지나가는 환승 구간이에요." } },
+    d: { letter: "D", en: "DELETE", title: { en: "Hassles deleted", ko: "없앤 불편함" }, note: { en: "The D line has no stops of its own: it runs through the stops above that removed a hassle.", ko: "D 노선에는 따로 역이 없어요. 위의 역 중 불편함을 없앤 역을 지나가요." } },
   };
   // Stops in ride order. Only things that are true today. `photo` = a file in /work/img (real screenshots so far).
   const STOPS = () => [
@@ -400,6 +416,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         ko: "Gmail의 새 메일을 AI(Gemini)가 면접·합격 여부·중요 인물·무관 넷으로 나누고, 중요한 것만 텔레그램으로 보내요. GitHub Actions가 10분마다 돌리고 비용은 월 0원이에요. 중요한 발신자는 텔레그램에서 /add로 바로 추가해요." },
       link: ["https://github.com/Sweet-Butters/mail-notifier", { en: "See the code", ko: "코드 보기" }] },
     { s: "c", id: "radar", big: true, on: true, tags: ["c", "d"],
+      del: [{ before: { en: "To find AI contests, you had to go through contest sites one by one, every day", ko: "AI 대회를 찾으려고 여러 공모전 사이트를 매일 하나씩 돌아다녀야 했음" }, after: { en: `Every morning ${fmt(N.sites)} sites are gathered automatically, with fakes and duplicates filtered out, in one place`, ko: `매일 아침 ${fmt(N.sites)}개 사이트를 자동으로 모아, 가짜와 중복을 걸러 한 곳에서 봄` } },
+        { before: { en: "Each site counted deadlines differently, so the same contest's dates disagreed between sources (108 mismatches)", ko: "사이트마다 마감일 세는 방식이 달라, 같은 대회의 날짜가 출처끼리 어긋남 (불일치 108건)" }, after: { en: "Checked 96 listings, found the cause and fixed it (15 mismatches); 30 samples are re-checked automatically every week", ko: "96건을 대조해 원인을 찾아 고침 (불일치 15건), 매주 표본 30건을 자동으로 다시 대조" }, nums: [["108 → 15", { en: "date mismatches between sources", ko: "출처 간 날짜 불일치" }]] }],
       short: { en: "AI Contest Radar", ko: "AI 공모전 레이더" }, title: { en: "AI Contest Radar", ko: "AI 공모전 레이더" },
       when: { en: "2026 · running daily", ko: "2026 · 매일 운영 중" },
       text: { en: "Every morning it gathers Korean AI contests, hackathons and startup competitions, filters them with AI, and shows them in one place.", ko: "국내 AI 공모전·해커톤·창업경진대회를 매일 아침 자동으로 모아, AI로 걸러서 한 곳에 보여 주는 사이트예요." },
@@ -420,6 +438,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       nums: [[{ en: fmt(N.sites), ko: fmt(N.sites) + "곳" }, { en: "sources", ko: "수집 사이트" }], [fmt(N.live), { en: "listings live today", ko: "오늘 게시된 공고" }]],
       link: [RADAR, { en: "See the service", ko: "서비스 보기" }] },
     { s: "c", id: "youth", big: true, tags: ["c", "d"],
+      del: [{ before: { en: "Benefits are scattered across many agencies, so many young people miss out simply because they don't know", ko: "혜택이 여러 기관에 흩어져 있어, 몰라서 못 받는 청소년이 많음" }, after: { en: "Benefits that match their career goals, gathered from official sources in one place (in progress)", ko: "진로 목표에 맞는 혜택을 공식 출처에서 모아 한 번에 보여 줌 (진행 중)" } }],
       short: { en: "Youth Benefit Finder", ko: "청소년 혜택 찾기" }, title: { en: "Youth Benefit Finder", ko: "청소년 혜택 찾기" },
       when: { en: "2026 · in progress", ko: "2026 · 진행 중" },
       text: { en: "A service that gathers the public and private benefits young people can get, matched to their career goals. It reuses the radar's AI judge.", ko: "진로 목표에 맞춰 청소년이 받을 수 있는 공공·민간 혜택을 모아 보여 주는 서비스예요. 레이더의 AI 판정기를 가져와 재사용했어요." },
@@ -431,7 +450,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       photo: ["/work/img/youth-site.jpg", { en: "The live site (in Korean): career paths as subway maps, and benefits open for application now", ko: "실제 사이트: 진로를 지하철 노선도로, 지금 신청할 수 있는 혜택" }],
       nums: [["8,225", { en: "items collected (2026-09-28)", ko: "개 수집 (2026-09-28)" }], ["2,503", { en: "scholarships", ko: "장학금" }], ["14", { en: "sources", ko: "출처" }]],
       link: ["https://sweet-butters.github.io/youth-benefit-finder/", { en: "Visit the site", ko: "사이트 보기" }] },
-    { s: "c", id: "replydesk", big: true, tags: ["c", "d"], short: { en: "replydesk", ko: "replydesk" },
+    { s: "c", id: "replydesk", big: true, tags: ["c", "d"],
+      del: [{ before: { en: "Every email gets read and answered from scratch, including ones that need no reply", ko: "답장이 필요 없는 메일까지 전부 읽고 처음부터 답장을 씀" }, after: { en: "Jev sorts the inbox first; drafts are written only for mail that needs one, and a person sends", ko: "Jev가 먼저 가려내고, 답장이 필요한 메일에만 초안을 만들어 사람이 보냄" } }], short: { en: "replydesk", ko: "replydesk" },
       title: { en: "replydesk: judge the email before writing the reply", ko: "replydesk: 답장을 쓰기 전에 메일부터 판단한다" },
       when: { en: "2026-09 · measured on real inboxes", ko: "2026-09 · 실제 메일함에서 측정" },
       text: { en: "Instead of handing the thread to an LLM, it first asks Jev eight questions: is a reply needed, is this handled by a form or link rather than a reply, what do they want, how urgent, how annoyed, can it be answered now, should a person write it, did we promise something. Then Gemini writes three drafts, Jev checks each for facts not in the thread, and ranks the rest. A person sends. Code by Claude Code and Codex.",
@@ -485,7 +505,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         "성공은 사용자가 수정본을 채택하는 것. 자동 수정은 아직 연결하지 않았으므로 자동 수정 서비스라고 소개하지 않음"] } },
     { s: "c", id: "site", tags: ["c"], short: { en: "This page", ko: "이 페이지" }, title: { en: "This page", ko: "이 페이지" }, when: "2026",
       text: { en: "The route-map design and the live numbers, built by talking it through with Claude. The radar numbers here are read fresh every day.", ko: "노선도 디자인과 실시간 숫자까지, Claude와 대화하며 직접 만들었어요. 이 페이지의 레이더 숫자도 매일 새로 읽어 와요." } },
-    { s: "c", id: "daangn", big: true, tags: ["c", "d"], short: { en: "AI study community (40)", ko: "AI 교습소 (40명)" },
+    { s: "c", id: "daangn", big: true, tags: ["c", "d"],
+      del: [{ before: { en: "People don't know where to begin with AI, so they never start", ko: "AI를 어디서부터 써야 할지 몰라 시작조차 못 함" }, after: { en: "They learn by building things themselves, in a local study group and in class", ko: "동네 스터디와 강의에서 직접 만들어 보며 배움" } }], short: { en: "AI study community (40)", ko: "AI 교습소 (40명)" },
       title: { en: "AI study community on Daangn", ko: "AI 교습소 (당근 모임)" }, when: { en: "2026-08 · co-run by two", ko: "2026-08 · 2인 공동 운영" },
       text: { en: "Online and in-person AI classes for university students, office workers and middle-aged learners, grown into a 40-person community on Daangn, a Korean local community app. We go from installing Claude Code and Codex to using them, running projects and sharing them.",
         ko: "당근 모임에서 대학생·직장인·중장년층을 대상으로 온·오프라인 AI 강의를 하며 40명 규모의 커뮤니티를 만들었어요. Claude Code와 Codex 설치부터 사용법, 프로젝트 진행과 공유까지 함께해요." },
@@ -500,7 +521,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       text: { en: "For a university's online lecture platform I film and edit a course titled \"(Intro) Break the limits of vibe coding: Claude Code skills for real work\". It goes through legal review and review by a professor in the field, and launches officially in February 2027.",
         ko: "대학 인터넷 강의 플랫폼에서 \"(입문) 바이브코딩의 한계를 부수자: 클로드 코드 실전용 skills\"라는 주제의 강의를 직접 촬영·편집하고 있어요. 법률 자문과 해당 분야 교수님의 자문으로 검증을 거쳐, 2027년 2월에 정식으로 공개돼요." } },
 
-    { s: "r", id: "jev", big: true, tags: ["r"], short: { en: "Trying a new AI model", ko: "새 AI 모델 실사용" },
+    { s: "r", id: "jev", big: true, tags: ["r", "d"],
+      del: [{ before: { en: "Searching with an LLM every day kept costing tokens", ko: "매일 LLM으로 검색하면 토큰 비용이 계속 듦" }, after: { en: "Rules decide first and judged listings are cached, so only new listings go to the AI", ko: "규칙이 먼저 판단하고 판정 결과를 캐시해, 새 공고만 AI에게 물음" }, nums: [["$0.0004", { en: "judging cost per day", ko: "하루 판정 비용" }]] }], short: { en: "Trying a new AI model", ko: "새 AI 모델 실사용" },
       title: { en: "Putting a new AI model to work in a live service", ko: "새 AI 모델을 실제 서비스에 붙여 보기" }, when: "2026-09",
       text: { en: "I plugged a new model that answers with probabilities instead of text (TypeSafe Jev) into the radar as its judge, and recorded the cost and the results.", ko: "텍스트 대신 확률로 답하는 새 모델(TypeSafe Jev)을 레이더의 판정기로 붙이고, 비용과 결과를 기록했어요." },
       photo: ["/work/img/jev-results.jpg", { en: "The first full run, from the notes (in Korean)", ko: "기록 중 첫 전체 실행 결과" }],
@@ -579,7 +601,8 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
         ["258 + 36", { en: "round 2 tests passing (JVM + on-device)", ko: "2차 테스트 통과 (JVM + 기기)" }],
         [{ en: "1 of 21", ko: "21명 중 1명" }, { en: "finalists", ko: "본선 진출" }]],
       link: [{ en: "/scpc/", ko: "/ko/scpc/" }, { en: "Read the full record", ko: "전체 기록 읽기" }] },
-    { s: "u", id: "cursor", big: true, tags: ["u", "d"], short: { en: "Cursor camp 999: chemcheck", ko: "Cursor 캠프 999: chemcheck" },
+    { s: "u", id: "cursor", big: true, tags: ["u", "d"],
+      del: [{ before: { en: "AI-drawn chemical structures look right but are often wrong, and slip into slides and papers unnoticed", ko: "AI가 그린 화학 구조는 그럴듯하지만 틀린 경우가 많고, 모른 채 강의자료나 논문에 들어감" }, after: { en: "Put in the drawing and its name, and chemcheck says whether it's the same molecule and where it differs", ko: "그림과 이름을 넣으면 같은 분자인지, 어디가 다른지 알려 줌" } }], short: { en: "Cursor camp 999: chemcheck", ko: "Cursor 캠프 999: chemcheck" },
       title: { en: "chemcheck: is the molecule the AI drew really that molecule?", ko: "chemcheck: AI가 그린 분자, 정말 그 분자일까" },
       when: { en: "2026-09 · Cursor AI startup camp 999", ko: "2026-09 · Cursor AI 창업 캠프 999 참여" },
       text: { en: "At Cursor's AI startup camp 999 I built a tool that checks whether a chemical structure drawn by ChatGPT or Gemini is really the molecule it's named as, and shows where it differs. I started it on a KTX train with Cursor on my phone.",
@@ -632,74 +655,59 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       when: { en: "2026-10 · planned", ko: "2026-10 · 예정" },
       text: { en: "At a Kkumdream (out-of-school youth support centre) volunteer session in October, 5–10 students will use the Youth Benefit Finder themselves.", ko: "10월 꿈드림 봉사에서 학생 5~10명이 청소년 혜택 찾기 사이트를 직접 써 보게 할 예정이에요." } },
 
-    { s: "d", id: "d-radar", big: true, tags: ["c", "d"], short: { en: "Hunting for contests", ko: "공모전 찾는 수고" }, title: { en: "Hunting for contests", ko: "공모전 찾는 수고" },
-      before: { en: "To find AI contests, you had to go through contest sites one by one, every day", ko: "AI 대회를 찾으려고 여러 공모전 사이트를 매일 하나씩 돌아다녀야 했음" },
-      after: { en: `Every morning ${fmt(N.sites)} sites are gathered automatically, with fakes and duplicates filtered out, in one place`, ko: `매일 아침 ${fmt(N.sites)}개 사이트를 자동으로 모아, 가짜와 중복을 걸러 한 곳에서 봄` },
-      nums: [[`${fmt(N.fetched)} → ${fmt(N.live)}`, { en: "listings today", ko: "건 (오늘)" }], [fmt(drops()), { en: "filtered out", ko: "건 걸러냄" }]],
-      link: [RADAR, { en: "See the service", ko: "서비스 보기" }] },
-    { s: "d", id: "d-chem", tags: ["u", "d"], short: { en: "Wrong AI-drawn molecules", ko: "AI가 틀리게 그린 분자" }, title: { en: "Molecules the AI drew wrong", ko: "AI가 틀리게 그린 분자" },
-      before: { en: "AI-drawn chemical structures look right but are often wrong, and slip into slides and papers unnoticed", ko: "AI가 그린 화학 구조는 그럴듯하지만 틀린 경우가 많고, 모른 채 강의자료나 논문에 들어감" },
-      after: { en: "Put in the drawing and its name, and chemcheck says whether it's the same molecule and where it differs", ko: "그림과 이름을 넣으면 같은 분자인지, 어디가 다른지 알려 줌" },
-      nums: [["6 / 10", { en: "judged AI drawings that were wrong", ko: "판정한 AI 그림 중 틀린 것" }]], link: [CHEM, { en: "Try it", ko: "직접 해 보기" }] },
-    { s: "d", id: "d-inbox", tags: ["c", "d"], short: { en: "Answering every email", ko: "모든 메일에 답하는 수고" }, title: { en: "Answering every email by hand", ko: "모든 메일을 직접 읽고 답하는 수고" },
-      before: { en: "Every email gets read and answered from scratch, including ones that need no reply", ko: "답장이 필요 없는 메일까지 전부 읽고 처음부터 답장을 씀" },
-      after: { en: "Jev sorts the inbox first; drafts are written only for mail that needs one, and a person sends", ko: "Jev가 먼저 가려내고, 답장이 필요한 메일에만 초안을 만들어 사람이 보냄" },
-      nums: [["19 / 20", { en: "received mails needed no reply", ko: "받은 메일 중 답장 불필요" }]], link: ["https://github.com/Sweet-Butters/replydesk", { en: "See the code", ko: "코드 보기" }] },
-    { s: "d", id: "d-date", tags: ["c", "d"], short: { en: "Mismatched deadlines", ko: "어긋난 마감일" }, title: { en: "Mismatched deadlines", ko: "어긋난 마감일" },
-      before: { en: "Each site counted deadlines differently, so the same contest's dates disagreed between sources (108 mismatches)", ko: "사이트마다 마감일 세는 방식이 달라, 같은 대회의 날짜가 출처끼리 어긋남 (불일치 108건)" },
-      after: { en: "Checked 96 listings, found the cause and fixed it (15 mismatches); 30 samples are re-checked automatically every week", ko: "96건을 대조해 원인을 찾아 고침 (불일치 15건), 매주 표본 30건을 자동으로 다시 대조" },
-      nums: [["108 → 15", { en: "date mismatches between sources", ko: "출처 간 날짜 불일치" }]] },
-    { s: "d", id: "d-cost", tags: ["r", "d"], short: { en: "AI judging cost", ko: "AI 판정 비용" }, title: { en: "AI judging cost", ko: "AI 판정 비용" },
-      before: { en: "Searching with an LLM every day kept costing tokens", ko: "매일 LLM으로 검색하면 토큰 비용이 계속 듦" },
-      after: { en: "Rules decide first and judged listings are cached, so only new listings go to the AI", ko: "규칙이 먼저 판단하고 판정 결과를 캐시해, 새 공고만 AI에게 물음" },
-      nums: [["$0.0004", { en: "judging cost per day", ko: "하루 판정 비용" }]] },
-    { s: "d", id: "d-youth", tags: ["c", "d"], short: { en: "Missed benefits", ko: "몰라서 못 받던 혜택" }, title: { en: "Benefits missed for not knowing", ko: "몰라서 못 받던 혜택" },
-      before: { en: "Benefits are scattered across many agencies, so many young people miss out simply because they don't know", ko: "혜택이 여러 기관에 흩어져 있어, 몰라서 못 받는 청소년이 많음" },
-      after: { en: "Benefits that match their career goals, gathered from official sources in one place (in progress)", ko: "진로 목표에 맞는 혜택을 공식 출처에서 모아 한 번에 보여 줌 (진행 중)" } },
-    { s: "d", id: "d-learn", tags: ["c", "u", "d"], short: { en: "Where to start with AI", ko: "AI 시작의 막막함" }, title: { en: "Not knowing where to start with AI", ko: "AI를 시작하는 막막함" },
-      before: { en: "People don't know where to begin with AI, so they never start", ko: "AI를 어디서부터 써야 할지 몰라 시작조차 못 함" },
-      after: { en: "They learn by building things themselves, in a local study group and in class", ko: "동네 스터디와 강의에서 직접 만들어 보며 배움" } },
   ];
 
   // Rows on the map: a big station for each section, then its stops.
   let rows = [], cur = 0;
   const tagHtml = (ks) => ks.map((k) => `<i style="--t:var(--${k})">${SECTIONS[k].letter}</i>`).join("");
   const code = (st, n) => `${SECTIONS[st.s].letter}${String(n).padStart(2, "0")}`;
+  const TRACK = { c: 0, r: 1, u: 2, d: 3 };
 
   function build() {
     const stops = STOPS();
     rows = [];
     const count = { c: 0, r: 0, u: 0, d: 0 };
-    for (const k of ["c", "r", "u", "d"]) {
+    for (const k of ["c", "r", "u"]) {
       rows.push({ hd: true, s: k, id: "sec-" + k, short: t(SECTIONS[k].title) });
-      stops.filter((x) => x.s === k).forEach((x) => rows.push({ ...x, short: t(x.short), title: t(x.title), code: code(x, ++count[k]) }));
+      stops.filter((x) => x.s === k).forEach((x) => rows.push({ ...x, tags: [...new Set([x.s, ...(x.tags || [])])].sort((a, b) => TRACK[a] - TRACK[b]),
+        short: t(x.short), title: t(x.title), code: code(x, ++count[k]) }));
     }
     // "Everything at a glance": one box per stop, grouped by section.
-    $("all-grid").innerHTML = ["c", "r", "u", "d"].map((k) => {
+    $("all-grid").innerHTML = ["c", "r", "u"].map((k) => {
       const items = rows.filter((x) => !x.hd && x.s === k).map((x) => {
         const when = t(x.when);
-        return `<li><a href="#stop-${x.id}" data-i="${rows.indexOf(x)}" class="${x.soon ? "soon" : ""}" style="--s:var(--${k})"><small>${x.code}${when ? " · " + when.split(" · ")[0] : ""}</small><b>${x.short}</b></a></li>`;
+        const also = x.tags.filter((g) => g !== k).map((g) => `<i style="--t:var(--${g})">${SECTIONS[g].letter}</i>`).join("");
+        return `<li><a href="#stop-${x.id}" data-i="${rows.indexOf(x)}" class="${x.soon ? "soon" : ""}" style="--s:var(--${k})"><small>${x.code}${when ? " · " + when.split(" · ")[0] : ""}${also ? `<span class="also">${also}</span>` : ""}</small><b>${x.short}</b></a></li>`;
       }).join("");
       return `<div class="all-group" style="--s:var(--${k})"><i aria-hidden="true">${SECTIONS[k].letter}</i><ul class="all-grid" aria-label="${t(SECTIONS[k].title)}">${items}</ul></div>`;
     }).join("");
 
-    // map: one line, coloured by section
+    // map: four parallel lines; a stop on several lines is a transfer station
     const map = $("map");
     map.style.setProperty("--n", rows.length);
     let html = "";
-    ["c", "r", "u", "d"].forEach((k, i, arr) => {
-      const a = rows.findIndex((r) => r.hd && r.s === k);
-      const nextHd = arr[i + 1] ? rows.findIndex((r) => r.hd && r.s === arr[i + 1]) : rows.length - 1;
-      const firstSoon = rows.findIndex((r, j) => j > a && j <= nextHd && r.soon);
-      const solidEnd = firstSoon > 0 ? firstSoon - 1 : nextHd;
-      html += `<span class="seg" style="--a:${a};--b:${solidEnd};--s:var(--${k})"></span>`;
-      if (firstSoon > 0) html += `<span class="seg soon" style="--a:${solidEnd};--b:${nextHd};--s:var(--${k})"></span>`;
+    ["c", "r", "u", "d"].forEach((k) => {
+      const on = rows.map((r, i) => (r.hd ? r.s === k : r.tags.includes(k)) ? i : -1).filter((i) => i >= 0);
+      if (!on.length) return;
+      const a = on[0], b = on[on.length - 1];
+      const solid = on.filter((i) => !rows[i].soon);
+      const solidEnd = solid[solid.length - 1];
+      html += `<span class="seg" style="--a:${a};--b:${solidEnd};--k:${TRACK[k]};--s:var(--${k})"></span>`;
+      if (b > solidEnd) html += `<span class="seg soon" style="--a:${solidEnd};--b:${b};--k:${TRACK[k]};--s:var(--${k})"></span>`;
     });
     rows.forEach((r, i) => {
-      html += `<button type="button" class="row${r.hd ? " hd" : ""}${r.soon ? " soon" : ""}" data-i="${i}" style="--o:${i};--s:var(--${r.s})" aria-label="${r.hd ? r.short : r.code + " " + r.title}">
-        <span class="dot" aria-hidden="true">${r.hd ? SECTIONS[r.s].letter : ""}</span><span class="t">${r.short}</span></button>`;
+      let mark;
+      if (r.hd) mark = `<span class="dot" aria-hidden="true">${SECTIONS[r.s].letter}</span>`;
+      else if (r.tags.length === 1) mark = `<span class="dot" aria-hidden="true"></span>`;
+      else {
+        const ks = r.tags.map((g) => TRACK[g]);
+        mark = `<span class="xfer" aria-hidden="true" style="--k0:${Math.min(...ks)};--k1:${Math.max(...ks)}">${r.tags.map((g) => `<i style="--k:${TRACK[g]};--t:var(--${g})"></i>`).join("")}</span>`;
+      }
+      html += `<button type="button" class="row${r.hd ? " hd" : ""}${r.soon ? " soon" : ""}" data-i="${i}" style="--o:${i};--k:${TRACK[r.s]};--s:var(--${r.s})" aria-label="${r.hd ? r.short : r.code + " " + r.title}">
+        ${mark}<span class="t">${r.short}</span></button>`;
     });
     html += `<span class="train" id="train" aria-hidden="true"></span>`;
+    $("legend").innerHTML = `<span class="pill" aria-hidden="true"><i style="--t:var(--c)"></i><i style="--t:var(--d)"></i></span>${t(W.legend)}`;
     map.innerHTML = html;
 
     // stories
@@ -713,6 +721,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       const cap = r.photo ? t(r.photo[1]) : "";
       const photo = r.photo ? `<figure><img src="${r.photo[0]}" alt="${cap}" width="1280" height="800" loading="lazy"><figcaption>${cap}</figcaption></figure>` : "";
       const ba = r.before ? `<div class="ba"><div class="before"><small>${t(W.before)}</small><span>${t(r.before)}</span></div><div class="arrow" aria-hidden="true">→</div><div class="after"><small>${t(W.after)}</small>${t(r.after)}</div></div>` : "";
+      const del = r.del ? `<div class="del"><b><i>D</i>${t(W.del)}</b>${r.del.map((x) => `<div class="ba"><div class="before"><small>${t(W.before)}</small><span>${t(x.before)}</span></div><div class="arrow" aria-hidden="true">→</div><div class="after"><small>${t(W.after)}</small>${t(x.after)}${x.nums ? x.nums.map(([v, k]) => `<em><b>${t(v)}</b> ${t(k)}</em>`).join("") : ""}</div></div>`).join("")}</div>` : "";
       const list = r.list ? `<ul>${t(r.list).map((x) => `<li>${x}</li>`).join("")}</ul>` : "";
       const mine = r.mine ? `<div class="mine"><b>${t(W.mine)}</b><ul>${t(r.mine).map((x) => `<li>${x}</li>`).join("")}</ul></div>` : "";
       const nums = r.nums ? `<div class="nums">${r.nums.map(([v, k]) => `<span><b>${t(v)}</b>${t(k)}</span>`).join("")}</div>` : "";
@@ -720,7 +729,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
       const ext = /^https?:/.test(href) ? ' target="_blank" rel="noopener"' : "";
       const link = r.link ? `<a class="out" href="${href}"${ext}>${t(r.link[1])}</a>` : "";
       const text = t(r.text);
-      return `<article class="story${r.big ? " big" : (!r.photo && !r.before && !r.list && !r.mine ? " short" : "")}" data-i="${i}" id="stop-${r.id}" style="--s:var(--${r.s})">${meta}<h3>${r.title}</h3>${photo}${text ? `<p>${text}</p>` : ""}${ba}${mine}${list}${nums}${link}</article>`;
+      return `<article class="story${r.big ? " big" : (!r.photo && !r.before && !r.del && !r.list && !r.mine ? " short" : "")}" data-i="${i}" id="stop-${r.id}" style="--s:var(--${r.s})">${meta}<h3>${r.title}</h3>${photo}${text ? `<p>${text}</p>` : ""}${ba}${del}${mine}${list}${nums}${link}</article>`;
     }).join("");
     observe();
   }
@@ -735,6 +744,7 @@ footer .mail { display: inline-flex; align-items: center; min-height: 50px; padd
     const train = $("train");
     train.style.setProperty("--cur", cur);
     train.style.setProperty("--s", `var(--${r.s})`);
+    train.style.setProperty("--k", TRACK[r.s]);
     const next = rows.slice(cur + 1).find((x) => !x.hd);
     const chip = r.hd ? SECTIONS[r.s].letter : r.code;
     $("led").style.setProperty("--s", `var(--${r.s})`);
